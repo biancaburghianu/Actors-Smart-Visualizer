@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Login and Register</title>
+        <link rel="stylesheet" href="../static/login.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="inner-box" id="card">
+                    <div class="card-front">
+                       <h2>Login</h2>
+                       <p>Actors Smart Visualizer</p>
+                       <p>Un site destinat previzualizarii statisticilor in urma norminalizarilor la Screen Actors Guild Awards.</p>
+                       <form action="">
+                           <input type="email" class="input-box" id="email" placeholder="Your Email" required>
+                           <input type="password" class="input-box" id="password" placeholder="Password" required>
+                        
+                        <input type="submit"  class="submit-btn" value="Login">
+                       
+                    </form>
+                    <button type="button" class="buttons" onclick="openRegister()">I'm new here</button>
+                   <a href="">Forgot password</a>
+                </div>
+                   <div class="card-back">
+                    <h2>Register</h2>
+                    <form>
+                           <input type="text" class="input-box" placeholder="Your Name" required>
+                        <input type="email" class="input-box" placeholder="Your Email" required>
+                           <input type="password" class="input-box" placeholder="Password" required>
+                           <a  href="" type="submit" class="submit-btn">Submit</a>
+                        </form>
+                    <button type="button" class="buttons" onclick="openLogin()">I have an account</button>
+                    <a href="">Forgot Password</a>
+
+                   </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var card=document.getElementById("card");
+            function openRegister(){
+                card.style.transform="rotateY(-180deg)";
+            }
+            function openLogin(){
+                card.style.transform="rotateY(0deg)";
+            }
+        </script>
+    </body>
+
+</html>
