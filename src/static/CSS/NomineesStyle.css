@@ -1,0 +1,327 @@
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+.NavTitle {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background-color: whitesmoke;
+}
+.NavTitle h1 {
+  font-size: 4rem;
+}
+.CardsClass {
+  justify-content: center;
+  align-items: center;
+}
+
+.LineText {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+.LineText::before,
+.LineText::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 2px solid;
+  margin: auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.LineText::before {
+  margin-right: 10px;
+}
+.LineText::after {
+  margin-left: 10px;
+}
+
+/* CARDS STYLE */
+
+.CardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  height: auto;
+  margin-bottom: 5rem;
+}
+.Card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: center;
+  height: 60vh;
+  min-width: 200px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  flex: 1;
+  margin: 10px;
+  position: relative;
+  transition: 0.5s ease-in;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.Card:hover {
+  opacity: 0.5;
+}
+.Card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.9)
+  );
+  z-index: 0;
+}
+.Card h3 {
+  color: #fff;
+  opacity: 1;
+  font-size: 3rem;
+  bottom: 20px;
+  left: 20px;
+  margin: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in 0.4s;
+  z-index: 1;
+  bottom: 20%;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 2rem;
+}
+.Card h1 {
+  font-weight: bolder;
+  font-style: oblique;
+  color: #fff;
+  opacity: 1;
+  font-size: 2.5rem;
+  bottom: 20px;
+  left: 20px;
+  margin: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in 0.4s;
+  z-index: 1;
+}
+.Card button {
+  padding: 0%;
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: transparent;
+  z-index: 1;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  margin: 1rem;
+  font-style: oblique;
+  transition: opacity 0.3s ease-in 0.4s;
+  opacity: 0;
+}
+.Card.active {
+  opacity: 1;
+  flex: 2;
+  min-width: 300px;
+}
+.Card.active h1,
+.Card.active h3,
+.Card.active button {
+  opacity: 1;
+}
+
+/* -------------------------------------------
+      Category 
+*/
+.CategoryNominalization {
+  margin: 0px 5vw 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.CategoryNominalization p {
+  text-align: center;
+  font-family: "Brush Script MT", cursive;
+  font-style: oblique;
+  font-size: 1.5rem;
+  margin: 5px;
+}
+.CategoryNominalization h1 {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 5px;
+  text-align: center;
+}
+
+.ButtonsClass {
+  flex: 1;
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-top: 3rem;
+  margin-right: 5vw;
+  justify-content: flex-end;
+}
+
+/* BUTTON DESIGN */
+
+.ButtonsClass button {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 2rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+
+.ButtonsClass button:hover,
+.ButtonsClass button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.ButtonsClass button:hover {
+  transform: translateY(-1px);
+}
+
+.ButtonsClass button:active {
+  background-color: #f0f0f1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+.SearchAndButtons {
+  /* align-items: center; */
+  display: flex;
+  width: 100%;
+}
+.SearchYear {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 5vw;
+  margin-top: 3rem;
+}
+.select-box {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  max-width: 10rem;
+}
+.select-box::-webkit-scrollbar {
+  border-radius: 0px;
+}
+.select-box:focus option {
+  border-radius: 0px;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media all and (max-width: 600px) {
+  .CategoryNominalization h1 {
+    font-size: 1.5rem;
+  }
+  .CategoryNominalization p1 {
+    font-size: 1rem;
+  }
+  .LineText {
+    font-size: 1.25rem;
+  }
+  .NavTitle h1 {
+    font-size: 2.5rem;
+  }
+  .SearchAndButtons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .ButtonsClass {
+    margin: 10px 0 0;
+  }
+  .ButtonsClass button {
+    font-size: 10px;
+  }
+  .SearchYear {
+    margin: 0;
+    text-align: center;
+    justify-content: center;
+    margin: 10px 0 10px;
+  }
+}
+@media all and (max-width: 375px) {
+  .Card.active {
+    min-width: 200px;
+  }
+  .NavTitle h1 {
+    font-size: 2rem;
+  }
+}
+@media all and (max-width: 1024px) {
+  .NavTitle h1 {
+    font-size: 3rem;
+  }
+  .Card h1 {
+    font-size: 2rem;
+  }
+  .Card h3,
+  .Card button {
+    font-size: 1.25rem;
+  }
+}
