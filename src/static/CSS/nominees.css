@@ -5,6 +5,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
+
 .NavTitle {
   width: 100%;
   display: flex;
@@ -12,9 +13,11 @@ body {
   justify-content: center;
   background-color: whitesmoke;
 }
+
 .NavTitle h1 {
   font-size: 4rem;
 }
+
 .CardsClass {
   justify-content: center;
   align-items: center;
@@ -25,6 +28,7 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 .LineText::before,
 .LineText::after {
   content: "";
@@ -34,9 +38,11 @@ body {
   margin-left: 2rem;
   margin-right: 2rem;
 }
+
 .LineText::before {
   margin-right: 10px;
 }
+
 .LineText::after {
   margin-left: 10px;
 }
@@ -52,6 +58,7 @@ body {
   height: auto;
   margin-bottom: 5rem;
 }
+
 .Card {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-repeat: no-repeat;
@@ -70,9 +77,11 @@ body {
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .Card:hover {
   opacity: 0.5;
 }
+
 .Card::before {
   content: "";
   position: absolute;
@@ -81,13 +90,12 @@ body {
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.9)
-  );
+  background-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.9));
   z-index: 0;
 }
+
 .Card h3 {
   color: #fff;
   opacity: 1;
@@ -103,6 +111,7 @@ body {
   border-bottom: 1px solid #fff;
   padding-bottom: 2rem;
 }
+
 .Card h1 {
   font-weight: bolder;
   font-style: oblique;
@@ -116,6 +125,7 @@ body {
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
 }
+
 .Card button {
   padding: 0%;
   font-size: 1.5rem;
@@ -130,11 +140,13 @@ body {
   transition: opacity 0.3s ease-in 0.4s;
   opacity: 0;
 }
+
 .Card.active {
   opacity: 1;
   flex: 2;
   min-width: 300px;
 }
+
 .Card.active h1,
 .Card.active h3,
 .Card.active button {
@@ -151,6 +163,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .CategoryNominalization p {
   text-align: center;
   font-family: "Brush Script MT", cursive;
@@ -158,6 +171,7 @@ body {
   font-size: 1.5rem;
   margin: 5px;
 }
+
 .CategoryNominalization h1 {
   font-size: 2rem;
   font-weight: bolder;
@@ -227,6 +241,7 @@ body {
   display: flex;
   width: 100%;
 }
+
 .SearchYear {
   width: 100%;
   height: 100%;
@@ -236,6 +251,7 @@ body {
   margin-left: 5vw;
   margin-top: 3rem;
 }
+
 .select-box {
   align-items: center;
   background-color: #ffffff;
@@ -263,9 +279,11 @@ body {
   vertical-align: baseline;
   max-width: 10rem;
 }
+
 .select-box::-webkit-scrollbar {
   border-radius: 0px;
 }
+
 .select-box:focus option {
   border-radius: 0px;
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
@@ -278,26 +296,33 @@ body {
   .CategoryNominalization h1 {
     font-size: 1.5rem;
   }
+
   .CategoryNominalization p1 {
     font-size: 1rem;
   }
+
   .LineText {
     font-size: 1.25rem;
   }
+
   .NavTitle h1 {
     font-size: 2.5rem;
   }
+
   .SearchAndButtons {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .ButtonsClass {
     margin: 10px 0 0;
   }
+
   .ButtonsClass button {
     font-size: 10px;
   }
+
   .SearchYear {
     margin: 0;
     text-align: center;
@@ -305,21 +330,26 @@ body {
     margin: 10px 0 10px;
   }
 }
+
 @media all and (max-width: 375px) {
   .Card.active {
     min-width: 200px;
   }
+
   .NavTitle h1 {
     font-size: 2rem;
   }
 }
+
 @media all and (max-width: 1024px) {
   .NavTitle h1 {
     font-size: 3rem;
   }
+
   .Card h1 {
     font-size: 2rem;
   }
+
   .Card h3,
   .Card button {
     font-size: 1.25rem;

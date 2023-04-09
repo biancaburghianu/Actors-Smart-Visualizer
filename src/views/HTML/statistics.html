@@ -1,296 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>AcVis</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="../../static/CSS/statistics.css">
 
-  </head>
+<head>
+  <title>AcVis</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../static/CSS/statistics.css">
 
-  <body>
-    <header>
-      <nav class="top-nav">
-        <div class="logo">
-          <img src="../../static/Poze diverse/Untitled.png" alt="Logo" />
+</head>
+
+<body>
+  <header>
+    <nav class="top-nav">
+      <div class="logo">
+        <img src="../../static/Poze diverse/Untitled.png" alt="Logo" />
+      </div>
+      <div class="nav-container">
+        <div class="menu-icon">
+          <i class="fas fa-bars"></i>
         </div>
-        <div class="nav-container">
-          <div class="menu-icon">
-            <i class="fas fa-bars"></i>
-          </div>
-          <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Nominees</a></li>
-            <li><a href="../HMTL/statistics.html">Statistics</a></li>
-            <li><a href="../HTML/articles.html">Articles</a></li>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Nominees</a></li>
+          <li><a href="../HMTL/statistics.html">Statistics</a></li>
+          <li><a href="../HTML/articles.html">Articles</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="statistics">
+      <h1 class="statistics-title">Statistics & Data Analysis</h1>
+      <form class="search-form">
+        <input type="text" placeholder="Search by title..." />
+      </form>
+      <article class="statistic">
+        <h1 class="statistic-title">Biggest Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
           </ul>
-        </div>
-      </nav>
-    </header>
+        </label>
+        <img src="../../static/Poze statistici/BiggestWinners.png" class="center" />
+      </article>
 
-    <main>
-      <section class="statistics">
-        <h1 class="statistics-title">Statistics & Data Analysis</h1>
-        <form class="search-form">
-          <input type="text" placeholder="Search by title..." />
-        </form>
-        <article class="statistic">
-          <h1 class="statistic-title">Biggest Winners</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Biggest Nominees</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze statistici/BiggestWinners.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze statistici/BiggestNominees.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Biggest Nominees</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Nominees</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze statistici/BiggestNominees.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Nominees.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Nominees</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Nominees.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Winners.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Winners</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Nominations</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Winners.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Nominations.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Nominations</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Nominations</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Nominations.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Nominations.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Nominations</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Show that more appeared</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Nominations.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showthatmoreappeared.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Show that more appeared</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">People with most statues</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showthatmoreappeared.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Peoplewithmoststatues.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">People with most statues</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">People that were most nominated</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Peoplewithmoststatues.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Peoplethatweremostnominated.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">People that were most nominated</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">People that more appeared</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Peoplethatweremostnominated.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Peoplethatmoreappeareds.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">People that more appeared</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">People by year - Nominees</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Peoplethatmoreappeareds.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Peoplebyyear-Nominees.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">People by year - Nominees</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Peoplebyyear-Nominees.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Winners2.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Winners</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Shows by year - Nominations</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Winners2.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Showsbyyear-Nominations2.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Shows by year - Nominations</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Category that more appeared</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Showsbyyear-Nominations2.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/Categorythatmoreappeared.png" class="center" />
+      </article>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Category that more appeared</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+      <article class="statistic">
+        <h1 class="statistic-title">Actor vs Actress</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
-            <input type="checkbox" class="dd-input" id="test" />
+          <input type="checkbox" class="dd-input" id="test" />
 
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/Categorythatmoreappeared.png" class="center" />
-        </article>
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/ActorvsActress.png" class="center" />
+      </article>
+    </section>
+  </main>
 
-        <article class="statistic">
-          <h1 class="statistic-title">Actor vs Actress</h1>
-          <label class="dropdown">
-            <div class="dd-button">Export</div>
+  <footer></footer>
+  <script src="../../static/JS/statistics.js"></script>
+</body>
 
-            <input type="checkbox" class="dd-input" id="test" />
-
-            <ul class="dd-menu">
-              <li>CSV</li>
-              <li>WebP</li>
-              <li>SVG</li>
-            </ul>
-          </label>
-          <img src="../../static/Poze Statistici/ActorvsActress.png" class="center" />
-        </article>
-      </section>
-    </main>
-
-    <footer></footer>
-    <script src="../../static/JS/statistics.js"></script>
-  </body>
 </html>
