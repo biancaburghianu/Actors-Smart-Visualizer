@@ -1,8 +1,75 @@
+/* Nav bar */
+.top-nav {
+  background-color: #000067;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 40px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -50px;
+  text-decoration: none;
+  position: absolute;
+}
+
+.logo {
+  position: absolute;
+  left: 30px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nav-links {
+  flex-basis: 75%;
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.nav-links a {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #a5a5a5;
+}
+
+/* End Navbar */
+
 body {
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 .NavTitle {
@@ -10,10 +77,12 @@ body {
   display: flex;
   text-align: center;
   justify-content: center;
-  background-color: whitesmoke;
 }
 .NavTitle h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
+  background: -webkit-linear-gradient(#d7e1ec, #000067);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .CardsClass {
   justify-content: center;
@@ -43,6 +112,15 @@ body {
 
 /* CARDS STYLE */
 
+.CardsAndNominalization {
+  width: 95vw;
+  /* margin: 0px 2.5vw 0px 2.5vw; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  border-radius: 10px;
+}
+
 .CardsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -50,9 +128,11 @@ body {
   margin-left: 5vw;
   margin-right: 5vw;
   height: auto;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 .Card {
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -91,38 +171,55 @@ body {
 .Card h3 {
   color: #fff;
   opacity: 1;
-  font-size: 3rem;
   bottom: 20px;
   left: 20px;
   margin: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
-  bottom: 20%;
+  font-size: 2rem;
+  margin-bottom: 0px;
+}
+.Card h2 {
+  transition: opacity 0.3s ease-in 0.4s;
+  color: #fff;
   font-size: 1.5rem;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 2rem;
+  font-weight: 100;
+  z-index: 1;
+  margin: 0px 1rem 1rem;
 }
 .Card h1 {
   font-weight: bolder;
   font-style: oblique;
   color: #fff;
   opacity: 1;
-  font-size: 2.5rem;
+  font-size: 3rem;
   bottom: 20px;
   left: 20px;
-  margin: 1rem;
+  margin: 0px 1rem 0px 1rem;
   opacity: 0;
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
 }
+.NominalizationType {
+  border-top: 2px solid #fff;
+  padding: 10px;
+  color: #fff;
+  z-index: 1;
+  margin: 0px 1rem 0px 1rem;
+  font-size: 1.5rem;
+}
+
 .Card button {
-  padding: 0%;
+  border-top: 2px solid #fff;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  padding: 20px 0px 0px 0px;
   font-size: 1.5rem;
   color: #fff;
   background-color: transparent;
   z-index: 1;
-  border: none;
   cursor: pointer;
   text-align: left;
   margin: 1rem;
@@ -131,36 +228,126 @@ body {
   opacity: 0;
 }
 .Card.active {
-  opacity: 1;
   flex: 2;
   min-width: 300px;
 }
 .Card.active h1,
 .Card.active h3,
-.Card.active button {
+.Card.active button,
+.Card.active h2 {
   opacity: 1;
+}
+
+/*  Overlay  */
+
+.overlayCard {
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  z-index: 2;
+  padding: 70px 0px 100px 0px;
+}
+.overlayCard.active {
+  display: flex;
+}
+.overlayCard.Actors.active {
+  justify-content: flex-start;
+}
+.overlayCard.Actors h2 {
+  color: #fff;
+  font-size: 1.5rem;
+}
+.overlayCard.Actors p {
+  color: #fff;
+  padding: 20px 10vw 20px 10vw;
+  font-size: 1.25rem;
+}
+
+.overlayCard button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  position: absolute;
+  right: 10%;
+  top: 2%;
+  padding: 15px;
+}
+.overlayCard h1 {
+  text-align: center;
+  width: 80%;
+  color: #fff;
+  font-size: 3rem;
+  border-bottom: 2px solid #fff;
+  padding: 0px 20px 20px 20px;
+  z-index: 3;
+}
+.overlayCard ul {
+  padding: 0px;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.overlayCard li {
+  text-align: center;
+  margin: 5vw;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 2rem;
+}
+.overlayCard span {
+  font-size: 1.75rem;
+}
+.name {
+  font-weight: 900;
+}
+.role {
+  font-weight: 100;
 }
 
 /* -------------------------------------------
       Category 
 */
 .CategoryNominalization {
-  margin: 0px 5vw 0px;
+  margin: 0px 5.1vw 0px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: flex-start;
 }
+.CategoryNominalization:nth-child(4n) {
+  justify-content: flex-end;
+}
+
 .CategoryNominalization p {
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
   text-align: center;
-  font-family: "Brush Script MT", cursive;
+  /* font-family: "Brush Script MT", cursive; */
   font-style: oblique;
-  font-size: 1.5rem;
+  font-weight: 100;
+  font-size: 1.75rem;
   margin: 5px;
 }
 .CategoryNominalization h1 {
   font-size: 2rem;
-  font-weight: bolder;
+  font-weight: 500;
   margin: 5px;
   text-align: center;
 }
@@ -230,7 +417,7 @@ body {
 .SearchYear {
   width: 100%;
   height: 100%;
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   align-items: flex-start;
   margin-left: 5vw;
@@ -261,7 +448,7 @@ body {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  max-width: 10rem;
+  max-width: 20rem;
 }
 .select-box::-webkit-scrollbar {
   border-radius: 0px;
@@ -275,6 +462,15 @@ body {
 }
 
 @media all and (max-width: 600px) {
+  .overlayCard {
+    padding: 20px;
+  }
+  .overlayCard h1 {
+    font-size: 2rem;
+  }
+  .overlayCard span {
+    font-size: 1.25rem;
+  }
   .CategoryNominalization h1 {
     font-size: 1.5rem;
   }
@@ -323,5 +519,47 @@ body {
   .Card h3,
   .Card button {
     font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .menu-icon {
+    display: block;
+    position: absolute;
+    left: 15px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #000067;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .nav-links.show-nav {
+    opacity: 1;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links a {
+    font-size: 20px;
+    color: #fff;
+  }
+  .show-nav {
+    width: 100%;
   }
 }
