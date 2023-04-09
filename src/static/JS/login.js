@@ -5,3 +5,6 @@ function openRegister() {
 function openLogin() {
   card.style.transform = "rotateY(0deg)";
 }
+function openHomePage() {
+  window.location.href="../HTML/home.html";
+}

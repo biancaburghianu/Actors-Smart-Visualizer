@@ -1,394 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>AcVis</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    </head>
-    <style>
-.top-nav {
-  background-color: #000067;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-}
 
-.logo img {
-  height: 40px;
-}
+<head>
+  <title>AcVis</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+</head>
+<style>
+  .top-nav {
+    background-color: #000067;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
 
-.nav-link {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .logo img {
+    height: 40px;
+  }
 
-.nav-link li {
-  margin-left: 20px;
-}
+  .nav-link {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.nav-link a {
-  color: #fff;
-  font-size: 16px;
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
+  .nav-link li {
+    margin-left: 20px;
+  }
 
-.nav-link a:hover {
-  color: #a5a5a5;
-}
-nav ul li {
-  display: inline-block;
-  padding: 0 15px; 
-  margin: 0;
-  text-align: center;
-  line-height: 30px;
-  font-size: 18px;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+  .nav-link a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .nav-link a:hover {
+    color: #a5a5a5;
+  }
+
+  nav ul li {
+    display: inline-block;
+    padding: 0 15px;
+    margin: 0;
+    text-align: center;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
 
 
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  margin: 15px 5px;
-  overflow: hidden;
-  width: 400px;
-}
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    margin: 15px 5px;
+    overflow: hidden;
+    width: 400px;
+  }
 
-.image-container {
-  width: 45%;
-  overflow: hidden;
-  position: relative;
-}
+  .image-container {
+    width: 45%;
+    overflow: hidden;
+    position: relative;
+  }
 
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
-}
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
 
-.image-container:hover img {
-  transform: scale(1.1);
-}
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
 
-.info-container {
-  padding: 20px;
-  width: 65%;
-}
+  .info-container {
+    padding: 20px;
+    width: 65%;
+  }
 
-.info-container h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
+  .info-container h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
 
-.info-container p {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
+  .info-container p {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
 
-.social-icons {
-  display: flex;
-}
+  .social-icons {
+    display: flex;
+  }
 
-.social-icons a {
-  color: #555;
-  font-size: 24px;
-  margin-right: 10px;
-  transition: color 0.3s ease-in-out;
-}
+  .social-icons a {
+    color: #555;
+    font-size: 24px;
+    margin-right: 10px;
+    transition: color 0.3s ease-in-out;
+  }
 
-.social-icons a:hover {
-  color: #0077b5;
-}
+  .social-icons a:hover {
+    color: #0077b5;
+  }
 
-.social-icons i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #f2f2f2;
-}
-.actors{
-    display:flex;
+  .social-icons i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+  }
+
+  .actors {
+    display: flex;
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
     width: 87%;
     margin: auto;
 
-}
-.articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 87%;
-  margin: auto;
-
-
-}
-
-article {
-  width: calc(33.33% - 10px);
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  border-radius: 10px;
-
-}
-
-article h2 {
-  margin-top: 0;
-}
-
-@media only screen and (max-width: 768px) {
-  article {
-    width: calc(50% - 10px);
   }
-}
+
+  .articles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 87%;
+    margin: auto;
 
 
+  }
 
-    </style>
-    <body>
-        <header>
-            <nav class="top-nav">
-                <img src="Untitled.png" style="width:60px;height: 55px; margin: -10px; position: absolute;left: 50px;" >
-                <ul class="nav-link">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Actors</a></li>
-                    <li><a href="#">Nominees</a></li>
-                    <li><a href="#">Statistics</a></li>
-                    <li><a href="#">Articles</a></li>
-                </ul>
-                <button style="border-radius: 25px; width: 40px; height: 40px; position: absolute ; right: 50px;"><i class="fa fa-user fa-2xl"></i></button>
-            </nav>
-        </header>
+  article {
+    width: calc(33.33% - 10px);
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
 
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-              <img src="slide1.jpg" style="width:100%">
-              <div class="caption">Slide 1 Caption</div>
-            </div>
-           
-            <div class="mySlides fade">
-              <img src="slide2.jpg" style="width:100%">
-              <div class="caption">Slide 2 Caption</div>
-            </div>
-          
-          
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-          </div>
+  }
 
-        <section class="actors">
-            <div class="card">
-                <div class="image-container">
-                  <img src="HelenMcCrory.jpeg" alt="Helen McCrory">
-                </div>
-                <div class="info-container">
-                  <h2>Helen McCrory</h2>
-                  <p>Age: 52</p>
-                  <p>Best known for: Peaky Blinders</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+  article h2 {
+    margin-top: 0;
+  }
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="TintoBrass.jpeg" alt="Tinto Brass">
-                </div>
-                <div class="info-container">
-                  <h2>Tinto Brass</h2>
-                  <p>Age: 90</p>
-                  <p>Best known for: Caligula</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+  @media only screen and (max-width: 768px) {
+    article {
+      width: calc(50% - 10px);
+    }
+  }
+</style>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="PedroPascal.jpeg" alt="Pedro Pascal">
-                </div>
-                <div class="info-container">
-                  <h2>Pedro Pascal</h2>
-                  <p>Age: 47</p>
-                  <p>Best known for: The Mandalorian</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+<body>
+  <header>
+    <nav class="top-nav">
+      <img src="Untitled.png" style="width:60px;height: 55px; margin: -10px; position: absolute;left: 50px;">
+      <ul class="nav-link">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Actors</a></li>
+        <li><a href="#">Nominees</a></li>
+        <li><a href="#">Statistics</a></li>
+        <li><a href="#">Articles</a></li>
+      </ul>
+      <button style="border-radius: 25px; width: 40px; height: 40px; position: absolute ; right: 50px;"><i
+          class="fa fa-user fa-2xl"></i></button>
+    </nav>
+  </header>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="KatherineLaNasa.jpeg" alt="Katherine LaNasa">
-                </div>
-                <div class="info-container">
-                  <h2>Katherine Nasa</h2>
-                  <p>Age: 52</p>
-                  <p>Best known for: The Campaign</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="slide1.jpg" style="width:100%">
+      <div class="caption">Slide 1 Caption</div>
+    </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="JackieSandler.jpeg" alt="Jackie Sandler">
-                </div>
-                <div class="info-container">
-                  <h2>Jackie Sandler</h2>
-                  <p>Age: 48</p>
-                  <p>Best known for: Pixels</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+    <div class="mySlides fade">
+      <img src="slide2.jpg" style="width:100%">
+      <div class="caption">Slide 2 Caption</div>
+    </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="D.B.Woodside.jpeg" alt="D.B. Woodside">
-                </div>
-                <div class="info-container">
-                  <h2>D.B. Woodside</h2>
-                  <p>Age: 53</p>
-                  <p>Best known for: Lucifer</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="AnadeArmas.jpeg" alt="Ana de Armas">
-                </div>
-                <div class="info-container">
-                  <h2>Ana de Armas</h2>
-                  <p>Age: 34</p>
-                  <p>Best known for: WAR DOGS</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="JasonStatham.jpeg" alt="Jason Statham">
-                </div>
-                <div class="info-container">
-                  <h2>Jason Statham</h2>
-                  <p>Age: 55</p>
-                  <p>Best known for: The Transporter/p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+  <section class="actors">
+    <div class="card">
+      <div class="image-container">
+        <img src="HelenMcCrory.jpeg" alt="Helen McCrory">
+      </div>
+      <div class="info-container">
+        <h2>Helen McCrory</h2>
+        <p>Age: 52</p>
+        <p>Best known for: Peaky Blinders</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="JennaOrtega.jpeg" alt="Jenna Ortega">
-                </div>
-                <div class="info-container">
-                  <h2>Jenna Ortega</h2>
-                  <p>Age: 35</p>
-                  <p>Best known for: Movie or TV Show</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
+    <div class="card">
+      <div class="image-container">
+        <img src="TintoBrass.jpeg" alt="Tinto Brass">
+      </div>
+      <div class="info-container">
+        <h2>Tinto Brass</h2>
+        <p>Age: 90</p>
+        <p>Best known for: Caligula</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-              <div class="card">
-                <div class="image-container">
-                  <img src="KeanuReeves.jpeg" alt="Keanu Reeves">
-                </div>
-                <div class="info-container">
-                  <h2>Keanu Reeves</h2>
-                  <p>Age: 58</p>
-                  <p>Best known for: Matrix</p>
-                  <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                  </div>
-                </div>
-              </div>
-        </section>
+    <div class="card">
+      <div class="image-container">
+        <img src="PedroPascal.jpeg" alt="Pedro Pascal">
+      </div>
+      <div class="info-container">
+        <h2>Pedro Pascal</h2>
+        <p>Age: 47</p>
+        <p>Best known for: The Mandalorian</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-        <section>
-            //Top 3 Nominees
-        </section>
+    <div class="card">
+      <div class="image-container">
+        <img src="KatherineLaNasa.jpeg" alt="Katherine LaNasa">
+      </div>
+      <div class="info-container">
+        <h2>Katherine Nasa</h2>
+        <p>Age: 52</p>
+        <p>Best known for: The Campaign</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-        <section>
-            //One Statistics
-        </section>
+    <div class="card">
+      <div class="image-container">
+        <img src="JackieSandler.jpeg" alt="Jackie Sandler">
+      </div>
+      <div class="info-container">
+        <h2>Jackie Sandler</h2>
+        <p>Age: 48</p>
+        <p>Best known for: Pixels</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-        <section>
-            <div class="articles-container">
-                <article>
-                  <h2>Article 1</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
-                </article>
-                <article>
-                  <h2>Article 2</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
-                </article>
-                <article>
-                  <h2>Article 3</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
-                </article>
-              </div>
-        </section>
+    <div class="card">
+      <div class="image-container">
+        <img src="D.B.Woodside.jpeg" alt="D.B. Woodside">
+      </div>
+      <div class="info-container">
+        <h2>D.B. Woodside</h2>
+        <p>Age: 53</p>
+        <p>Best known for: Lucifer</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-        <footer>
+    <div class="card">
+      <div class="image-container">
+        <img src="AnadeArmas.jpeg" alt="Ana de Armas">
+      </div>
+      <div class="info-container">
+        <h2>Ana de Armas</h2>
+        <p>Age: 34</p>
+        <p>Best known for: WAR DOGS</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
 
-        </footer>
-    </body>
+    <div class="card">
+      <div class="image-container">
+        <img src="JasonStatham.jpeg" alt="Jason Statham">
+      </div>
+      <div class="info-container">
+        <h2>Jason Statham</h2>
+        <p>Age: 55</p>
+        <p>Best known for: The Transporter/p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="image-container">
+        <img src="JennaOrtega.jpeg" alt="Jenna Ortega">
+      </div>
+      <div class="info-container">
+        <h2>Jenna Ortega</h2>
+        <p>Age: 35</p>
+        <p>Best known for: Movie or TV Show</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="image-container">
+        <img src="KeanuReeves.jpeg" alt="Keanu Reeves">
+      </div>
+      <div class="info-container">
+        <h2>Keanu Reeves</h2>
+        <p>Age: 58</p>
+        <p>Best known for: Matrix</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    //Top 3 Nominees
+  </section>
+
+  <section>
+    //One Statistics
+  </section>
+
+  <section>
+    <div class="articles-container">
+      <article>
+        <h2>Article 1</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo
+          non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
+      </article>
+      <article>
+        <h2>Article 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo
+          non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
+      </article>
+      <article>
+        <h2>Article 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce et sodales lectus. Donec scelerisque, justo
+          non accumsan dignissim, purus sapien eleifend ante, vel malesuada lacus sapien nec ex.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+
+  </footer>
+</body>
+
 </html>

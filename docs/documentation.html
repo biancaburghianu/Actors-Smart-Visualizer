@@ -1,1 +1,236 @@
-<html> Here is going to be the documentation for our project </html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="documentation.css">
+</head>
+
+<body prefix="schema: http://schema.org">
+    <header>
+        <div class="banner">
+            <img src="images.png" width="100" height="50" alt="Scholarly HTML logo">
+            <h1>Actors Smart Visualizer</h1>
+        </div>
+    </header>
+    <div role="contentinfo">
+        <ol role="directory">
+            <li><a href="#abstract"><span>1. </span>Abstract</a></li>
+            <li><a href="#introduction"><span>2. </span>Introducere</a></li>
+            <li><a href="#structure"><span>3. </span>Structura</a>
+                <ol role="directory">
+                    <li><a href="#teh"><span>3.1 </span>Tehnologii utilizate</a></li>
+                    <li><a href="#pag"><span>3.2 </span>Paginile site-ului</a></li>
+                    <li><a href="#logreg"><span>3.3 </span>Pagina de login si register</a></li>
+                    <li><a href="#home"><span>3.4 </span>Pagina acasa</a></li>
+                    <li><a href="#statistici"><span>3.5 </span>Pagina de statistici</a></li>
+                    <li><a href="#nominalizari"><span>3.6 </span>Pagina de nominalizari</li>
+                    <li><a href="#info"><span>3.7 </span>Pagina cu informatii suplimentare</a></li>
+                </ol>
+            </li>
+            <li><a href="#car"><span>4. </span>Caracteristicile sistemului</a>
+            <li><a href="#con"><span>5. </span>Constrangeri</a></li>
+            <li><a href="#fun"><span>6. </span>Functionalitatea site-ul</a></li>
+            <li><a href="#bib"><span>7. </span>Bibliografie</a></li>
+
+            <dl>
+                <dt>Autori</dt>
+                <dd>
+                    Burghianu Bianca Andreea
+                    &amp;
+                    <a href="https://github.com/biancaburghianu">git</a>
+                </dd>
+                <dd>
+                    Chirila Ciprian
+                    &amp;
+                    <a href="https://github.com/chirilaciprian">git</a>
+                </dd>
+                <dd>
+                    Perju Rares
+                    &amp;
+                    <a href="https://github.com/Perju-Rares-Andrei">git</a>
+                </dd>
+
+                <dt><a href="https://github.com/biancaburghianu/proiectTW">Project repository</a></dt>
+
+
+            </dl>
+    </div>
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+        <h2><span>1. </span>Abstract</h2>
+        <p>
+            Actors Smart Visualizer este un instrument Web de vizualizare flexibila a datelor referitoare la
+            nominalizarile actorilor la Screen Actors Guid (SAG) Awards.
+
+        </p>
+    </section>
+    <section id="introduction" role="doc-introduction">
+        <!-- review? -->
+        <h2><span>2. </span>Introducere</h2>
+        <p>
+            Un utilizator poate vedea statisticile in functie de an, numele show-ului, al filmului sau al actorului. O
+            alta functionalitate pe care
+            o permite acest instrument Web este aceea de a descarca statisticile in diferite formate: CSV, WebP si SVG.
+            Utilizatorul poate de asemenea
+            sa citeasca articole referitoare la productii sau actori si sa vada nominalizarile in functie de categorii.
+        </p>
+        <p>
+            Scopul aplicatiei:
+        </p>
+        <ul>
+            <li>se incadreaza in domeniul family,free-time</li>
+            <li>este facuta pentru orice iubitor de filme, seriale</li>
+            <li>aduce o modalitate simpla si placuta de a ramane la curent cu nominalizarile la Screen Actors Guid (SAG)
+                Awards si vietile actorilor</li>
+            <li>
+                permite pastrarea statisticilor in formatul preferat
+            </li>
+        </ul>
+    </section>
+    <section id="structure">
+        <!-- review? -->
+        <h2><span>3. </span>Structura</h2>
+        <p>
+            Site-ul este de tipul single-page aplication, are un API la care se fac request-uri si un server
+            care retine continutul static al aplicatiei, avand de asemenea o baza de date in care vom salva informatiile
+            legate de un
+            utilizator, actorii si productiile preferate. Informatiile oferite unui utilizator
+            legat de actori, nominalizari
+            si productii vor fi de fapt raspunsuri ale request-urilor facute la API-ul The Movie Database (TMDb), iar
+            statisticle vor fi preluate
+            din Dataset-ul Screen Actors Guild Awards, 1994 - 2020.
+        </p>
+        <section id="teh">
+            <!-- review? -->
+            <h3><span>3.1 </span> Tehnologii utilizate</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Node.js pentru partea de backend</li>
+            </ul>
+            <section id="pag">
+                <!-- review? -->
+                <h3><span>3.2 </span>Paginile site-lui</h3>
+                <p>
+                    Fiecare pagina a site-lui se bazeaza pe cate un schelet html, toate paginile de html se gasesc in
+                    src/views/HTML. Stilizarile paginilor se gasesc in src/static/CSS, pentru fiecare schelet
+                    de HTML, numele CSS-urilor corespunde cu numele HTML-urilor, fiind diferita doar extensia
+                    fisierului. In plus, in src/static/JS avem implementate
+                    script-uri de JavaScript in care se gasesc functiile necesare pentru schetele de HTML, conventia de
+                    denumire este aceeasi ca si la HTML-uri si CSS-uri.
+                </p>
+            </section>
+            <section id="logreg">
+                <!-- review? -->
+                <h3><span>3.3 </span>Pagina de login si register</code></h3>
+                <p>
+                    Pagina de login asigura o modalitate utilizatorului de a se loga printr-un formular pentru ca acesta
+                    sa poata beneficia de
+                    serviciile instrumentului Web. In cazul in care utilizatorul nu si-a creeat inca un cont, poate
+                    accesa aceasta functionalitate
+                    din pagina formularul de Login, ii va fi afisat un formular aferent inregistrarii pe platforma
+                    noastra.
+                </p>
+            </section>
+            <section id="home">
+                <!-- review? -->
+                <h3><span>3.4 </span>Pagina acasa</h3>
+                <p>
+                    Aceasta pagina pune la dispozitie utilizatorului o lista cu productiile sale preferate,
+                    detalii despre noile productii, articole, statistici si nominalizari.
+                </p>
+
+            </section>
+
+            <section id="statistici">
+                <!-- review? -->
+                <h3><span>3.5 </span>Pagina de statistici</h3>
+                <p>
+                    In aceasta pagina utilizatorul poate vizualiza statisticile nominzalizarilor la Screen Actors Guid
+                    (SAG) Awards, le poate
+                    filtra in functie de denumire. Aceste statistici pot fi pe urma exportate si descarcate in
+                    urmatoarele formate: WebP, SVG si CSV.
+            </section>
+            <section id="nominalizari">
+                <!-- review? -->
+                <h3><span>3.8 </span>Pagina de nominalizari</h3>
+                <p>
+                    Aceasta pagina a fost creata pentru vizualizarea nominalizarilor la Screen Actors Guid (SAG) Awards.
+                    Utilizatorul poate
+                    filtra rezultatele in functie de categoria nominalizarilor: Movies, Stunts, Series.
+            </section>
+            <section id="info">
+                <!-- review? -->
+                <h3><span>3.9 </span>Pagina cu informatii suplimentare</h3>
+                <p>
+                    Daca un utilizator isi doreste sa afle mai multe informatii legate de actorii, filmele, sau
+                    serialele nominalizate, va fi
+                    redirectionat catre aceasta pagina, unde poate vizualiza mai multe detalii in functie de
+                    preferintele sale.
+                </p>
+
+                <section id="car">
+                    <!-- review? -->
+                    <h2><span>4. </span>Caracteristicile site-ului(Goals)</h2>
+                    <p>
+                        Site-ul va folosi cel mai probabil un model arhitectural MVC(model-view-controller), pentru a fi
+                        mai usor de impartit pe
+                        categorii de lucru, facilitand astfel si munca in echipa. Vom folosi un controller pentru a
+                        parcurge diferite rute catre
+                        continutul pe care dorim sa il afisam pe pagina, deoarece vom crea un site de forma "single-page
+                        application". Vom retine
+                        date importante intr-o baza de date relationala, MySQL. Vom putea exporta statistici in format
+                        WebP, SVG si CSV.
+
+                    </p>
+                </section>
+                <section id="con">
+                    <!-- review? -->
+                    <h2><span>5. </span>Constrangeri</h2>
+                    <p>
+                        Nu exista constrangeri de utilizare, deoarece site-ul e conceput pentru
+                        orice tip de ecran, functionand si pe modul orizontal al unui telefon,
+                        tablete, etc partea de front-end fiind full responsive.
+                    </p>
+                </section>
+                <section id="fun">
+                    <!-- review? -->
+                    <h2><span>6. </span>Functionalitatea site-ului</h2>
+                    <p>
+                        Site-ul este construit in asa fel incat utilizatorii sa fie
+                        atrasi de interfata placuta si usor de utilizat pentru o interactiune plina
+                        de beneficii. Utilizatori pot fi considerati doar cei logati,
+                        pentru a putea beneficia de servicii.
+                        Site-ul pune la dispozitie utilizatorului diverse functii precum crearea
+                        unui cont, logarea, folosirea contului pentru a vizualiza statisticile generate, a le descarca.
+                        De asemenea, utilizatorul poate
+                        vizualiza detalii suplimentare referitoare la productiile sale favorite, inclusiv actorii sai
+                        favoriti. Prin intermediul site-ului nostru,
+                        utilizatorul poate vizualiza si nominalizarile per categorie, poate sa isi salveze actorii si
+                        productiile favorite, astfel interactiunea
+                        sa cu site-ul nostru fiind strict legata de preferintele sale in materie de filme si seriale.
+                    </p>
+                </section>
+                <section id="bib">
+                    <!-- review? -->
+                    <h2><span>7. </span>Bibliografie</h2>
+                    <p>
+                        <a
+                            href="https://w3c.github.io/scholarly-html/?fbclid=IwAR1KXp2BioDB1D3dZELQKtFIU1TT0T6tR2EJFUq-n2zUVV5L7n0NJhk_nf0#article">Raport
+                            Model</a>
+                    </p>
+                    <p>
+                        <a href="https://www.w3schools.com/css/default.asp"> CSS help</a>
+                    </p>
+                </section>
+
+
+                </dd>
+                </dl>
+            </section>
+</body>
+
+</html>
