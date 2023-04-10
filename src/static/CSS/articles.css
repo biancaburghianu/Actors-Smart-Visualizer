@@ -1,181 +1,236 @@
+/* Navbar login button */
+
+#UserBtn {
+  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 20px;
+}
+.UserLogin {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  opacity: 0;
+  flex-direction: row;
+  /* margin: 40px; */
+  top: 80px;
+  position: absolute;
+  right: 0px;
+  height: 150px;
+  width: 250px;
+  border-bottom-left-radius: 10px;
+  background: -webkit-linear-gradient(#000067, #d7e1ec);
+  z-index: 1;
+  transition: all 0.5s ease-in;
+}
+.UserLogin.active {
+  opacity: 1;
+}
+.UserLogin ul {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+.UserLogin li {
+  padding: 10px;
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+}
+.UserLogin a {
+  padding: 10px;
+  color: #fff;
+  font-size: 1.25rem;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease-in;
+}
+.UserLogin a:hover {
+  color: #a5a5a5;
+}
+
+/* End Navbar Login Button */
+
 .body {
-    background-color: #f8f8ff;
-    width: 100%;
-    text-align: center;
+  background-color: #f8f8ff;
+  width: 100%;
+  text-align: center;
 }
 
 .top-nav {
-    background-color: #000067;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    height: 40px;
+  background-color: #000067;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 40px;
 }
 
 .nav-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -50px;
-    text-decoration: none;
-    position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -50px;
+  text-decoration: none;
+  position: absolute;
 }
 
 .logo {
-    position: absolute;
-    left: 30px;
+  position: absolute;
+  left: 30px;
 }
 
 .logo img {
-    height: 40px;
+  height: 40px;
 }
 
 .menu-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .nav-links {
-    flex-basis: 75%;
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
+  flex-basis: 75%;
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
 }
 
 .nav-links li {
-    margin-left: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
+  margin-left: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .nav-links a {
-    color: #fff;
-    font-size: 16px;
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
-    color: #a5a5a5;
+  color: #a5a5a5;
 }
 
 .articles {
-    margin-top: 50px;
-    width: 100%;
-    text-align: center;
-    background-color: #ffffff;
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  background-color: #ffffff;
 }
 
 .article {
-    background-color: #ffffff;
-    background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
-    display: inline-block;
-    padding: 3px;
-    width: 60%;
-    margin: 30px;
-    border-radius: 10px;
-    text-align: left;
+  background-color: #ffffff;
+  background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
+  display: inline-block;
+  padding: 3px;
+  width: 60%;
+  margin: 30px;
+  border-radius: 10px;
+  text-align: left;
 }
 
 .articles-title {
-    margin-top: 120px;
-    font-size: 52px;
-    background: -webkit-linear-gradient(#d7e1ec, #000067);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  margin-top: 120px;
+  font-size: 52px;
+  background: -webkit-linear-gradient(#d7e1ec, #000067);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .article-image {
-    float: left;
-    width: 60%;
-    border-radius: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    margin-right: 20px;
+  float: left;
+  width: 60%;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
 }
 
 .article-title {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
 
 .article-text {
-    margin: 10px;
-    font-size: 20px;
+  margin: 10px;
+  font-size: 20px;
 }
 
 #readMore {
-    border-radius: 10px;
-    border: 1.5px solid #000067;
-    text-decoration: none;
-    background-color: #eeeeee;
+  border-radius: 10px;
+  border: 1.5px solid #000067;
+  text-decoration: none;
+  background-color: #eeeeee;
 }
 
 #more {
-    display: none;
+  display: none;
 }
 
 @media screen and (max-width: 700px) {
-    .menu-icon {
-        display: block;
-        position: absolute;
-        left: 15px;
-    }
+  .menu-icon {
+    display: block;
+    position: absolute;
+    left: 15px;
+  }
 
-    .nav-links {
-        position: fixed;
-        top: 50px;
-        left: 0;
-        right: 0;
-        height: 80px;
-        background-color: #000067;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 50px 0;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-        width: 100%;
-        z-index: 1;
-    }
+  .nav-links {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #000067;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    width: 100%;
+    z-index: 1;
+  }
 
-    .nav-links.show-nav {
-        opacity: 1;
-    }
+  .nav-links.show-nav {
+    opacity: 1;
+  }
 
-    .nav-links li {
-        margin: 10px 0;
-    }
+  .nav-links li {
+    margin: 10px 0;
+  }
 
-    .nav-links a {
-        font-size: 20px;
-        color: #fff;
-    }
+  .nav-links a {
+    font-size: 20px;
+    color: #fff;
+  }
 
-    .show-nav {
-        width: 100%;
-    }
+  .show-nav {
+    width: 100%;
+  }
 
-    .article {
-        width: 95%;
-        margin-left: 1px;
-        margin-right: 1px;
-        margin-top: 10px;
-    }
+  .article {
+    width: 95%;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 10px;
+  }
 
-    .article-text {
-        margin: 10px;
-        font-size: 16px;
-    }
+  .article-text {
+    margin: 10px;
+    font-size: 16px;
+  }
 }

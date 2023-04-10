@@ -24,3 +24,12 @@ function handleSearch() {
     }
   });
 }
+
+//  Login Script
+const LoginBtn = document.getElementById("UserBtn");
+const LoginPannel = document.querySelector(".UserLogin");
+LoginBtn.addEventListener("click", () => {
+  if (LoginPannel.classList.contains("active"))
+    LoginPannel.classList.remove("active");
+  else LoginPannel.classList.add("active");
+});
