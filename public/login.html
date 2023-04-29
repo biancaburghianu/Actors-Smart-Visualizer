@@ -1,0 +1,50 @@
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="./login.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="inner-box" id="card">
+        <div class="card-front">
+          <h2>Login</h2>
+          <p>Actors Smart Visualizer</p>
+          <p>
+            Un site destinat previzualizarii statisticilor in urma
+            norminalizarilor la Screen Actors Guild Awards.
+          </p>
+          <form action="" method="post">
+            <input type="username" class="input-box" id="username" placeholder="Your username" required />
+            <input type="password" class="input-box" id="password" placeholder="Your password" required />
+            <input type="submit" class="submit-btn" value="Login" />
+          </form>
+          <a href="register.html">Create an account</a>
+          <a href="">Forgot password</a>
+        </div>
+      </div>
+      <script>const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const xhr = new XMLHttpRequest();
+        const url = "/login";
+
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            const token = xhr.getResponseHeader("Authorization").split(" ")[1];
+            localStorage.setItem("token", token);
+            window.location.href = "../HTML/home.html";
+          }
+        };
+
+        const data = JSON.stringify({ email, password });
+        xhr.send(data);
+      </script>
+
+</body>
+
+</html>
