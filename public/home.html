@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AcVis</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="home.css">
+</head>
+
+<body>
+  <header>
+    <nav class="top-nav">
+      <div class="logo">
+        <img src="Untitled.png" alt="Logo" />
+      </div>
+      <div class="nav-container">
+        <div class="menu-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../HTML/home.html">Home</a></li>
+          <li><a href="../HTML/nominees.html">Nominees</a></li>
+          <li><a href="../HTML/statistics.html">Statistics</a></li>
+          <li><a href="../HTML/articles.html">Articles</a></li>
+        </ul>
+      </div>
+      <button id="UserBtn"><i class="fa fa-user fa-2xl"></i></button>
+      <div class="UserLogin">
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main style="margin-top: 100px;">
+    <section class="nominees">
+      <h1 class="articles-title"><i>Nominees Film-CAST IN MOTION PICTURE</i></h1>
+      <div class="CardsContainer">
+        <div class="Card active" style="
+            background-image: url(https://wallpapercave.com/wp/wp12109124.jpg);
+          ">
+          <h1>Winner</h1>
+          <h3>Everything everywhere all at once</h3>
+          <button>View Cast</button>
+        </div>
+        <div class="Card" style="
+            background-image: url(https://wallpapercave.com/dwp1x/wp11716913.jpg);
+          ">
+          <h3>The fablemans</h3>
+          <button>View Cast</button>
+        </div>
+        <div class="Card" style="
+            background-image: url(https://images6.alphacoders.com/129/1296356.jpg);
+          ">
+          <h3>Babylon</h3>
+          <button>View Cast</button>
+        </div>
+        <div class="Card" style="
+            background-image: url(https://wallpapercave.com/dwp1x/wp11994083.jpg);
+          ">
+          <h3>Banshees of Inisherin</h3>
+          <button>View Cast</button>
+        </div>
+        <div class="Card" style="
+            background-image: url(https://media1.houstonpress.com/hou/imager/u/magnum/14820055/hou_art_20230106_wt_header.jpeg?cb=1672798656);
+          ">
+          <h3>Women Talking</h3>
+          <button>View Cast</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="showMore">
+      <button class="showMoreBtn"><a href="Nominees.html" style="text-decoration: none; color: white;">Show more
+          nominees</a></button>
+    </div>
+
+    <h1 class="articles-title"><i>Actors & Actress</i></h1>
+
+    <section class="actors">
+      <article>
+        <div class="card">
+          <div class="image-container">
+            <img src="../../static/Poze actori/AnadeArmas.jpeg" alt="Ana de Armas">
+          </div>
+          <div class="info-container">
+            <h2>Ana de Armas</h2>
+            <p>Age: 34</p>
+            <p>Best known for: WAR DOGS</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="card">
+          <div class="image-container">
+            <img src="../../static/Poze actori/JennaOrtega.jpeg" alt="Jenna Ortega">
+          </div>
+          <div class="info-container">
+            <h2>Jenna Ortega</h2>
+            <p>Age: 35</p>
+            <p>Best known for : Wednesday</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <div class="card">
+          <div class="image-container">
+            <img src="../../static/Poze actori/JasonStatham.jpeg" alt="Jason Statham">
+          </div>
+          <div class="info-container">
+            <h2>Jason Statham</h2>
+            <p>Age: 55</p>
+            <p>Best known for: The Transporter</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="showMore">
+      <button class="showMoreBtn"><a href="#" style="text-decoration: none; color: white;">Show more actors</a></button>
+    </div>
+
+    <h1 class="articles-title" style="width: 60%;"><i>Statistics</i></h1>
+
+    <section class="statistics">
+      <article class="statistic">
+        <h1 class="statistic-title">Actor vs Actress</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li>CSV</li>
+            <li>WebP</li>
+            <li>SVG</li>
+          </ul>
+        </label>
+        <img src="../../static/Poze Statistici/ActorvsActress.png" class="center" />
+      </article>
+    </section>
+
+    <div class="showMore">
+      <button class="showMoreBtn"><a href="../HTML/statistics.html" style="text-decoration: none; color: white;">Show
+          more statistics</a></button>
+    </div>
+
+    <h1 class="articles-title" style="width: 60%;"><i>Articles</i></h1>
+
+
+    <section class="articles">
+      <article class="article">
+        <h1 class="article-title">
+          Margot Robbie is 'everything' in new Barbie poster, Ryan is just Ken
+          <hr>
+        </h1>
+        <img src="../../static/Poze articole/Barbie_collage.png" class="article-image" />
+        <div class="article-text">
+          <p>
+            Several colourful posters from the upcoming Barbie film by Greta Gerwig show many Barbies led by
+            Margot Robbie and other Kens led by Ryan Gosling.
+            It's time to meet the new Barbies and Kens. The upcoming film by Greta Gerwig shows the world of
+            the doll with several actors taking on the different Barbies and Kens. While Margot Robbie leads
+            the Barbies, Ryan Gosling leads the Kens. The bright and colourful posters also reveal some new
+            characters, a few who are human that are pivotal to the film. Helen Mirren has been revealed as
+            the narrator of the rom-com. (Also read: Barbie teaser: Margot Robbie is no 'baby doll' in Greta
+            Gerwig film. Watch)
+
+
+            <span id="dots1">...</span><span id="more1" style="display:none;">It's time to meet the new
+              Barbies and Kens. The
+              upcoming film by Greta Gerwig shows the world of the doll with several actors taking on the
+              different Barbies and Kens. While Margot Robbie leads the Barbies, Ryan Gosling leads the
+              Kens. The bright and colourful posters also reveal some new characters, a few who are human
+              that are pivotal to the film. Helen Mirren has been revealed as the narrator of the
+              rom-com.<br></br>
+              <b>The main poster features Margot Robbie as Barbie calls her 'everything'.</b>
+              <br></br>
+              There are other character posters for Issa Rae, Kate McKinnon, Nicola Coughlan, Hari Nef,
+              Alexandra Shipp, Ritu Arya, Emma Mackey, Dua Lipa, Ana Cruz Kayne and Sharon Rooney. These
+              Barbies have careers and titles like author, President, diplomat and doctor. In Greta's
+              film, Barbies can also win Nobel and Pulitzers Prizes as well. Singer Dua Lipa is the newest
+              name to be attached to the film.<br></br>Besides Ryan Gosling, Simu Liu, Ncuti Gatwa,
+              Kingsley Ben-Adir and Scott Evans are also playing Ken. While the Barbies have something to
+              do, the Kens are hilariously 'just Ken'.
+              <br></br>Other new characters include Emerald Fennell as Midge and Michael Cera as Allan.
+              America Ferrara, Ariana Greenblatt, Will Ferrell, Connor Swindells, and Jamie Demetriou play
+              the humans while Helen Mirren is the narrator. The tone of the posters is quirky and fun,
+              feeling like the audience is also in a joke with the characters.</span>
+          </p>
+          <button onclick="myFunction(1)" id="readMore">Read more</button>
+        </div>
+      </article>
+    </section>
+    <div class="showMore">
+      <button class="showMoreBtn"><a href="../HTML/articles.html" style="text-decoration: none; color: white;">Show more
+          articles</a></button>
+    </div>
+  </main>
+
+  <footer></footer>
+  <script src="../../static/JS/nominees.js"></script>
+</body>
+
+</html>
