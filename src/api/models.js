@@ -1,10 +1,11 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "./sequelizeConfig.js";
+
 class User extends Model {}
 
 User.init(
   {
-    userName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -22,3 +23,5 @@ User.init(
 User.sync(); //creeaza tabelul daca nu exista
 
 console.log(User === sequelize.models.User);
+
+export { User };
