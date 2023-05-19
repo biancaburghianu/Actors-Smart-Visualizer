@@ -1,8 +1,9 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
   <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="login.css" />
+  <link rel="stylesheet" href="login.css" />
 </head>
 
 <body>
@@ -22,7 +23,7 @@
             <button type="submit">Login</button>
           </form>
           <input type="button" class="submit-btn" value="Create an account"
-            onClick="window.location.href='http://localhost:3456/register'" />
+            onClick="window.location.href='register.html'" />
         </div>
         <a href="">Forgot password</a>
       </div>
@@ -48,7 +49,7 @@
                 const token = authHeader.split(" ")[1];
                 console.log(token);
                 localStorage.setItem("token", token);
-                window.location.href = "http://localhost:3456/home";
+                window.location.href = "/home.html";
               }
             } else if (xhr.status === 401) {
               alert("Username sau parola gresite!");

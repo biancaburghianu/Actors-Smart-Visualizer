@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import { generateToken } from "./generateToken.js";
-import { User } from "./models.js";
+import { generateToken } from "../utils/generateToken.js";
+import { User } from "../models/models.js";
 
 export async function loginUser(username, password) {
   const user = await User.findOne({
@@ -21,3 +21,4 @@ export async function loginUser(username, password) {
 
   return { user, token };
 }
+//AR TREBUI IMPLEMENTAT UN FIND ALL, SAU LASAM USERNAME UL UNIC?

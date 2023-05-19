@@ -33,3 +33,45 @@ LoginBtn.addEventListener("click", () => {
     LoginPannel.classList.remove("active");
   else LoginPannel.classList.add("active");
 });
+const request = new XMLHttpRequest();
+request.open("GET", "http://localhost:3456/statistics/biggestWinners");
+request.onload = function () {
+  if (request.status === 200) {
+    const data = JSON.parse(request.responseText);
+    // Perform the data analysis and create the plot
+    const groupedData = processData(data);
+
+    // Create the plot
+    const trace = {
+      x: groupedData.map((item) => item.show),
+      y: groupedData.map((item) => item.count),
+      text: groupedData.map((item) => item.count),
+      textposition: "auto",
+      type: "bar",
+    };
+
+    const layout = {
+      title: "Top 10 Biggest Winners",
+    };
+
+    const fig = Plotly.newPlot("chart", [trace], layout);
+  } else {
+    console.error("Error fetching biggest winners:", request.status);
+  }
+};
+request.send();
+
+// Function to process the retrieved data
+function processData(data) {
+  // Process the data received from the server
+  // Modify this function according to your data structure and processing requirements
+  // For example:
+  const processedData = data.map((item) => {
+    return {
+      show: item.show,
+      count: item.count,
+    };
+  });
+
+  return processedData;
+}

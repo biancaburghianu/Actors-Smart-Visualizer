@@ -1,16 +1,20 @@
-import { sequelize } from "./sequelizeConfig.js";
-import { registerUser } from "./registerUser.js";
-import { loginUser } from "./authUser.js";
+import { sequelize } from "./models/sequelizeConfig.js";
+import { registerUser } from "./controllers/registerUser.js";
+import { loginUser } from "./controllers/authUser.js";
 
-import http from "http";
+import http, { request } from "http";
 import url from "url";
 import fs from "fs";
 import path from "path";
+import { Nominalisation } from "./models/models.js";
 
 const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = parsedUrl.pathname;
-
+  console.log(pathname);
   if (req.method === "POST" && req.url === "/register") {
     let body = "";
     req.on("data", (chunk) => {
@@ -34,47 +38,8 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ error: error.message }));
       }
     });
-  } else if (parsedUrl.pathname === "/register" && req.method === "GET") {
-    fs.readFile("../../public/register.html", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading register.html");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname === "/login" && req.method === "GET") {
-    fs.readFile("../../public/login.html", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading login.html");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname === "/login.css") {
-    fs.readFile("../../public/login.css", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading style.css");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/css" });
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname === "/loginBackground.jpeg") {
-    fs.readFile("../../public/loginBackground.jpeg", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading style.css");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/jpeg" });
-      res.end(data);
-    });
-  } else if (req.url === "/login" && req.method === "POST") {
+  }
+  if (req.url === "/login" && req.method === "POST") {
     console.log("am intrat in if");
     let body = "";
     req.on("data", (chunk) => {
@@ -82,12 +47,12 @@ const server = http.createServer((req, res) => {
     });
     req.on("end", async () => {
       const { username, password } = JSON.parse(body);
-      //   if (!username && !password) {
-      //     res.writeHead(401, { "Content-Type": "text/plain" });
-      //     res.write("Utilizatorul nu exista");
-      //     res.end();
-      //     return;
-      //   }
+      if (!username && !password) {
+        res.writeHead(401, { "Content-Type": "text/plain" });
+        res.write("Utilizatorul nu exista");
+        res.end();
+        return;
+      }
       const result = await loginUser(username, password);
       if (!result) {
         res.writeHead(401, { "Content-Type": "text/plain" });
@@ -105,69 +70,29 @@ const server = http.createServer((req, res) => {
       res.write("Ai reusit sa te autentifici");
       res.end();
     });
-  } else if (parsedUrl.pathname === "/home" && req.method === "GET") {
-    fs.readFile("../../public/home.html", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading home.html");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(data);
-      console.log(data);
-    });
-  } else if (parsedUrl.pathname === "/home.css") {
-    fs.readFile("../../public/home.css", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading style.css");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "text/css" });
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname === "/Untitled.png") {
-    fs.readFile("../../public/Untitled.png", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading style.css");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "image/png" });
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname === "/Logo.png") {
-    fs.readFile("../../public/Logo.png", function (err, data) {
-      if (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("Error reading style.css");
-        return;
-      }
-      res.writeHead(200, { "Content-Type": "image/png" });
-      res.end(data);
-    });
-  } else if (req.method === "POST" && req.url === "/register") {
-    let body = "";
-    req.on("data", (chunk) => {
-      body += chunk;
-    });
-    req.on("end", async () => {
-      try {
-        const { username, password } = JSON.parse(body);
-        console.log(username, password);
-        const result = await registerUser(username, password);
+  }
+  if (req.method === "GET" && req.url === "/statistics/biggestWinners") {
+    const year = "2020 - 26th Annual Screen Actors Guild Awards";
+    async function getNominalisations() {
+      const nominalisation = await Nominalisation.findAll({
+        attributes: [
+          "show",
+          [sequelize.fn("COUNT", sequelize.col("show")), "count"],
+        ],
+        where: { won: "True" },
+        group: ["show"],
+        order: [[sequelize.fn("COUNT", sequelize.col("show")), "DESC"]],
+        limit: 10,
+      });
+      console.log("hei am fost apelat");
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(nominalisation));
+    }
 
-        if (result.success) {
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ message: result.message }));
-        } else {
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: result.error }));
-        }
-      } catch (error) {
-        res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: error.message }));
-      }
+    getNominalisations().catch((error) => {
+      console.error(error);
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: error.message }));
     });
   }
 });
