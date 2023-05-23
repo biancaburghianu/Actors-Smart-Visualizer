@@ -54,9 +54,9 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartBiggestWinners('csv')">CSV</li>
+            <li onclick="exportChartBiggestWinners('webp')">WebP</li>
+            <li onclick="exportChartBiggestWinners('svg')">SVG</li>
           </ul>
         </label>
         <div id="BiggestWinners" class="center"></div>
@@ -70,9 +70,9 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartBiggestNominees('csv')">CSV</li>
+            <li onclick="exportChartBiggestNominees('webp')">WebP</li>
+            <li onclick="exportChartBiggestNominees('svg')">SVG</li>
           </ul>
         </label>
         <div id="BiggestNominees" class="center"></div>
@@ -86,12 +86,12 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartMostNominatedPeople('csv')">CSV</li>
+            <li onclick="exportChartMostNominatedPeople('webp')">WebP</li>
+            <li onclick="exportChartMostNominatedPeople('svg')">SVG</li>
           </ul>
         </label>
-        <div id="MostNominatedPeople" ></div>
+        <div id="MostNominatedPeople" class="center"></div>
       </article>
       
       <article class="statistic">
@@ -102,12 +102,12 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartPeopleWithMostStatues('csv')">CSV</li>
+            <li onclick="exportChartPeopleWithMostStatues('webp')">WebP</li>
+            <li onclick="exportChartPeopleWithMostStatues('svg')">SVG</li>
           </ul>
         </label>
-        <div id="PeopleWithMostStatues" ></div>
+        <div id="PeopleWithMostStatues" class="center"></div>
       </article>
 
       <article class="statistic">
@@ -118,12 +118,12 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartMostAppearedShows('csv')">CSV</li>
+            <li onclick="exportChartMostAppearedShows('webp')">WebP</li>
+            <li onclick="exportChartMostAppearedShows('svg')">SVG</li>
           </ul>
         </label>
-        <div id="MostAppearedShows" ></div>
+        <div id="MostAppearedShows" class="center"></div>
       </article>
 
       <article class="statistic">
@@ -134,17 +134,127 @@
           <input type="checkbox" class="dd-input" id="test" />
 
           <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
+            <li onclick="exportChartMostAppearedPeople('csv')">CSV</li>
+            <li onclick="exportChartMostAppearedPeople('webp')">WebP</li>
+            <li onclick="exportChartMostAppearedPeople('svg')">SVG</li>
           </ul>
         </label>
-        <div id="MostAppearedPeople" ></div>
+        <div id="MostAppearedPeople" class="center" ></div>
       </article>
       
+      <article class="statistic">
+        <h1 class="statistic-title">Most Appeared Category</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartMostAppearedCategories('csv')">CSV</li>
+            <li onclick="exportChartMostAppearedCategories('webp')">WebP</li>
+            <li onclick="exportChartMostAppearedCategories('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="MostAppearedCategories" class="center"></div>
+      </article>
+
+      <article class="statistic">
+        <h1 class="statistic-title">Actor vs Actress</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartActorVsActressProportions('csv')">CSV</li>
+            <li onclick="exportChartActorVsActressProportions('webp')">WebP</li>
+            <li onclick="exportChartActorVsActressProportions('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="ActorVsActressProportions" class="center" ></div>
+      </article>
      
-     
+      <article class="statistic">
+        <h1 class="statistic-title">Show By Year - Nominees</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartShowByYearNominees('csv')">CSV</li>
+            <li onclick="exportChartShowByYearNominees('webp')">WebP</li>
+            <li onclick="exportChartShowByYearNominees('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="ShowByYearNominees" class="center" ></div>
+      </article>
+
+
+      <article class="statistic">
+        <h1 class="statistic-title">Show By Year - Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartShowByYearWinners('csv')">CSV</li>
+            <li onclick="exportChartShowByYearWinners('webp')">WebP</li>
+            <li onclick="exportChartShowByYearWinners('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="ShowByYearWinners" class="center" ></div>
+      </article>
       
+
+      <article class="statistic">
+        <h1 class="statistic-title">People by Year - Nominees</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartPeopleByYearNominees('csv')">CSV</li>
+            <li onclick="exportChartPeopleByYearNominees('webp')">WebP</li>
+            <li onclick="exportChartPeopleByYearNominees('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="PeopleByYearNominees" class="center" ></div>
+      </article>
+
+      <article class="statistic">
+        <h1 class="statistic-title">People by Year - Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartPeopleByYearWinners('csv')">CSV</li>
+            <li onclick="exportChartPeopleByYearWinners('webp')">WebP</li>
+            <li onclick="exportChartPeopleByYearWinners('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="PeopleByYearWinners" class="center" ></div>
+      </article>
+
+      <article class="statistic">
+        <h1 class="statistic-title">Winning and Losing</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+
+          <input type="checkbox" class="dd-input" id="test" />
+
+          <ul class="dd-menu">
+            <li onclick="exportChartWinningandLosingProportions('csv')">CSV</li>
+            <li onclick="exportChartWinningandLosingProportions('webp')">WebP</li>
+            <li onclick="exportChartWinningandLosingProportions('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="WinningandLosingProportions" class="center" ></div>
+      </article>
       
 
       
