@@ -1,6 +1,7 @@
 import { loginRoute } from "./loginRoute.js";
 import { registerRoute } from "./registerRoute.js";
 import { statisticsRoute } from "./statisticsRoute.js";
+import { nomineesRoute } from "./nomineesRoute.js";
 
 export async function router(req, res) {
   if (req.url.match(/^\/login/)) {
@@ -15,8 +16,8 @@ export async function router(req, res) {
     console.log("statistics route");
     statisticsRoute(req, res);
   }
-  //   if (req.url.match(/^\/nominees/)) {
-  //     console.log("nominees route");
-  //     nomineesRoute(req, res);
-  //   }
+    if (req.url.match(/^\/nominees/)) {
+      console.log("nominees route");
+      nomineesRoute(req, res);
+    }
 }
