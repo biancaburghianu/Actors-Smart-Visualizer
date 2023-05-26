@@ -1130,7 +1130,7 @@ function exportChartPeopleWithMostStatues(format) {
 //exportChartMostAppearedShows
 function exportChartMostAppearedShows(format) {
   if (format === "csv") {
-    const peopleRequest = new XMLHttpRequest();
+    const showsRequest = new XMLHttpRequest();
     showsRequest.open(
       "GET",
       "http://localhost:3456/statistics/mostAppearedShows"
@@ -1163,6 +1163,153 @@ function exportChartMostAppearedShows(format) {
     Plotly.downloadImage("MostAppearedShows", {
       format: "svg",
       filename: "MostAppearedShows",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartMostAppearedPeople
+function exportChartMostAppearedPeople(format) {
+  if (format === "csv") {
+    const peopleRequest = new XMLHttpRequest();
+    peopleRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/mostAppearedPeople"
+    );
+    peopleRequest.onload = function () {
+      if (peopleRequest.status === 200) {
+        const peopleData = JSON.parse(peopleRequest.responseText);
+        const processedPeopleData = processPMAShowsData(peopleData);
+        exportDataToCSV(peopleData, "most_appeared_people");
+      } else {
+        console.error(
+          "Error fetching most appeared shows:",
+          peopleRequest.status
+        );
+      }
+    };
+    peopleRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("MostAppearedPeople", {
+      format: "webp",
+      filename: "MostAppearedPeople",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("MostAppearedPeople", {
+      format: "svg",
+      filename: "MostAppearedPeople",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartMostAppearedCategories
+function exportChartMostAppearedCategories(format) {
+  if (format === "csv") {
+    const categoriesRequest = new XMLHttpRequest();
+    categoriesRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/mostAppearedCategories"
+    );
+    categoriesRequest.onload = function () {
+      if (categoriesRequest.status === 200) {
+        const categoriesData = JSON.parse(categoriesRequest.responseText);
+        const processedCategoriesData =
+          processCMACategoriesData(categoriesData);
+        exportDataToCSV(categoriesData, "most_appeared_categories");
+      } else {
+        console.error(
+          "Error fetching most appeared categories:",
+          categoriesRequest.status
+        );
+      }
+    };
+    categoriesRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("MostAppearedCategories", {
+      format: "webp",
+      filename: "MostAppearedCategories",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("MostAppearedCategories", {
+      format: "svg",
+      filename: "MostAppearedCategories",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartActorVsActressProportions
+function exportChartActorVsActressProportions(format) {
+  if (format === "csv") {
+    const actorActressProportionsRequest = new XMLHttpRequest();
+    actorActressProportionsRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/actorActressProportions"
+    );
+    actorActressProportionsRequest.onload = function () {
+      if (actorActressProportionsRequest.status === 200) {
+        const actorActressProportionsData = JSON.parse(
+          actorActressProportionsRequest.responseText
+        );
+
+        const processedData = actorActressProportionsData.data.map((item) => {
+          return {
+            category: item.category,
+            count: item.count,
+          };
+        });
+        exportDataToCSV(processedData, "actors_vs_actresses");
+      } else {
+        console.error(
+          "Error fetching actors vs actresses:",
+          actorActressProportionsRequest.status
+        );
+      }
+    };
+    actorActressProportionsRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("ActorVsActressProportions", {
+      format: "webp",
+      filename: "ActorVsActressProportions",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("ActorVsActressProportions", {
+      format: "svg",
+      filename: "ActorVsActressProportions",
     })
       .then(function () {
         console.log("s-a descarcat svg-ul");
