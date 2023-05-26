@@ -1051,7 +1051,7 @@ function exportChartMostNominatedPeople(format) {
         exportDataToCSV(processedNomineesData, "most_nominated_people");
       } else {
         console.error(
-          "Error fetching biggest winners:",
+          "Error fetching most nominated people:",
           nomineesRequest.status
         );
       }
@@ -1072,6 +1072,51 @@ function exportChartMostNominatedPeople(format) {
     Plotly.downloadImage("MostNominatedPeople", {
       format: "svg",
       filename: "MostNominatedPeople",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+//exportChartPeopleWithMostStatues
+function exportChartPeopleWithMostStatues(format) {
+  if (format === "csv") {
+    const peopleRequest = new XMLHttpRequest();
+    peopleRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/peopleWithMostStatues"
+    );
+    peopleRequest.onload = function () {
+      if (peopleRequest.status === 200) {
+        const peopleData = JSON.parse(peopleRequest.responseText);
+        const processedPeopleData = processPeopleData(peopleData);
+        exportDataToCSV(processedPeopleData, "people_with_most_statues");
+      } else {
+        console.error(
+          "Error fetching people with most statues:",
+          peopleRequest.status
+        );
+      }
+    };
+    peopleRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("PeopleWithMostStatues", {
+      format: "webp",
+      filename: "PeopleWithMostStatues",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("PeopleWithMostStatues", {
+      format: "svg",
+      filename: "PeopleWithMostStatues",
     })
       .then(function () {
         console.log("s-a descarcat svg-ul");
