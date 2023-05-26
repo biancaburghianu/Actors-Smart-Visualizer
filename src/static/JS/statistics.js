@@ -1126,3 +1126,49 @@ function exportChartPeopleWithMostStatues(format) {
       });
   }
 }
+
+//exportChartMostAppearedShows
+function exportChartMostAppearedShows(format) {
+  if (format === "csv") {
+    const peopleRequest = new XMLHttpRequest();
+    showsRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/mostAppearedShows"
+    );
+    showsRequest.onload = function () {
+      if (showsRequest.status === 200) {
+        const showsData = JSON.parse(showsRequest.responseText);
+        const processedShowsData = processMAShowsData(showsData);
+        exportDataToCSV(showsData, "most_appeared_shows");
+      } else {
+        console.error(
+          "Error fetching most appeared shows:",
+          showsRequest.status
+        );
+      }
+    };
+    showsRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("MostAppearedShows", {
+      format: "webp",
+      filename: "MostAppearedShows",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("MostAppearedShows", {
+      format: "svg",
+      filename: "MostAppearedShows",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
