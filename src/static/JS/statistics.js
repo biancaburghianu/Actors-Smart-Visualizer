@@ -110,49 +110,6 @@ winnersRequest.onload = function () {
   }
 };
 winnersRequest.send();
-
-function exportChartBiggestWinners(format) {
-  if (format === "csv") {
-    const winnersRequest = new XMLHttpRequest();
-    winnersRequest.open(
-      "GET",
-      "http://localhost:3456/statistics/biggestWinners"
-    );
-    winnersRequest.onload = function () {
-      if (winnersRequest.status === 200) {
-        const winnersData = JSON.parse(winnersRequest.responseText);
-        const processedWinnersData = processWinnersData(winnersData);
-        exportDataToCSV(processedWinnersData, "biggest_winners");
-      } else {
-        console.error("Error fetching biggest winners:", winnersRequest.status);
-      }
-    };
-    winnersRequest.send();
-  } else if (format === "webp") {
-    Plotly.downloadImage("BiggestWinners", {
-      format: "webp",
-      filename: "BiggestWinners.webp",
-    })
-      .then(function () {
-        console.log("s-a descarcat webp-ul");
-      })
-      .catch(function (error) {
-        console.error("Error exporting chart as WebP:", error);
-      });
-  } else if (format === "svg") {
-    Plotly.downloadImage("BiggestWinners", {
-      format: "svg",
-      filename: "BiggestWinners.svg",
-    })
-      .then(function () {
-        console.log("s-a descarcat svg-ul");
-      })
-      .catch(function (error) {
-        console.error("Error exporting chart as SVG:", error);
-      });
-  }
-}
-
 // BIGGEST NOMINEES
 
 function processShowsData(data) {
@@ -1022,6 +979,51 @@ function exportChartBiggestWinners(format) {
     Plotly.downloadImage("BiggestWinners", {
       format: "svg",
       filename: "BiggestWinners",
+    })
+      .then(function () {
+        console.log("s-a descarcat svg-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+//exportChartBiggestNominees
+function exportChartBiggestNominees(format) {
+  if (format === "csv") {
+    const nomineesRequest = new XMLHttpRequest();
+    nomineesRequest.open(
+      "GET",
+      "http://localhost:3456/statistics/biggestNominees"
+    );
+    nomineesRequest.onload = function () {
+      if (nomineesRequest.status === 200) {
+        const nomineesData = JSON.parse(nomineesRequest.responseText);
+        const processedNomineesData = processShowsData(nomineesData);
+        exportDataToCSV(processedNomineesData, "biggest_nominees");
+      } else {
+        console.error(
+          "Error fetching biggest winners:",
+          nomineesRequest.status
+        );
+      }
+    };
+    nomineesRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("BiggestNominees", {
+      format: "webp",
+      filename: "BiggestNominees",
+    })
+      .then(function () {
+        console.log("s-a descarcat webp-ul");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("BiggestNominees", {
+      format: "svg",
+      filename: "BiggestNominees",
     })
       .then(function () {
         console.log("s-a descarcat svg-ul");
