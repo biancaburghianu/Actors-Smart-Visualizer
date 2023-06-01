@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
+    "newsapi": "^2.4.1",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "querystring": "^0.2.1",
