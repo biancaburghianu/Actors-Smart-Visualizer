@@ -1,6 +1,6 @@
 import { loginRoute } from "./loginRoute.js";
 import { registerRoute } from "./registerRoute.js";
-import { statisticsRoute } from "./statisticsRoute.js";
+import { statisticsRoute } from "./routes/statisticsRoute.js";
 import { nomineesRoute } from "./nomineesRoute.js";
 
 export async function router(req, res) {
