@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "api-for-statistics",
   "version": "1.0.0",
   "description": "packages for the backend",
   "main": "index.js",
