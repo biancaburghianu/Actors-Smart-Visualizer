@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
   const corsOptions = {
     origin: "*",
     methods: "GET, POST, PUT, DELETE",
-    allowedHeaders: "Content-Type",
+    allowedHeaders: "*",
   };
   cors(corsOptions)(req, res, () => {
     router(req, res);

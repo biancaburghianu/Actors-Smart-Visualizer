@@ -1,6 +1,6 @@
 import NewsAPI from "newsapi";
 import dotenv from "dotenv";
-import querystring from "querystring";
+import queryString from "query-string";
 import url from "url";
 
 dotenv.config();
@@ -9,7 +9,7 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 export function getArticles(req, res) {
   const parsed = url.parse(req.url);
-  const query = querystring.parse(parsed.query);
+  const query = queryString.parse(parsed.query);
 
   if (query.search) {
     newsapi.v2
