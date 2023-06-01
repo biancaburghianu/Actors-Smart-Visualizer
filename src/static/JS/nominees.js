@@ -11,6 +11,11 @@ dropdown.addEventListener("change",()=>{
 // request for database data and tmdb api
 
 const API_KEY = "23fe5450a05a0810ba1587ec23e9b849";
+const excludedCategories = [
+  "CAST IN A MOTION PICTURE",
+  "ENSEMBLE IN A COMEDY SERIES",
+  "ENSEMBLE IN A DRAMA SERIES",
+];
 
 async function getDataFromDb(year) {
   const res = await fetch(`http://localhost:3456/nominees/${year}`);
@@ -19,7 +24,7 @@ async function getDataFromDb(year) {
   let category = "";
   let CardsContainerEl;
   let containerEL;
-  
+
   data.forEach((nominee) => {
     if (nominee.category != category) {
       category = nominee.category;
@@ -40,11 +45,14 @@ async function getDataFromDb(year) {
       if (nominee.category.search("SERIES") != -1) containerEL.id = "Series";
       else containerEL.id = "Movies";
     }
+
     const cardEl = document.createElement("div");
     if (nominee.won === "True") cardEl.className = "Card active";
     else cardEl.className = "Card";
     CardsContainerEl.appendChild(cardEl);
+
     if (nominee.full_name === null) {
+      // Code for nominees without full_name
       const response = fetch(
         `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${nominee.show}`
       )
@@ -56,7 +64,8 @@ async function getDataFromDb(year) {
           cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${MovieData.results[0].poster_path})`;
         })
         .catch((err) => console.log(err));
-    } else {
+    } else if (!excludedCategories.includes(nominee.category.toUpperCase())) {
+      // Code for nominees with full_name (excluding specific categories)
       const response = fetch(
         `https://api.themoviedb.org/3/search/person?api_key=${API_KEY}&query=${nominee.full_name}`
       )
@@ -69,9 +78,14 @@ async function getDataFromDb(year) {
           cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${ActorData.results[0].profile_path})`;
         })
         .catch((err) => console.log(err));
+    } else {
+      cardEl.remove(); // Remove the card for excluded categories with full_name
     }
   });
 }
+
+
+
 
 // End of gettingData
 

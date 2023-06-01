@@ -51,6 +51,34 @@
         <h1 class="statistic-title">Biggest Winners</h1>
         <label class="dropdown">
           <div class="dd-button">Export</div>
+          <input type="checkbox" class="dd-input" id="test" />
+          <ul class="dd-menu">
+            <li onclick="exportChartBiggestWinners('csv')">CSV</li>
+            <li onclick="exportChartBiggestWinners('webp')">WebP</li>
+            <li onclick="exportChartBiggestWinners('svg')">SVG</li>
+          </ul>
+        </label>
+        <div id="BiggestWinners" class="center"></div>
+        <div>
+          <label for="year">Year:</label>
+          <select id="year" onchange="updateChart()">
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+          </select>
+      
+          <label for="male">Male:</label>
+          <input type="checkbox" id="male" onchange="updateChart()" />
+      
+          <label for="won">Won:</label>
+          <input type="checkbox" id="won" onchange="updateChart()" />
+        </div>
+      </article>
+      
+      <article class="statistic">
+        <h1 class="statistic-title">Biggest Winners</h1>
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
 
           <input type="checkbox" class="dd-input" id="test" />
 
