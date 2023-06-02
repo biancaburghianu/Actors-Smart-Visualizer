@@ -13,7 +13,7 @@ User.init(
       allowNull: false,
       primaryKey: true,
       type: DataTypes.INTEGER,
-      defaultValue: DataTypes.INTEGER,
+      autoIncrement:true
     },
     username: {
       type: DataTypes.STRING,
@@ -57,12 +57,7 @@ Nominalisation.init(
 
 FavoriteArticle.init(
   {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-      defaultValue: DataTypes.INTEGER,
-    },
+  
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
@@ -96,4 +91,4 @@ FavoriteArticle.sync();
 
 console.log(User === sequelize.models.User);
 
-export { User, Nominalisation };
+export { User, Nominalisation, FavoriteArticle };

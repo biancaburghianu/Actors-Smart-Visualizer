@@ -183,6 +183,32 @@ p {
   font-size: 20px;
 }
 
+.favorite-button {
+  display: inline-block;
+  padding: 5px;
+  border: none;
+  background: none;
+  color: #ff0000;
+  font-size: 18px;
+  cursor: pointer;
+  float: right;
+}
+
+.favorite-button:hover {
+  color: #ff5f5f;
+}
+
+.favorite-button i {
+  margin-right: 5px;
+}
+
+.favorite-button .fas,
+.favorite-button .far {
+  font-size: inherit;
+}
+
+
+
 
 
 @media screen and (max-width: 700px) {
@@ -242,3 +268,4 @@ p {
     width: 100px;;
   }
 }
+

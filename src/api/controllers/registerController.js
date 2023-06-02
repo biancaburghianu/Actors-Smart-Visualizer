@@ -10,6 +10,7 @@ export async function registerUser(req, res) {
     try {
       const { username, password } = JSON.parse(body);
 
+
       const userExists = await User.findOne({
         where: {
           username: username,
@@ -30,6 +31,7 @@ export async function registerUser(req, res) {
         username: username,
         password: hashedPassword,
       });
+      console.log(username);
       if (user) {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(

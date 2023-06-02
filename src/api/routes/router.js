@@ -3,6 +3,7 @@ import { registerRoute } from "./registerRoute.js";
 import { statisticsRoute } from "./statisticsRoute.js";
 import { nomineesRoute } from "./nomineesRoute.js";
 import { articlesRoute } from "./articlesRoute.js";
+import {favoritesRoute} from "./favoritesRoute.js"
 
 export async function router(req, res) {
   if (req.url.match(/^\/login/)) {

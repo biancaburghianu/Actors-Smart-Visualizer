@@ -33,6 +33,7 @@ const articlesContainer = document.querySelector(".articles-container");
 
 function searchArticles() {
   const searchTerm = searchInput.value;
+  console.log(123, searchTerm);
   const url = `http://localhost:3456/articles?search=${searchTerm}`;
 
   fetch(url)
@@ -44,7 +45,13 @@ function searchArticles() {
         const articleElement = document.createElement("div");
         articleElement.classList.add("article");
 
-        const publishedAtElement = document.createElement("p");
+        const favoriteButton = document.createElement("button");
+        favoriteButton.classList.add("favorite-button");
+        favoriteButton.innerHTML =
+          '<i class="far fa-heart"></i> Mark as favorite';
+        articleElement.appendChild(favoriteButton);
+
+        const publishedAtElement = document.createElement("em");
         publishedAtElement.textContent = "Published at: " + article.publishedAt;
         articleElement.appendChild(publishedAtElement);
 
@@ -67,14 +74,77 @@ function searchArticles() {
         articleLink.textContent = "Read more about this";
         articleElement.appendChild(articleLink);
 
-      
-
         articlesContainer.appendChild(articleElement);
       });
+      favoriteButton();
     })
     .catch((error) => {
       console.error(error);
     });
+}
+
+function favoriteButton() {
+  const favoriteBtns = document.querySelectorAll(".favorite-button");
+
+  favoriteBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isFavorite = btn.classList.contains("favorite");
+
+      favoriteBtns.forEach((btn) => {
+        btn.classList.remove("favorite");
+        btn.innerHTML = '<i class="far fa-heart"></i> Mark as favorite';
+      });
+
+      if (!isFavorite) {
+        btn.classList.add("favorite");
+        btn.innerHTML = '<i class="fas fa-heart"></i> Favorite';
+
+        const articleElement = btn.closest(".article");
+        const title = articleElement.querySelector("h2").textContent;
+        const description = articleElement.querySelector("p").textContent;
+        const publishedAt = articleElement.querySelector("em").textContent;
+        const imageUrl = articleElement.querySelector("img").src;
+        const articleUrl = articleElement.querySelector("a").href;
+
+        const favoriteArticle = {
+          title,
+          description,
+          publishedAt,
+          imageUrl,
+          articleUrl,
+        };
+
+        const token = localStorage.getItem("token");
+        const url = "http://localhost:3456/favorite/article";
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(favoriteArticle),
+        };
+
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
+  });
+}
+
+function checkHeartsFavorites() {
+  const hearts = document.querySelectorAll(".fa.fa-heart");
+  if (hearts.length < 1) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 document

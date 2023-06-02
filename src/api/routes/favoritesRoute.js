@@ -1,3 +1,5 @@
+import {addFavoriteArticle} from "../controllers/favoriteController.js";
+
 export function favoritesRoute(req, res) {
   if (req.url.match(/^\/favorite\/article/) && req.method === "GET") {
     console.log("favorite/article route");
