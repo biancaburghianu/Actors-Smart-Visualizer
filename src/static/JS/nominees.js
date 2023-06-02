@@ -11,19 +11,18 @@ dropdown.addEventListener("change",()=>{
 // request for database data and tmdb api
 
 const API_KEY = "23fe5450a05a0810ba1587ec23e9b849";
-const excludedCategories = [
-  "CAST IN A MOTION PICTURE",
-  "ENSEMBLE IN A COMEDY SERIES",
-  "ENSEMBLE IN A DRAMA SERIES",
-];
 
 async function getDataFromDb(year) {
   const res = await fetch(`http://localhost:3456/nominees/${year}`);
   const data = await res.json();
-  console.log(data);
   let category = "";
   let CardsContainerEl;
   let containerEL;
+  const excludedCategories = [
+    "CAST IN A MOTION PICTURE",
+    "ENSEMBLE IN A COMEDY SERIES",
+    "ENSEMBLE IN A DRAMA SERIES",
+  ];
 
   data.forEach((nominee) => {
     if (nominee.category != category) {
@@ -39,20 +38,17 @@ async function getDataFromDb(year) {
       containerEL.appendChild(categoryEL);
       containerEL.appendChild(CardsContainerEl);
       BigContainerEl.appendChild(containerEL);
-      if (nominee.category.toUpperCase().indexOf("STUNT") != -1) {
+      if (nominee.category.toUpperCase().search("STUNT") != -1) {
         containerEL.id = "Stunts";
       }
-      if (nominee.category.search("SERIES") != -1) containerEL.id = "Series";
+      else if (nominee.category.toUpperCase().search("SERIES") != -1) containerEL.id = "Series";
       else containerEL.id = "Movies";
     }
-
     const cardEl = document.createElement("div");
     if (nominee.won === "True") cardEl.className = "Card active";
     else cardEl.className = "Card";
-    CardsContainerEl.appendChild(cardEl);
-
     if (nominee.full_name === null) {
-      // Code for nominees without full_name
+
       const response = fetch(
         `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${nominee.show}`
       )
@@ -62,10 +58,11 @@ async function getDataFromDb(year) {
     <h3>${MovieData.results[0].title || MovieData.results[0].name}</h3>
     <button class="CardBtn">View Cast</button>`;
           cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${MovieData.results[0].poster_path})`;
+          
         })
         .catch((err) => console.log(err));
-    } else if (!excludedCategories.includes(nominee.category.toUpperCase())) {
-      // Code for nominees with full_name (excluding specific categories)
+        CardsContainerEl.appendChild(cardEl);
+    } else if(!excludedCategories.includes(category.toUpperCase())) {
       const response = fetch(
         `https://api.themoviedb.org/3/search/person?api_key=${API_KEY}&query=${nominee.full_name}`
       )
@@ -73,19 +70,16 @@ async function getDataFromDb(year) {
         .then((ActorData) => {
           cardEl.innerHTML = `
     <h3>${ActorData.results[0].name}</h3>
-    <h2>${nominee.show}<h2>
+    <h2>${nominee.show}</h2>
     <button class="ActorsCardBtn">More Info</button>`;
           cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${ActorData.results[0].profile_path})`;
+          
         })
         .catch((err) => console.log(err));
-    } else {
-      cardEl.remove(); // Remove the card for excluded categories with full_name
+        CardsContainerEl.appendChild(cardEl);
     }
   });
 }
-
-
-
 
 // End of gettingData
 
@@ -100,7 +94,7 @@ async function CreateELEMENTS(year) {
   const closebtn = document.querySelectorAll(".overlaybtn");
   const overlaybtn = document.querySelectorAll(".CardBtn");
   const ActorsCardBtn = document.querySelectorAll(".ActorsCardBtn");
-  const Actorsoverlaybtn = document.querySelectorAll(".ActorsCardBtn");
+  // const Actorsoverlaybtn = document.querySelectorAll(".ActorsCardBtn");
   const LoginBtn = document.getElementById("UserBtn");
   const LoginPannel = document.querySelector(".UserLogin");
 
@@ -139,11 +133,13 @@ async function CreateELEMENTS(year) {
       Card.classList.remove("active");
     });
   }
+
   closebtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       // overlay.classList.remove("active");
       overlay.forEach((ovr) => {
         ovr.classList.remove("active");
+        console.log("Button working");
       });
     });
   });
@@ -151,6 +147,7 @@ async function CreateELEMENTS(year) {
   overlaybtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       CastOverlay.classList.add("active");
+      console.log("Button working");
     });
   });
   ActorsCardBtn.forEach((btn) => {
@@ -163,8 +160,10 @@ async function CreateELEMENTS(year) {
 
   const MovieBtn = document.getElementById("MoviesBTN");
   const StuntsBtn = document.getElementById("StuntsBTN");
+  const seriesBtn = document.getElementById("SeriesBTN");
   const StuntsCards = document.querySelectorAll("#Stunts");
   const MoviesCards = document.querySelectorAll("#Movies");
+  const seriesCards = document.querySelectorAll("#Series");
   const allbtn = document.getElementById("AllBtn");
   const AllCards = document.querySelectorAll(".CardsAndCategory");
 
@@ -173,13 +172,30 @@ async function CreateELEMENTS(year) {
     StuntsCards.forEach((StuntCard) => {
       StuntCard.classList.add("hidden");
     });
+    seriesCards.forEach((card)=>{
+      card.classList.add("hidden");
+    })
   });
   StuntsBtn.addEventListener("click", () => {
     ResetCards();
     MoviesCards.forEach((MoviesCard) => {
       MoviesCard.classList.add("hidden");
     });
+    seriesCards.forEach((card)=>{
+      card.classList.add("hidden");
+    })
   });
+
+  seriesBtn.addEventListener("click",()=>{
+    ResetCards();
+    MoviesCards.forEach((card)=>{
+      card.classList.add("hidden");
+    });
+    StuntsCards.forEach((card)=>{
+      card.classList.add("hidden");
+    })
+  })
+
   allbtn.addEventListener("click", () => {
     ResetCards();
   });
