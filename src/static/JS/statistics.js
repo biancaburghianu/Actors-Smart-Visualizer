@@ -62,6 +62,122 @@ LoginBtn.addEventListener("click", () => {
   LoginPannel.classList.toggle("active");
 });
 
+
+/*Actors by year */
+
+function fetchActorsData() {
+  const year = document.getElementById("year").value;
+  const gender = document.getElementById("gender").value;
+  const won = document.getElementById("wonActors").checked;
+
+  console.log("Selected data:");
+  console.log("Year:", year);
+  console.log("Gender:", gender);
+  console.log("Won:", won);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    `http://localhost:3456/statistics/actorsByYear/${year}/${gender}/${won}`
+  );
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const actorsData = JSON.parse(xhr.responseText);
+      console.log("Received data:", actorsData);
+      createChart(actorsData, "chart");
+    } else {
+      console.error("Error fetching actors data:", xhr.status);
+    }
+  };
+  xhr.send();
+}
+
+function createChart(actorsData, divName) {
+  const xData = actorsData.map((actor) => actor.full_name);
+  const yData = actorsData.map((actor) => actor.won_count);
+
+  const data = [
+    {
+      x: xData,
+      y: yData,
+      type: "bar",
+      marker: {
+        color: "blue",
+      },
+    },
+  ];
+
+  const layout = {
+    title: "Actors' By Year",
+    xaxis: { title: "Actor" },
+    yaxis: { title: "Won Count" },
+    responsive: true, // Make the chart responsive
+  };
+
+  Plotly.newPlot("ActorsByYear", data, layout);
+}
+
+/*Winners by category */
+function fetchCategoryData() {
+  const category = document.getElementById("Category").value;
+  const won = document.getElementById("wonCategory");
+
+  console.log("Selected data:");
+  console.log("Category:", category);
+  console.log("Won:", won.checked);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    `http://localhost:3456/statistics/winnersByCategory/${encodeURIComponent(category)}/${won.checked}`
+  );
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const categoryData = JSON.parse(xhr.responseText);
+      console.log("Received data:", categoryData);
+      createChartWinnersByCategory(categoryData, "WinnersByCategory");
+    } else {
+      console.error("Error fetching category data:", xhr.status);
+    }
+  };
+  xhr.send();
+}
+
+function createChartWinnersByCategory(categoryData, divName) {
+  const xData = categoryData.map((category) => category.year);
+  const yData = categoryData.map((category) => category.count);
+  const resultData = categoryData.map((category) => category.value);
+
+  const data = [
+    {
+      x: xData,
+      y: yData,
+      type: "bar",
+      text: resultData,
+      marker: {
+        color: "blue",
+      },
+    },
+  ];
+
+  const layout = {
+    title: "Winners by Category",
+    xaxis: { title: "Year" },
+    yaxis: { title: "Count" },
+    responsive: true, // Make the chart responsive
+  };
+
+  Plotly.newPlot(divName, data, layout);
+}
+
+function updateWonCheckbox() {
+  const won = document.getElementById("won");
+  won.checked = !won.checked;
+}
+
+
+
+
 // BIGGEST WINNERS
 function processWinnersData(data) {
   const processedData = data.map((item) => {

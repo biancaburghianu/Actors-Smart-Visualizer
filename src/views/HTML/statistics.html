@@ -47,34 +47,101 @@
       <form class="search-form">
         <input type="text" placeholder="Search by title..." />
       </form>
+
       <article class="statistic">
-        <h1 class="statistic-title">Biggest Winners</h1>
+        <h1 class="statistic-title">Actors By Year</h1>
+      
         <label class="dropdown">
           <div class="dd-button">Export</div>
           <input type="checkbox" class="dd-input" id="test" />
           <ul class="dd-menu">
-            <li onclick="exportChartBiggestWinners('csv')">CSV</li>
-            <li onclick="exportChartBiggestWinners('webp')">WebP</li>
-            <li onclick="exportChartBiggestWinners('svg')">SVG</li>
+            <li onclick="exportChartActorsByYear('csv')">CSV</li>
+            <li onclick="exportChartActorsByYear('webp')">WebP</li>
+            <li onclick="exportChartActorsByYear('svg')">SVG</li>
           </ul>
         </label>
-        <div id="BiggestWinners" class="center"></div>
-        <div>
+      
+        <div id="ActorsByYear" class="center"></div>
+      
+        <div class="statistic-title" style="margin-bottom: 20px;">
           <label for="year">Year:</label>
-          <select id="year" onchange="updateChart()">
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
+          <select id="year">
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
           </select>
       
-          <label for="male">Male:</label>
-          <input type="checkbox" id="male" onchange="updateChart()" />
+          <label for="gender">Gender:</label>
+          <select id="gender">
+            <option value="all">All</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
       
-          <label for="won">Won:</label>
-          <input type="checkbox" id="won" onchange="updateChart()" />
+          <label for="wonActors">Won:</label>
+          <input type="checkbox" id="wonActors" />
+      
+          <button onclick="fetchActorsData()">View</button>
         </div>
       </article>
+
+
       
+
+      <article class="statistic">
+        <h1 class="statistic-title">Winners By Category</h1>
+      
+        <label class="dropdown">
+          <div class="dd-button">Export</div>
+          <input type="checkbox" class="dd-input" id="test" />
+          <ul class="dd-menu">
+            <li onclick="exportWinnersByCategory('csv')">CSV</li>
+            <li onclick="exportWinnersByCategory('webp')">WebP</li>
+            <li onclick="exportWinnersByCategory('svg')">SVG</li>
+          </ul>
+        </label>
+      
+        <div id="WinnersByCategory" class="center"></div>
+      
+        <div class="statistic-title" style="margin-bottom: 20px;">
+          <label for="Category">Category:</label>
+          <select id="Category">
+            <option value="CAST IN A MOTION PICTURE">CAST IN A MOTION PICTURE</option>
+            <option value="MALE ACTOR"> MALE ACTOR IN A LEADING ROLE</option>
+            <option value="FEMALE ACTOR"> FEMALE ACTOR IN LEADING ROLE</option>
+            <option value="ENSEMBLE IN A DRAMA SERIES"> ENSEMBLE IN A DRAMA SERIES</option>
+            <option value="FEMALE DRAMA"> FEMALE ACTOR IN A DRAMA SERIES</option>
+            <option value="MALE DRAMA"> MALE ACTOR IN A DRAMA SERIES</option>
+            <option value="ENSEMBLE IN A COMEDY SERIES"> ENSEMBLE IN A COMEDY SERIES</option>
+            <option value="FEMALE COMEDY"> FEMALE ACTOR IN A COMEDY SERIES</option>
+            <option value="MALE COMEDY"> MALE ACTOR IN A COMEDY SERIES</option>
+          </select>
+      
+          <label for="wonCategory">Won:</label>
+          <input type="checkbox" id="wonCategory"  />
+      
+          <button onclick="fetchCategoryData()">View</button>
+        </div>
+      </article>
+
+
       <article class="statistic">
         <h1 class="statistic-title">Biggest Winners</h1>
         <label class="dropdown">
