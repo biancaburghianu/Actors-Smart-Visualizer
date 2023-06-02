@@ -95,7 +95,6 @@ function favoriteButton() {
     btn.addEventListener("click", () => {
       const isFavorite = btn.classList.contains("favorite");
 
-      // Deselect all favorite buttons
       favoriteBtns.forEach((btn) => {
         btn.classList.remove("favorite");
         btn.innerHTML = '<i class="far fa-heart"></i> Mark as favorite';
@@ -125,7 +124,8 @@ function favoriteButton() {
         const options = {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify(favoriteArticle)
         };
