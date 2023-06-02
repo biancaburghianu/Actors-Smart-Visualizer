@@ -81,7 +81,7 @@
   top: 80px;
   position: absolute;
   right: 0px;
-  height: 150px;
+  height: 70px;
   width: 250px;
   border-bottom-left-radius: 10px;
   background: -webkit-linear-gradient(#000067, #d7e1ec);
@@ -621,5 +621,8 @@ body {
   }
   .show-nav {
     width: 100%;
+  }
+  .UserLogin{
+    width: 100px;;
   }
 }
