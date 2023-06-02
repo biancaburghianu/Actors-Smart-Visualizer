@@ -62,7 +62,6 @@ LoginBtn.addEventListener("click", () => {
   LoginPannel.classList.toggle("active");
 });
 
-
 /*Actors by year */
 
 function fetchActorsData() {
@@ -129,7 +128,9 @@ function fetchCategoryData() {
   const xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    `http://localhost:3456/statistics/winnersByCategory/${encodeURIComponent(category)}/${won.checked}`
+    `http://localhost:3456/statistics/winnersByCategory/${encodeURIComponent(
+      category
+    )}/${won.checked}`
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -174,9 +175,6 @@ function updateWonCheckbox() {
   const won = document.getElementById("won");
   won.checked = !won.checked;
 }
-
-
-
 
 // BIGGEST WINNERS
 function processWinnersData(data) {

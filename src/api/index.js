@@ -8,7 +8,7 @@ dotenv.config();
 const server = http.createServer((req, res) => {
   const corsOptions = {
     origin: "*",
-    methods: "GET, POST, PUT, DELETE",
+    methods: "GET, POST, PUT, DELETE, PATCH",
     allowedHeaders: "*",
   };
   cors(corsOptions)(req, res, () => {

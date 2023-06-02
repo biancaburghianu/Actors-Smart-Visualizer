@@ -20,5 +20,8 @@ export async function router(req, res) {
   } else if (req.url.match(/^\/articles/)) {
     console.log("articles route");
     articlesRoute(req, res);
+  } else if (req.url.match(/^\/favorite\//)) {
+    console.log("favorite route");
+    favoritesRoute(req, res);
   }
 }

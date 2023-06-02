@@ -1,4 +1,4 @@
-import { Nominalisation } from "../models/models.js";
+import { Nominalisation } from "../models.js";
 import sequelize from "sequelize";
 
 export async function getBiggestWinners(req, res) {
@@ -48,7 +48,6 @@ export async function getBiggestNominees(req, res) {
   }
 }
 
-
 export async function getMostNominatedPeople(req, res) {
   try {
     const people = await Nominalisation.findAll({
@@ -56,10 +55,10 @@ export async function getMostNominatedPeople(req, res) {
         "full_name",
         [sequelize.fn("COUNT", sequelize.col("full_name")), "count"],
       ],
-      where: { 
-        full_name: { [sequelize.Op.ne]: null } ,
-        won: "False"
-    },
+      where: {
+        full_name: { [sequelize.Op.ne]: null },
+        won: "False",
+      },
       group: ["full_name"],
       order: [[sequelize.fn("COUNT", sequelize.col("full_name")), "DESC"]],
       limit: 10,
@@ -84,10 +83,10 @@ export async function getPeopleWithMostStatues(req, res) {
         "full_name",
         [sequelize.fn("COUNT", sequelize.col("full_name")), "count"],
       ],
-      where: { 
-        full_name: { [sequelize.Op.ne]: null } ,
-        won: "True"
-    },
+      where: {
+        full_name: { [sequelize.Op.ne]: null },
+        won: "True",
+      },
       group: ["full_name"],
       order: [[sequelize.fn("COUNT", sequelize.col("full_name")), "DESC"]],
       limit: 10,
@@ -111,18 +110,24 @@ export async function getMostAppearedShows(req, res) {
       attributes: [
         "show",
         [
-          sequelize.fn("COUNT", sequelize.literal("CASE WHEN won = 'False' THEN 1 END")),
-          "FalseCount"
+          sequelize.fn(
+            "COUNT",
+            sequelize.literal("CASE WHEN won = 'False' THEN 1 END")
+          ),
+          "FalseCount",
         ],
         [
-          sequelize.fn("COUNT", sequelize.literal("CASE WHEN won = 'True' THEN 1 END")),
-          "TrueCount"
+          sequelize.fn(
+            "COUNT",
+            sequelize.literal("CASE WHEN won = 'True' THEN 1 END")
+          ),
+          "TrueCount",
         ],
         [sequelize.fn("COUNT", sequelize.col("show")), "TotalAppearance"],
       ],
       where: {
         show: {
-          [sequelize.Op.ne]: null
+          [sequelize.Op.ne]: null,
         },
       },
       group: ["show"],
@@ -142,28 +147,30 @@ export async function getMostAppearedShows(req, res) {
   }
 }
 
-
 export async function getMostAppearedPeople(req, res) {
   try {
     const people = await Nominalisation.findAll({
       attributes: [
         "full_name",
         [
-          sequelize.fn("SUM", sequelize.literal("CASE WHEN won = 'True' THEN 1 ELSE 0 END")),
-          "TrueCount"
+          sequelize.fn(
+            "SUM",
+            sequelize.literal("CASE WHEN won = 'True' THEN 1 ELSE 0 END")
+          ),
+          "TrueCount",
         ],
         [
-          sequelize.fn("SUM", sequelize.literal("CASE WHEN won = 'False' THEN 1 ELSE 0 END")),
-          "FalseCount"
+          sequelize.fn(
+            "SUM",
+            sequelize.literal("CASE WHEN won = 'False' THEN 1 ELSE 0 END")
+          ),
+          "FalseCount",
         ],
-        [
-          sequelize.fn("COUNT", sequelize.col("*")),
-          "TotalAppearance"
-        ],
+        [sequelize.fn("COUNT", sequelize.col("*")), "TotalAppearance"],
       ],
       where: {
         full_name: {
-          [sequelize.Op.ne]: null
+          [sequelize.Op.ne]: null,
         },
       },
       group: ["full_name"],
@@ -183,28 +190,30 @@ export async function getMostAppearedPeople(req, res) {
   }
 }
 
-
 export async function getMostAppearedCategories(req, res) {
   try {
     const categories = await Nominalisation.findAll({
       attributes: [
         "category",
         [
-          sequelize.fn("SUM", sequelize.literal("CASE WHEN won = 'True' THEN 1 ELSE 0 END")),
-          "TrueCount"
+          sequelize.fn(
+            "SUM",
+            sequelize.literal("CASE WHEN won = 'True' THEN 1 ELSE 0 END")
+          ),
+          "TrueCount",
         ],
         [
-          sequelize.fn("SUM", sequelize.literal("CASE WHEN won = 'False' THEN 1 ELSE 0 END")),
-          "FalseCount"
+          sequelize.fn(
+            "SUM",
+            sequelize.literal("CASE WHEN won = 'False' THEN 1 ELSE 0 END")
+          ),
+          "FalseCount",
         ],
-        [
-          sequelize.fn("COUNT", sequelize.col("*")),
-          "TotalAppearance"
-        ],
+        [sequelize.fn("COUNT", sequelize.col("*")), "TotalAppearance"],
       ],
       where: {
         category: {
-          [sequelize.Op.ne]: null
+          [sequelize.Op.ne]: null,
         },
       },
       group: ["category"],
@@ -224,44 +233,46 @@ export async function getMostAppearedCategories(req, res) {
   }
 }
 
-import { Op } from 'sequelize';
+import { Op } from "sequelize";
 
 export async function getActorActressProportions(req, res) {
   try {
     const actorActressData = await Nominalisation.findAll({
       attributes: [
-        'category',
-        [sequelize.fn('COUNT', sequelize.col('category')), 'count']
+        "category",
+        [sequelize.fn("COUNT", sequelize.col("category")), "count"],
       ],
       where: {
         [Op.or]: [
-          { category: { [Op.like]: 'MALE%' } },
-          { category: { [Op.like]: 'FEMALE%' } }
-        ]
+          { category: { [Op.like]: "MALE%" } },
+          { category: { [Op.like]: "FEMALE%" } },
+        ],
       },
-      group: ['category']
+      group: ["category"],
     });
 
     if (actorActressData) {
-      const data = actorActressData.map(item => ({
-        category: item.category.includes('FEMALE') ? 'Actor' : 'Actress',
-        count: item.get('count')
+      const data = actorActressData.map((item) => ({
+        category: item.category.includes("FEMALE") ? "Actor" : "Actress",
+        count: item.get("count"),
       }));
 
-      const actorCount = data.find(item => item.category === 'Actor')?.count || 0;
-      const actressCount = data.find(item => item.category === 'Actress')?.count || 0;
+      const actorCount =
+        data.find((item) => item.category === "Actor")?.count || 0;
+      const actressCount =
+        data.find((item) => item.category === "Actress")?.count || 0;
       const totalCount = actorCount + actressCount;
 
       const actorProportion = actorCount / totalCount;
       const actressProportion = actressCount / totalCount;
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ data, actorProportion, actressProportion }));
     } else {
-      throw new Error('No actor or actress data found');
+      throw new Error("No actor or actress data found");
     }
   } catch (error) {
-    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ error: error.message }));
   }
 }
@@ -270,7 +281,13 @@ export async function getShowByYearNominees(req, res) {
   try {
     const nominees = await Nominalisation.findAll({
       attributes: [
-        [sequelize.fn("DISTINCT", sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)), "year"],
+        [
+          sequelize.fn(
+            "DISTINCT",
+            sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)
+          ),
+          "year",
+        ],
         "show",
         [sequelize.fn("COUNT", sequelize.col("show")), "count"],
       ],
@@ -278,7 +295,7 @@ export async function getShowByYearNominees(req, res) {
         show: {
           [Op.ne]: "N/A",
         },
-        won:"False",
+        won: "False",
       },
       group: ["year", "show"],
       order: [
@@ -293,7 +310,9 @@ export async function getShowByYearNominees(req, res) {
         nominees.find((item) => item.dataValues.year === year)
       );
 
-      const filteredNominees = showsYear.filter((item) => item.dataValues.year !== null);
+      const filteredNominees = showsYear.filter(
+        (item) => item.dataValues.year !== null
+      );
 
       const processedNominees = filteredNominees.map((item) => ({
         year: item.dataValues.year,
@@ -316,7 +335,13 @@ export async function getShowByYearWinners(req, res) {
   try {
     const nominees = await Nominalisation.findAll({
       attributes: [
-        [sequelize.fn("DISTINCT", sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)), "year"],
+        [
+          sequelize.fn(
+            "DISTINCT",
+            sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)
+          ),
+          "year",
+        ],
         "show",
         [sequelize.fn("COUNT", sequelize.col("show")), "count"],
       ],
@@ -324,7 +349,7 @@ export async function getShowByYearWinners(req, res) {
         show: {
           [Op.ne]: "N/A",
         },
-        won:"True",
+        won: "True",
       },
       group: ["year", "show"],
       order: [
@@ -339,7 +364,9 @@ export async function getShowByYearWinners(req, res) {
         nominees.find((item) => item.dataValues.year === year)
       );
 
-      const filteredNominees = showsYear.filter((item) => item.dataValues.year !== null);
+      const filteredNominees = showsYear.filter(
+        (item) => item.dataValues.year !== null
+      );
 
       const processedNominees = filteredNominees.map((item) => ({
         year: item.dataValues.year,
@@ -362,7 +389,13 @@ export async function getPeopleByYearNominees(req, res) {
   try {
     const nominees = await Nominalisation.findAll({
       attributes: [
-        [sequelize.fn("DISTINCT", sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)), "year"],
+        [
+          sequelize.fn(
+            "DISTINCT",
+            sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)
+          ),
+          "year",
+        ],
         "full_name",
         [sequelize.fn("COUNT", sequelize.col("full_name")), "count"],
       ],
@@ -385,7 +418,9 @@ export async function getPeopleByYearNominees(req, res) {
         nominees.find((item) => item.dataValues.year === year)
       );
 
-      const filteredNominees = showsYear.filter((item) => item.dataValues.year !== null);
+      const filteredNominees = showsYear.filter(
+        (item) => item.dataValues.year !== null
+      );
 
       const processedNominees = filteredNominees.map((item) => ({
         year: item.dataValues.year,
@@ -408,7 +443,13 @@ export async function getPeopleByYearWinners(req, res) {
   try {
     const nominees = await Nominalisation.findAll({
       attributes: [
-        [sequelize.fn("DISTINCT", sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)), "year"],
+        [
+          sequelize.fn(
+            "DISTINCT",
+            sequelize.fn("SUBSTRING", sequelize.col("year"), 1, 4)
+          ),
+          "year",
+        ],
         "full_name",
         [sequelize.fn("COUNT", sequelize.col("full_name")), "count"],
       ],
@@ -431,7 +472,9 @@ export async function getPeopleByYearWinners(req, res) {
         nominees.find((item) => item.dataValues.year === year)
       );
 
-      const filteredNominees = showsYear.filter((item) => item.dataValues.year !== null);
+      const filteredNominees = showsYear.filter(
+        (item) => item.dataValues.year !== null
+      );
 
       const processedNominees = filteredNominees.map((item) => ({
         year: item.dataValues.year,
@@ -450,13 +493,24 @@ export async function getPeopleByYearWinners(req, res) {
   }
 }
 
-
 export async function getWinning(req, res) {
   try {
     const winners = await Nominalisation.findAll({
       attributes: [
-        [sequelize.fn("SUM", sequelize.literal(`CASE WHEN won = 'False' THEN 1 ELSE 0 END`)), "falseCount"],
-        [sequelize.fn("SUM", sequelize.literal(`CASE WHEN won = 'True' THEN 1 ELSE 0 END`)), "trueCount"],
+        [
+          sequelize.fn(
+            "SUM",
+            sequelize.literal(`CASE WHEN won = 'False' THEN 1 ELSE 0 END`)
+          ),
+          "falseCount",
+        ],
+        [
+          sequelize.fn(
+            "SUM",
+            sequelize.literal(`CASE WHEN won = 'True' THEN 1 ELSE 0 END`)
+          ),
+          "trueCount",
+        ],
       ],
     });
 
@@ -479,5 +533,3 @@ export async function getWinning(req, res) {
     res.end(JSON.stringify({ error: error.message }));
   }
 }
-
-

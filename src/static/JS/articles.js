@@ -33,7 +33,6 @@ const articlesContainer = document.querySelector(".articles-container");
 
 function searchArticles() {
   const searchTerm = searchInput.value;
-  console.log(123, searchTerm);
   const url = `http://localhost:3456/articles?search=${searchTerm}`;
 
   fetch(url)
