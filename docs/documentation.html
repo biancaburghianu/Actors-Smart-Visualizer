@@ -26,10 +26,11 @@
                     <li><a href="#pag"><span>3.3 </span>Paginile aplicatiei</a></li>
                     <li><a href="#register"><span>3.4 </span>Pagina register</a></li>
                     <li><a href="#login"><span>3.5 </span>Pagina de login</a></li>
-                    <li><a href="#home"><span>3.6 </span>Pagina acasa</li>
-                    <li><a href="#statistici"><span>3.7 </span>Pagina de statistici</a></li>
-                    <li><a href="#nominalizari"><span>3.8 </span>Pagina de nominalizari</a></li>
-                    <li><a href="#articole"><span>3.9 </span>Pagina de articole</a></li>
+                    <li><a href="#password"><span>3.6 </span>Pagina de schimbat parola</a></li>
+                    <li><a href="#home"><span>3.7 </span>Pagina acasa</li>
+                    <li><a href="#statistici"><span>3.8 </span>Pagina de statistici</a></li>
+                    <li><a href="#nominalizari"><span>3.9 </span>Pagina de nominalizari</a></li>
+                    <li><a href="#articole"><span>3.10 </span>Pagina de articole</a></li>
                 </ol>
             </li>
             <li><a href="#con"><span>4. </span>Constrangeri</a></li>
@@ -183,10 +184,12 @@
                         pentru ca
                         acesta
                         sa poata beneficia de
-                        serviciile instrumentului Web. Pentru a le oferi utilizatorilor siguranta, parole sunt
-                        hash-uite, cu bcrypt.
+                        serviciile instrumentului Web. Pentru a le oferi utilizatorilor siguranta, parolele si
+                        actorul/productia
+                        cinematografica preferate sunt
+                        hash-uite cu bcrypt.
                         Daca creearea contului a fost reusita, (utilizatorul nu a folosit un username care deja exista
-                        in aplicatia noastra),
+                        in aplicatia noastra sau a introdus o parola/ un nume preferat prea scurt),
                         acesta este obligat sa se autentifice pentru a beneficia de serviciile instrumentului nostru
                         Web.
                     </p>
@@ -208,19 +211,34 @@
                         il decodam, iar daca trece de validare, ii generam unul nou.
                     </p>
                 </section>
+                <section id="password">
+                    <!-- review? -->
+                    <h3><span>3.6 </span>Pagina de schimbat parola</code></h3>
+                    <p>
+                        Pagina de schimbat parola ii pune la dispozitie utilizatorului o modalitate prin care
+                        isi poate schimba parola in cazul in care si-a uitat-o. Pentru resetarea parolei acesta are
+                        nevoie de username-ul pe care l-a folosit in momentul in care si-a creeat contul si de
+                        filmul/productia cinematografica
+                        preferata pe care a introdus-o tot in momentul in care si-a creat contul.
+                    </p>
+                </section>
                 <section id="home">
                     <!-- review? -->
-                    <h3><span>3.6 </span>Pagina acasa</h3>
+                    <h3><span>3.7 </span>Pagina acasa</h3>
                     <p>
-                        Aceasta pagina pune la dispozitie utilizatorului o lista cu productiile sale preferate,
-                        detalii despre noile productii, articole, statistici si nominalizari.
+                        Pagina acasa ii pune la dispozitie utilizatorului o lista cu preferintele sale.
+                        Utilizatorul poate selecta o singura componenta preferata per categorie. De exemplu, o singura
+                        statistica
+                        sau un singur articol. Aceste preferinte sunt identificate in tabelele corespunzatoare prin
+                        intermediul id-ului
+                        unic al utilizatorului, din baza de date.
                     </p>
 
                 </section>
 
                 <section id="statistici">
                     <!-- review? -->
-                    <h3><span>3.7 </span>Pagina de statistici</h3>
+                    <h3><span>3.8 </span>Pagina de statistici</h3>
                     <p> Aceasta pagina poate fi accesata apasand pe STATISTICS, in bara de navigatie.
                         In aceasta pagina utilizatorul poate vizualiza statisticile nominzalizarilor la Screen Actors
                         Guid
@@ -242,7 +260,7 @@
                 </section>
                 <section id="nominalizari">
                     <!-- review? -->
-                    <h3><span>3.8 </span>Pagina de nominalizari</h3>
+                    <h3><span>3.9 </span>Pagina de nominalizari</h3>
                     <p>
                         Aceasta pagina poate fi accesata din bara de navigatie, apasand NOMINEES, creata pentru
                         vizualizarea
@@ -260,7 +278,7 @@
                 </section>
                 <section id="articole">
                     <!-- review? -->
-                    <h3><span>3.9 </span>Pagina de articole</h3>
+                    <h3><span>3.10 </span>Pagina de articole</h3>
                     <p>
                         Un utilizator poate vedea mai multe articole cu informatii in legatura cu actorii sau
                         productiile cinematografice preferate
