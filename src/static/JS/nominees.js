@@ -208,21 +208,3 @@ async function CreateELEMENTS(year) {
 //End of creating cards
 
 CreateELEMENTS('2020');
-
-/// show more button for home page.
-
-function myFunction(articleNum) {
-  var dots = document.getElementById("dots" + articleNum);
-  var moreText = document.getElementById("more" + articleNum);
-  var btnText = document.getElementById("readMore");
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    moreText.style.display = "none";
-    btnText.innerHTML = "Read more";
-  } else {
-    dots.style.display = "none";
-    moreText.style.display = "inline";
-    btnText.innerHTML = "Read less";
-  }
-}

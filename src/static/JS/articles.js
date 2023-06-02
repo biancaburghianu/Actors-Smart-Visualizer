@@ -44,11 +44,6 @@ function searchArticles() {
         const articleElement = document.createElement("div");
         articleElement.classList.add("article");
 
-        const articleLink = document.createElement("a");
-        articleLink.href = article.url;
-        articleLink.textContent = "Read more about this";
-        articleElement.appendChild(articleLink);
-
         const publishedAtElement = document.createElement("p");
         publishedAtElement.textContent = "Published at: " + article.publishedAt;
         articleElement.appendChild(publishedAtElement);
@@ -57,15 +52,22 @@ function searchArticles() {
         titleElement.textContent = article.title;
         articleElement.appendChild(titleElement);
 
-        const descriptionElement = document.createElement("p");
-        descriptionElement.textContent = article.description;
-        articleElement.appendChild(descriptionElement);
-
         if (article.urlToImage) {
           const imageElement = document.createElement("img");
           imageElement.src = article.urlToImage;
           articleElement.appendChild(imageElement);
         }
+
+        const descriptionElement = document.createElement("p");
+        descriptionElement.textContent = article.description;
+        articleElement.appendChild(descriptionElement);
+
+        const articleLink = document.createElement("a");
+        articleLink.href = article.url;
+        articleLink.textContent = "Read more about this";
+        articleElement.appendChild(articleLink);
+
+      
 
         articlesContainer.appendChild(articleElement);
       });

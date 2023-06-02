@@ -16,7 +16,7 @@
   top: 80px;
   position: absolute;
   right: 0px;
-  height: 150px;
+  height: 70px;
   width: 250px;
   border-bottom-left-radius: 10px;
   background: -webkit-linear-gradient(#000067, #d7e1ec);
@@ -123,7 +123,21 @@
   color: #a5a5a5;
 }
 
-.articles {
+.search-container input[type="text"]{
+  padding: 10px;
+  border: 2px solid #000067;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 300px;
+}
+
+.articles-container {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+  background-color: #ffffff;
+}
+.articles-top{
   margin-top: 50px;
   width: 100%;
   text-align: center;
@@ -149,7 +163,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.article-image {
+img {
   float: left;
   width: 60%;
   border-radius: 10px;
@@ -158,27 +172,18 @@
   margin-right: 20px;
 }
 
-.article-title {
+h2 {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 10px;
 }
 
-.article-text {
+p {
   margin: 10px;
   font-size: 20px;
 }
 
-#readMore {
-  border-radius: 10px;
-  border: 1.5px solid #000067;
-  text-decoration: none;
-  background-color: #eeeeee;
-}
 
-#more {
-  display: none;
-}
 
 @media screen and (max-width: 700px) {
   .menu-icon {
@@ -229,8 +234,11 @@
     margin-top: 10px;
   }
 
-  .article-text {
+  p {
     margin: 10px;
     font-size: 16px;
+  }
+  .UserLogin{
+    width: 100px;;
   }
 }
