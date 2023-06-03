@@ -2035,3 +2035,119 @@ function exportChartWinningandLosingProportions(format) {
 
   winningRequest.send();
 }
+
+// exportChartActorsByYear
+function exportChartActorsByYear(format) {
+  const year = document.getElementById("year").value;
+  const gender = document.getElementById("gender").value;
+  const won = document.getElementById("wonActors").checked;
+
+  console.log("Selected data:");
+  console.log("Year:", year);
+  console.log("Gender:", gender);
+  console.log("Won:", won);
+
+  const ActorsByYear = new XMLHttpRequest();
+  ActorsByYear.open(
+    "GET",
+    `http://localhost:4567/statistics/actorsByYear/${year}/${gender}/${won}`
+  );
+  ActorsByYear.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  ActorsByYear.onload = function () {
+    if (ActorsByYear.status === 200) {
+      const actorsData = JSON.parse(ActorsByYear.responseText);
+      console.log("Received data:", actorsData);
+
+      if (format === "csv") {
+        exportDataToCSV(actorsData, "actors_data");
+      } else if (format === "webp") {
+        Plotly.downloadImage("ActorsByYear", {
+          format: "webp",
+          filename: "ActorsData",
+        })
+          .then(function () {
+            console.log("WebP chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as WebP:", error);
+          });
+      } else if (format === "svg") {
+        Plotly.downloadImage("ActorsByYear", {
+          format: "svg",
+          filename: "ActorsData",
+        })
+          .then(function () {
+            console.log("SVG chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as SVG:", error);
+          });
+      }
+    } else {
+      console.error("Error fetching actors data:", ActorsByYear.status);
+    }
+  };
+  ActorsByYear.send();
+}
+
+
+//exportWinnersByCategory
+function exportWinnersByCategory(format) {
+  const category = document.getElementById("Category").value;
+  const won = document.getElementById("wonCategory");
+
+  console.log("Selected data:");
+  console.log("Category:", category);
+  console.log("Won:", won.checked);
+
+  const WinnersByCategory = new XMLHttpRequest();
+  WinnersByCategory.open(
+    "GET",
+    `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(
+      category
+    )}/${won.checked}`
+  );
+  WinnersByCategory.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  WinnersByCategory.onload = function () {
+    if (WinnersByCategory.status === 200) {
+      const categoryData = JSON.parse(WinnersByCategory.responseText);
+      console.log("Received data:", categoryData);
+      createChartWinnersByCategory(categoryData, "WinnersByCategory");
+
+      if (format === "csv") {
+        exportDataToCSV(categoryData, "category_data");
+      } else if (format === "webp") {
+        Plotly.downloadImage("WinnersByCategory", {
+          format: "webp",
+          filename: "WinnersByCategory",
+        })
+          .then(function () {
+            console.log("WebP chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as WebP:", error);
+          });
+      } else if (format === "svg") {
+        Plotly.downloadImage("WinnersByCategory", {
+          format: "svg",
+          filename: "WinnersByCategory",
+        })
+          .then(function () {
+            console.log("SVG chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as SVG:", error);
+          });
+      }
+    } else {
+      console.error("Error fetching category data:", WinnersByCategory.status);
+    }
+  };
+  WinnersByCategory.send();
+}
