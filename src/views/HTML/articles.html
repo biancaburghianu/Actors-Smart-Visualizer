@@ -32,11 +32,11 @@
             <button id="UserBtn"><i class="fa fa-user fa-2xl"></i></button>
             <div class="UserLogin">
                 <ul>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="#" id="logoutButton">Logout</a></li>
                 </ul>
             </div>
         </nav>
-        
+
     </header>
 
     <div class="articles-top">
@@ -44,9 +44,18 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search articles..." />
             <button id="searchButton"><i class="fas fa-search"></i></button>
-        </div></div>
-    
+        </div>
+    </div>
+
     <div class="articles-container"></div>
+    <script>
+        const logoutButton = document.querySelector("#logoutButton");
+
+        logoutButton.addEventListener("click", () => {
+            window.location.href = "login.html";
+            localStorage.removeItem("token");
+        });
+    </script>
     <script src="../../static/JS/articles.js"></script>
 </body>
 
