@@ -74,25 +74,25 @@ function fetchActorsData() {
   console.log("Gender:", gender);
   console.log("Won:", won);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open(
+  const ActorsByYear = new XMLHttpRequest();
+  ActorsByYear.open(
     "GET",
     `http://localhost:4567/statistics/actorsByYear/${year}/${gender}/${won}`
   );
-  xhr.setRequestHeader(
+  ActorsByYear.setRequestHeader(
     "Authorization",
     `Bearer ${localStorage.getItem("token")}`
   );
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const actorsData = JSON.parse(xhr.responseText);
+  ActorsByYear.onload = function () {
+    if (ActorsByYear.status === 200) {
+      const actorsData = JSON.parse(ActorsByYear.responseText);
       console.log("Received data:", actorsData);
       createChart(actorsData, "chart");
     } else {
-      console.error("Error fetching actors data:", xhr.status);
+      console.error("Error fetching actors data:", ActorsByYear.status);
     }
   };
-  xhr.send();
+  ActorsByYear.send();
 }
 
 function createChart(actorsData, divName) {
@@ -129,27 +129,27 @@ function fetchCategoryData() {
   console.log("Category:", category);
   console.log("Won:", won.checked);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open(
+  const WinnersByCategory = new XMLHttpRequest();
+  WinnersByCategory.open(
     "GET",
     `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(
       category
     )}/${won.checked}`
   );
-  xhr.setRequestHeader(
+  WinnersByCategory.setRequestHeader(
     "Authorization",
     `Bearer ${localStorage.getItem("token")}`
   );
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const categoryData = JSON.parse(xhr.responseText);
+  WinnersByCategory.onload = function () {
+    if (WinnersByCategory.status === 200) {
+      const categoryData = JSON.parse(WinnersByCategory.responseText);
       console.log("Received data:", categoryData);
       createChartWinnersByCategory(categoryData, "WinnersByCategory");
     } else {
-      console.error("Error fetching category data:", xhr.status);
+      console.error("Error fetching category data:", WinnersByCategory.status);
     }
   };
-  xhr.send();
+  WinnersByCategory.send();
 }
 
 function createChartWinnersByCategory(categoryData, divName) {
@@ -185,7 +185,58 @@ function updateWonCheckbox() {
 }
 
 // BIGGEST WINNERS
-function processWinnersData(data) {
+
+function displayBiggestWinnersChart(divId) {
+  function processWinnersData(data) {
+    const processedData = data.map((item) => {
+      return {
+        show: item.show,
+        count: item.count,
+      };
+    });
+
+    return processedData;
+  }
+
+  const winnersRequest = new XMLHttpRequest();
+  winnersRequest.open("GET", "http://localhost:4567/statistics/biggestWinners");
+  winnersRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  winnersRequest.onload = function () {
+    if (winnersRequest.status === 200) {
+      const winnersData = JSON.parse(winnersRequest.responseText);
+      const processedWinnersData = processWinnersData(winnersData);
+
+      const winnersTrace = {
+        x: processedWinnersData.map((item) => item.show),
+        y: processedWinnersData.map((item) => item.count),
+        text: processedWinnersData.map((item) => item.count),
+        textposition: "auto",
+        type: "bar",
+        marker: {
+          color: "blue",
+        },
+      };
+
+      const winnersLayout = {
+        title: "Top 10 Biggest Winners",
+      };
+
+      const winnersConfig = {
+        responsive: true,
+      };
+
+      Plotly.newPlot(divId, [winnersTrace], winnersLayout, winnersConfig);
+    } else {
+      console.error("Error fetching biggest winners:", winnersRequest.status);
+    }
+  };
+  winnersRequest.send();
+}
+
+displayBiggestWinnersChart.processWinnersData = function (data) {
   const processedData = data.map((item) => {
     return {
       show: item.show,
@@ -194,52 +245,68 @@ function processWinnersData(data) {
   });
 
   return processedData;
-}
-
-const winnersRequest = new XMLHttpRequest();
-winnersRequest.open("GET", "http://localhost:4567/statistics/biggestWinners");
-winnersRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-winnersRequest.onload = function () {
-  if (winnersRequest.status === 200) {
-    const winnersData = JSON.parse(winnersRequest.responseText);
-    const processedWinnersData = processWinnersData(winnersData);
-
-    const winnersTrace = {
-      x: processedWinnersData.map((item) => item.show),
-      y: processedWinnersData.map((item) => item.count),
-      text: processedWinnersData.map((item) => item.count),
-      textposition: "auto",
-      type: "bar",
-      marker: {
-        color: "blue",
-      },
-    };
-
-    const winnersLayout = {
-      title: "Top 10 Biggest Winners",
-    };
-
-    const winnersConfig = {
-      responsive: true,
-    };
-
-    Plotly.newPlot(
-      "BiggestWinners",
-      [winnersTrace],
-      winnersLayout,
-      winnersConfig
-    );
-  } else {
-    console.error("Error fetching biggest winners:", winnersRequest.status);
-  }
 };
-winnersRequest.send();
+
+displayBiggestWinnersChart("BiggestWinners");
+
+
 // BIGGEST NOMINEES
 
-function processShowsData(data) {
+
+function displayBiggestNomineesChart(divId) {
+  function processShowsData(data) {
+    const processedData = data.map((item) => {
+      return {
+        show: item.show,
+        count: item.count,
+      };
+    });
+
+    return processedData;
+  }
+
+  const showsRequest = new XMLHttpRequest();
+  showsRequest.open("GET", "http://localhost:4567/statistics/biggestNominees");
+  showsRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  showsRequest.onload = function () {
+    if (showsRequest.status === 200) {
+      const showsData = JSON.parse(showsRequest.responseText);
+      const processedShowsData = processShowsData(showsData);
+
+      const showsTrace = {
+        x: processedShowsData.map((item) => item.show),
+        y: processedShowsData.map((item) => item.count),
+        text: processedShowsData.map((item) => item.count),
+        textposition: "auto",
+        type: "bar",
+        marker: {
+          color: "blue",
+        },
+      };
+
+      const showsLayout = {
+        title: "Biggest Nominees",
+      };
+
+      const showsConfig = {
+        responsive: true,
+      };
+
+      Plotly.newPlot(divId, [showsTrace], showsLayout, showsConfig);
+    } else {
+      console.error(
+        "Error fetching biggest nominees (shows):",
+        showsRequest.status
+      );
+    }
+  };
+  showsRequest.send();
+}
+
+displayBiggestNomineesChart.processShowsData = function (data) {
   const processedData = data.map((item) => {
     return {
       show: item.show,
@@ -248,159 +315,245 @@ function processShowsData(data) {
   });
 
   return processedData;
-}
-
-const showsRequest = new XMLHttpRequest();
-showsRequest.open("GET", "http://localhost:4567/statistics/biggestNominees");
-showsRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-showsRequest.onload = function () {
-  if (showsRequest.status === 200) {
-    const showsData = JSON.parse(showsRequest.responseText);
-    const processedShowsData = processShowsData(showsData);
-
-    const showsTrace = {
-      x: processedShowsData.map((item) => item.show),
-      y: processedShowsData.map((item) => item.count),
-      text: processedShowsData.map((item) => item.count),
-      textposition: "auto",
-      type: "bar",
-      marker: {
-        color: "blue",
-      },
-    };
-
-    const showsLayout = {
-      title: "Biggest Nominees",
-    };
-
-    const showsConfig = {
-      responsive: true,
-    };
-
-    Plotly.newPlot("BiggestNominees", [showsTrace], showsLayout, showsConfig);
-  } else {
-    console.error(
-      "Error fetching biggest nominees (shows):",
-      showsRequest.status
-    );
-  }
 };
-showsRequest.send();
+
+
+displayBiggestNomineesChart("BiggestNominees");
+
 
 // MOST NOMINATED PEOPLE
 
-function processPeopleData(data) {
+function displayMostNominatedPeopleChart(divId) {
+  function processPeopleData(data) {
+    return data.map((item) => {
+      return {
+        full_name: item.full_name,
+        count: item.count,
+      };
+    });
+  }
+
+  const peopleRequest = new XMLHttpRequest();
+  peopleRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/mostNominatedPeople"
+  );
+  peopleRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  peopleRequest.onload = function () {
+    if (peopleRequest.status === 200) {
+      const peopleData = JSON.parse(peopleRequest.responseText);
+      const processedPeopleData = processPeopleData(peopleData);
+
+      const peopleTrace = {
+        x: processedPeopleData.map((item) => item.full_name),
+        y: processedPeopleData.map((item) => item.count),
+        text: processedPeopleData.map((item) => item.count),
+        textposition: "auto",
+        type: "bar",
+        marker: {
+          color: "blue",
+        },
+      };
+
+      const peopleLayout = {
+        title: "Most Nominated People",
+      };
+
+      const peopleConfig = {
+        responsive: true,
+      };
+
+      Plotly.newPlot(divId, [peopleTrace], peopleLayout, peopleConfig);
+    } else {
+      console.error(
+        "Error fetching most nominated people:",
+        peopleRequest.status
+      );
+    }
+  };
+  peopleRequest.send();
+}
+
+displayMostNominatedPeopleChart.processPeopleData = function (data) {
   return data.map((item) => {
     return {
       full_name: item.full_name,
       count: item.count,
     };
   });
-}
-
-const peopleRequest = new XMLHttpRequest();
-peopleRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/mostNominatedPeople"
-);
-peopleRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-peopleRequest.onload = function () {
-  if (peopleRequest.status === 200) {
-    const peopleData = JSON.parse(peopleRequest.responseText);
-    const processedPeopleData = processPeopleData(peopleData);
-
-    const peopleTrace = {
-      x: processedPeopleData.map((item) => item.full_name),
-      y: processedPeopleData.map((item) => item.count),
-      text: processedPeopleData.map((item) => item.count),
-      textposition: "auto",
-      type: "bar",
-      marker: {
-        color: "blue",
-      },
-    };
-
-    const peopleLayout = {
-      title: "Most Nominated People",
-    };
-
-    const peopleConfig = {
-      responsive: true,
-    };
-
-    Plotly.newPlot(
-      "MostNominatedPeople",
-      [peopleTrace],
-      peopleLayout,
-      peopleConfig
-    );
-  } else {
-    console.error(
-      "Error fetching most nominated people:",
-      peopleRequest.status
-    );
-  }
 };
-peopleRequest.send();
+
+displayMostNominatedPeopleChart("MostNominatedPeople");
+
 
 //PEOPLE WITH MOST STATUES
 
-const PeopleWithMostStatuesRequest = new XMLHttpRequest();
-PeopleWithMostStatuesRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/peopleWithMostStatues"
-);
-PeopleWithMostStatuesRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-PeopleWithMostStatuesRequest.onload = function () {
-  if (PeopleWithMostStatuesRequest.status === 200) {
-    const peopleData = JSON.parse(PeopleWithMostStatuesRequest.responseText);
-    const processedPeopleData = processPeopleData(peopleData);
-
-    const peopleTrace = {
-      x: processedPeopleData.map((item) => item.full_name),
-      y: processedPeopleData.map((item) => item.count),
-      text: processedPeopleData.map((item) => item.count),
-      textposition: "auto",
-      type: "bar",
-      marker: {
-        color: "blue",
-      },
-    };
-
-    const peopleLayout = {
-      title: "People With Most Statues",
-    };
-
-    const peopleConfig = {
-      responsive: true,
-    };
-
-    Plotly.newPlot(
-      "PeopleWithMostStatues",
-      [peopleTrace],
-      peopleLayout,
-      peopleConfig
-    );
-  } else {
-    console.error(
-      "Error fetching most nominated people:",
-      PeopleWithMostStatuesRequest.status
-    );
+function displayPeopleWithMostStatuesChart(divId) {
+  function processPeopleData(data) {
+    return data.map((item) => {
+      return {
+        full_name: item.full_name,
+        count: item.count,
+      };
+    });
   }
-};
-PeopleWithMostStatuesRequest.send();
+
+  const PeopleWithMostStatuesRequest = new XMLHttpRequest();
+  PeopleWithMostStatuesRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/peopleWithMostStatues"
+  );
+  PeopleWithMostStatuesRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  PeopleWithMostStatuesRequest.onload = function () {
+    if (PeopleWithMostStatuesRequest.status === 200) {
+      const peopleData = JSON.parse(
+        PeopleWithMostStatuesRequest.responseText
+      );
+      const processedPeopleData = processPeopleData(peopleData);
+
+      const peopleTrace = {
+        x: processedPeopleData.map((item) => item.full_name),
+        y: processedPeopleData.map((item) => item.count),
+        text: processedPeopleData.map((item) => item.count),
+        textposition: "auto",
+        type: "bar",
+        marker: {
+          color: "blue",
+        },
+      };
+
+      const peopleLayout = {
+        title: "People With Most Statues",
+      };
+
+      const peopleConfig = {
+        responsive: true,
+      };
+
+      Plotly.newPlot(
+        divId,
+        [peopleTrace],
+        peopleLayout,
+        peopleConfig
+      );
+    } else {
+      console.error(
+        "Error fetching people with most statues:",
+        PeopleWithMostStatuesRequest.status
+      );
+    }
+  };
+  PeopleWithMostStatuesRequest.send();
+}
+
+displayPeopleWithMostStatuesChart("PeopleWithMostStatues");
+
 
 // MOST APPEARED SHOWS
-function processMAShowsData(data) {
+function displayMostAppearedShowsChart(divId) {
+  function processMAShowsData(data) {
+    return data.map((item) => {
+      const totalCount = item.TotalAppearance;
+      const falseCount = item.FalseCount;
+      const trueCount = item.TrueCount;
+      const falseProportion = falseCount / totalCount;
+      const trueProportion = trueCount / totalCount;
+      return {
+        show: item.show,
+        totalCount: totalCount,
+        falseProportion: falseProportion,
+        trueProportion: trueProportion,
+        falseCount: falseCount,
+        trueCount: trueCount,
+      };
+    });
+  }
+
+  const mashowsRequest = new XMLHttpRequest();
+  mashowsRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/mostAppearedShows"
+  );
+  mashowsRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  mashowsRequest.onload = function () {
+    if (mashowsRequest.status === 200) {
+      const showsData = JSON.parse(mashowsRequest.responseText);
+      const processedShowsData = processMAShowsData(showsData);
+
+      const fig = {
+        data: [],
+        layout: {
+          title: "Shows with Most Appearances",
+          barmode: "stack",
+        },
+      };
+
+      const colors = processedShowsData.map(() => [
+        "rgba(0, 0, 255, 1)",
+        "rgba(255, 0, 0, 1)",
+      ]);
+
+      const totalCountY = processedShowsData.map((item) => item.totalCount);
+
+      const falseProportionY = processedShowsData.map(
+        (item) => item.falseProportion * item.totalCount
+      );
+
+      const trueProportionY = processedShowsData.map(
+        (item) => item.trueProportion * item.totalCount
+      );
+
+      const falseProportionTrace = {
+        x: processedShowsData.map((item) => item.show),
+        y: falseProportionY,
+        text: falseProportionY,
+        textposition: "auto",
+        name: "Nominee",
+        type: "bar",
+        marker: {
+          color: colors.map(([, color2]) => color2),
+        },
+      };
+
+      const trueProportionTrace = {
+        x: processedShowsData.map((item) => item.show),
+        y: trueProportionY,
+        text: trueProportionY,
+        textposition: "auto",
+        name: "Won",
+        type: "bar",
+        marker: {
+          color: colors.map(([color1]) => color1),
+        },
+      };
+      const figConfig = {
+        responsive: true,
+      };
+      fig.data.push(trueProportionTrace);
+      fig.data.push(falseProportionTrace);
+
+      Plotly.newPlot(divId, fig.data, fig.layout, figConfig);
+    } else {
+      console.error(
+        "Error fetching most appeared shows:",
+        mashowsRequest.status
+      );
+    }
+  };
+
+  mashowsRequest.send();
+}
+
+displayMostAppearedShowsChart.processMAShowsData = function (data) {
   return data.map((item) => {
     const totalCount = item.TotalAppearance;
     const falseCount = item.FalseCount;
@@ -416,93 +569,115 @@ function processMAShowsData(data) {
       trueCount: trueCount,
     };
   });
-}
-
-const mashowsRequest = new XMLHttpRequest();
-mashowsRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/mostAppearedShows"
-);
-mashowsRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-mashowsRequest.onload = function () {
-  if (mashowsRequest.status === 200) {
-    const showsData = JSON.parse(mashowsRequest.responseText);
-    const processedShowsData = processMAShowsData(showsData);
-
-    const fig = {
-      data: [],
-      layout: {
-        title: "Shows with Most Appearances",
-        barmode: "stack",
-      },
-    };
-
-    const colors = processedShowsData.map(() => [
-      "rgba(0, 0, 255, 1)",
-      "rgba(255, 0, 0, 1)",
-    ]);
-
-    const totalCountY = processedShowsData.map((item) => item.totalCount);
-
-    const falseProportionY = processedShowsData.map(
-      (item) => item.falseProportion * item.totalCount
-    );
-
-    const trueProportionY = processedShowsData.map(
-      (item) => item.trueProportion * item.totalCount
-    );
-
-    const falseProportionTrace = {
-      x: processedShowsData.map((item) => item.show),
-      y: falseProportionY,
-      text: falseProportionY,
-      textposition: "auto",
-      name: "Nominee",
-      type: "bar",
-      marker: {
-        color: colors.map(([, color2]) => color2),
-      },
-    };
-
-    const trueProportionTrace = {
-      x: processedShowsData.map((item) => item.show),
-      y: trueProportionY,
-      text: trueProportionY,
-      textposition: "auto",
-      name: "Won",
-      type: "bar",
-      marker: {
-        color: colors.map(([color1]) => color1),
-      },
-    };
-    const figConfig = {
-      responsive: true,
-    };
-    fig.data.push(trueProportionTrace);
-    fig.data.push(falseProportionTrace);
-
-    Plotly.newPlot("MostAppearedShows", fig.data, fig.layout, figConfig);
-  } else {
-    console.error("Error fetching most appeared shows:", mashowsRequest.status);
-  }
 };
 
-mashowsRequest.send();
+displayMostAppearedShowsChart("MostAppearedShows");
+
 
 // PEOPLE THAT MOST APPEARED
 
-function processPMAShowsData(data) {
+function displayMostAppearedPeopleChart(divId) {
+  function processPMAShowsData(data) {
+    return data.map((item) => {
+      const falseCount = item.FalseCount;
+      const trueCount = item.TrueCount;
+      const totalCount = falseCount + trueCount;
+      const falseProportion = falseCount / totalCount;
+      const trueProportion = trueCount / totalCount;
+      return {
+        full_name: item.full_name, // Update property name to full_name
+        totalCount: totalCount,
+        falseProportion: falseProportion,
+        trueProportion: trueProportion,
+        falseCount: falseCount,
+        trueCount: trueCount,
+      };
+    });
+  }
+
+  const pmashowsRequest = new XMLHttpRequest();
+  pmashowsRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/mostAppearedPeople"
+  );
+  pmashowsRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  pmashowsRequest.onload = function () {
+    if (pmashowsRequest.status === 200) {
+      const showsData = JSON.parse(pmashowsRequest.responseText);
+      const processedShowsData = processPMAShowsData(showsData);
+
+      const fig = {
+        data: [],
+        layout: {
+          title: "Most Appeared People",
+          barmode: "stack",
+        },
+      };
+
+      const colors = processedShowsData.map(() => [
+        "rgba(0, 0, 255, 1)",
+        "rgba(255, 0, 0, 1)",
+      ]);
+
+      const totalCountY = processedShowsData.map((item) => item.totalCount);
+
+      const falseCountY = processedShowsData.map((item) => item.falseCount);
+
+      const trueCountY = processedShowsData.map((item) => item.trueCount);
+
+      const falseCountTrace = {
+        x: processedShowsData.map((item) => item.full_name), // Update property name to full_name
+        y: falseCountY,
+        text: falseCountY,
+        textposition: "auto",
+        name: "Nominee",
+        type: "bar",
+        marker: {
+          color: colors.map(([, color2]) => color2),
+        },
+      };
+
+      const trueCountTrace = {
+        x: processedShowsData.map((item) => item.full_name), // Update property name to full_name
+        y: trueCountY,
+        text: trueCountY,
+        textposition: "auto",
+        name: "Won",
+        type: "bar",
+        marker: {
+          color: colors.map(([color1]) => color1),
+        },
+      };
+      const figConfig = {
+        responsive: true,
+      };
+
+      fig.data.push(trueCountTrace);
+      fig.data.push(falseCountTrace);
+
+      Plotly.newPlot(divId, fig.data, fig.layout, figConfig);
+    } else {
+      console.error(
+        "Error fetching most appeared shows:",
+        pmashowsRequest.status
+      );
+    }
+  };
+
+  pmashowsRequest.send();
+}
+displayMostAppearedShowsChart.processMAShowsData = function (data) {
   return data.map((item) => {
+    const totalCount = item.TotalAppearance;
     const falseCount = item.FalseCount;
     const trueCount = item.TrueCount;
-    const totalCount = falseCount + trueCount;
     const falseProportion = falseCount / totalCount;
     const trueProportion = trueCount / totalCount;
     return {
-      full_name: item.full_name, // Update property name to full_name
+      show: item.show,
       totalCount: totalCount,
       falseProportion: falseProportion,
       trueProportion: trueProportion,
@@ -510,85 +685,106 @@ function processPMAShowsData(data) {
       trueCount: trueCount,
     };
   });
-}
-
-const pmashowsRequest = new XMLHttpRequest();
-pmashowsRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/mostAppearedPeople"
-);
-pmashowsRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-pmashowsRequest.onload = function () {
-  if (pmashowsRequest.status === 200) {
-    const showsData = JSON.parse(pmashowsRequest.responseText);
-    const processedShowsData = processPMAShowsData(showsData);
-
-    const fig = {
-      data: [],
-      layout: {
-        title: "Most Appeared People",
-        barmode: "stack",
-      },
-    };
-
-    const colors = processedShowsData.map(() => [
-      "rgba(0, 0, 255, 1)",
-      "rgba(255, 0, 0, 1)",
-    ]);
-
-    const totalCountY = processedShowsData.map((item) => item.totalCount);
-
-    const falseCountY = processedShowsData.map((item) => item.falseCount);
-
-    const trueCountY = processedShowsData.map((item) => item.trueCount);
-
-    const falseCountTrace = {
-      x: processedShowsData.map((item) => item.full_name), // Update property name to full_name
-      y: falseCountY,
-      text: falseCountY,
-      textposition: "auto",
-      name: "Nominee",
-      type: "bar",
-      marker: {
-        color: colors.map(([, color2]) => color2),
-      },
-    };
-
-    const trueCountTrace = {
-      x: processedShowsData.map((item) => item.full_name), // Update property name to full_name
-      y: trueCountY,
-      text: trueCountY,
-      textposition: "auto",
-      name: "Won",
-      type: "bar",
-      marker: {
-        color: colors.map(([color1]) => color1),
-      },
-    };
-    const figConfig = {
-      responsive: true,
-    };
-
-    fig.data.push(trueCountTrace);
-    fig.data.push(falseCountTrace);
-
-    Plotly.newPlot("MostAppearedPeople", fig.data, fig.layout, figConfig);
-  } else {
-    console.error(
-      "Error fetching most appeared shows:",
-      pmashowsRequest.status
-    );
-  }
 };
+displayMostAppearedPeopleChart("MostAppearedPeople");
 
-pmashowsRequest.send();
 
 //CATEGORY THAT MOST APPEARED
 
-function processCMACategoriesData(data) {
+function displayMostAppearedCategoriesChart(divId) {
+  function processCMACategoriesData(data) {
+    return data.map((item) => {
+      const falseCount = item.FalseCount;
+      const trueCount = item.TrueCount;
+      const totalCount = falseCount + trueCount;
+      const falseProportion = falseCount / totalCount;
+      const trueProportion = trueCount / totalCount;
+      return {
+        category: item.category,
+        totalCount: totalCount,
+        falseProportion: falseProportion,
+        trueProportion: trueProportion,
+        falseCount: falseCount,
+        trueCount: trueCount,
+      };
+    });
+  }
+
+  const cmaCategoriesRequest = new XMLHttpRequest();
+  cmaCategoriesRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/mostAppearedCategories"
+  );
+  cmaCategoriesRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  cmaCategoriesRequest.onload = function () {
+    if (cmaCategoriesRequest.status === 200) {
+      const categoriesData = JSON.parse(cmaCategoriesRequest.responseText);
+      const processedCategoriesData = processCMACategoriesData(categoriesData);
+
+      const fig = {
+        data: [],
+        layout: {
+          title: "Most Appeared Categories",
+          barmode: "stack",
+        },
+      };
+
+      const colors = processedCategoriesData.map(() => [
+        "rgba(0, 0, 255, 1)",
+        "rgba(255, 0, 0, 1)",
+      ]);
+
+      const totalCountY = processedCategoriesData.map((item) => item.totalCount);
+
+      const falseCountY = processedCategoriesData.map((item) => item.falseCount);
+
+      const trueCountY = processedCategoriesData.map((item) => item.trueCount);
+
+      const falseCountTrace = {
+        x: processedCategoriesData.map((item) => item.category),
+        y: falseCountY,
+        text: falseCountY,
+        textposition: "auto",
+        name: "Nominee",
+        type: "bar",
+        marker: {
+          color: colors.map(([, color2]) => color2),
+        },
+      };
+
+      const trueCountTrace = {
+        x: processedCategoriesData.map((item) => item.category),
+        y: trueCountY,
+        text: trueCountY,
+        textposition: "auto",
+        name: "Won",
+        type: "bar",
+        marker: {
+          color: colors.map(([color1]) => color1),
+        },
+      };
+      const figConfig = {
+        responsive: true,
+      };
+
+      fig.data.push(trueCountTrace);
+      fig.data.push(falseCountTrace);
+
+      Plotly.newPlot(divId, fig.data, fig.layout, figConfig);
+    } else {
+      console.error(
+        "Error fetching most appeared categories:",
+        cmaCategoriesRequest.status
+      );
+    }
+  };
+
+  cmaCategoriesRequest.send();
+}
+displayMostAppearedCategoriesChart.processCMACategoriesData = function (data) {
   return data.map((item) => {
     const falseCount = item.FalseCount;
     const trueCount = item.TrueCount;
@@ -606,517 +802,486 @@ function processCMACategoriesData(data) {
   });
 }
 
-const cmaCategoriesRequest = new XMLHttpRequest();
-cmaCategoriesRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/mostAppearedCategories"
-);
-cmaCategoriesRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-cmaCategoriesRequest.onload = function () {
-  if (cmaCategoriesRequest.status === 200) {
-    const categoriesData = JSON.parse(cmaCategoriesRequest.responseText);
-    const processedCategoriesData = processCMACategoriesData(categoriesData);
+displayMostAppearedCategoriesChart("MostAppearedCategories");
 
-    const fig = {
-      data: [],
-      layout: {
-        title: "Most Appeared Categories",
-        barmode: "stack",
-      },
-    };
-
-    const colors = processedCategoriesData.map(() => [
-      "rgba(0, 0, 255, 1)",
-      "rgba(255, 0, 0, 1)",
-    ]);
-
-    const totalCountY = processedCategoriesData.map((item) => item.totalCount);
-
-    const falseCountY = processedCategoriesData.map((item) => item.falseCount);
-
-    const trueCountY = processedCategoriesData.map((item) => item.trueCount);
-
-    const falseCountTrace = {
-      x: processedCategoriesData.map((item) => item.category),
-      y: falseCountY,
-      text: falseCountY,
-      textposition: "auto",
-      name: "Nominee",
-      type: "bar",
-      marker: {
-        color: colors.map(([, color2]) => color2),
-      },
-    };
-
-    const trueCountTrace = {
-      x: processedCategoriesData.map((item) => item.category),
-      y: trueCountY,
-      text: trueCountY,
-      textposition: "auto",
-      name: "Won",
-      type: "bar",
-      marker: {
-        color: colors.map(([color1]) => color1),
-      },
-    };
-    const figConfig = {
-      responsive: true,
-    };
-    fig.data.push(trueCountTrace);
-    fig.data.push(falseCountTrace);
-
-    Plotly.newPlot("MostAppearedCategories", fig.data, fig.layout, figConfig);
-  } else {
-    console.error(
-      "Error fetching most appeared categories:",
-      cmaCategoriesRequest.status
-    );
-  }
-};
-
-cmaCategoriesRequest.send();
 
 // ACTORS VS ACTRESESS
 
-const actorActressProportionsRequest = new XMLHttpRequest();
-actorActressProportionsRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/actorActressProportions"
-);
-actorActressProportionsRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-actorActressProportionsRequest.onload = function () {
-  if (actorActressProportionsRequest.status === 200) {
-    const actorActressProportionsData = JSON.parse(
-      actorActressProportionsRequest.responseText
-    );
+function displayActorActressProportionsChart(divId) {
+  const actorActressProportionsRequest = new XMLHttpRequest();
+  actorActressProportionsRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/actorActressProportions"
+  );
+  actorActressProportionsRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  actorActressProportionsRequest.onload = function () {
+    if (actorActressProportionsRequest.status === 200) {
+      const actorActressProportionsData = JSON.parse(
+        actorActressProportionsRequest.responseText
+      );
 
-    const processedData = actorActressProportionsData.data.map((item) => {
-      return {
-        category: item.category,
-        count: item.count,
+      const processedData = actorActressProportionsData.data.map((item) => {
+        return {
+          category: item.category,
+          count: item.count,
+        };
+      });
+
+      const pieTrace = {
+        labels: processedData.map((item) => item.category),
+        values: processedData.map((item) => item.count),
+        type: "pie",
+        marker: {
+          colors: processedData.map((item) =>
+            item.category === "Actor"
+              ? "rgba(0, 0, 255, 1)"
+              : "rgba(255, 0, 0, 1)"
+          ),
+        },
+        textinfo: "label+percent",
+        textposition: "inside",
       };
-    });
+      const pieConfig = {
+        responsive: true,
+      };
 
-    const pieTrace = {
-      labels: processedData.map((item) => item.category),
-      values: processedData.map((item) => item.count),
-      type: "pie",
-      marker: {
-        colors: processedData.map((item) =>
-          item.category === "Actor"
-            ? "rgba(0, 0, 255, 1)"
-            : "rgba(255, 0, 0, 1)"
-        ),
-      },
-      textinfo: "label+percent",
-      textposition: "inside",
-    };
-    const pieConfig = {
-      responsive: true,
-    };
+      const pieLayout = {
+        title: "Actor vs Actress Proportions",
+      };
 
-    const pieLayout = {
-      title: "Actor vs Actress Proportions",
-    };
+      Plotly.newPlot(
+        divId,
+        [pieTrace],
+        pieLayout,
+        pieConfig
+      );
+    } else {
+      console.error(
+        "Error fetching actor vs actress proportions:",
+        actorActressProportionsRequest.status
+      );
+    }
+  };
 
-    Plotly.newPlot(
-      "ActorVsActressProportions",
-      [pieTrace],
-      pieLayout,
-      pieConfig
-    );
-  } else {
-    console.error(
-      "Error fetching actor vs actress proportions:",
-      actorActressProportionsRequest.status
-    );
-  }
-};
-actorActressProportionsRequest.send();
+  actorActressProportionsRequest.send();
+}
+displayActorActressProportionsChart.processActorActressProportionsData = function(data) {
+  return data.map((item) => {
+    return {
+      category: item.category,
+      count: item.count,
+    };
+  });
+}
+
+
+displayActorActressProportionsChart("ActorVsActressProportions");
 
 // SHOW BY YEAR - NOMINEES
 
-const nomineesRequest = new XMLHttpRequest();
-nomineesRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/showByYearNominees"
-);
-nomineesRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-nomineesRequest.onload = function () {
-  if (nomineesRequest.status === 200) {
-    const nomineesData = JSON.parse(nomineesRequest.responseText);
+function displayShowByYearNomineesChart(divId) {
+  const nomineesRequest = new XMLHttpRequest();
+  nomineesRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/showByYearNominees"
+  );
+  nomineesRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  nomineesRequest.onload = function () {
+    if (nomineesRequest.status === 200) {
+      const nomineesData = JSON.parse(nomineesRequest.responseText);
 
-    const filteredNominees = [];
+      const filteredNominees = [];
 
-    nomineesData.forEach((nominee) => {
-      const { year, show, count } = nominee;
+      nomineesData.forEach((nominee) => {
+        const { year, show, count } = nominee;
 
-      if (year !== 1 && year !== null && year !== " ESQ") {
-        const existingNominee = filteredNominees.find(
-          (item) => item.year === year
-        );
+        if (year !== 1 && year !== null && year !== " ESQ") {
+          const existingNominee = filteredNominees.find(
+            (item) => item.year === year
+          );
 
-        if (!existingNominee) {
-          filteredNominees.push({
-            year: year,
-            show: show,
-            count: count,
-          });
+          if (!existingNominee) {
+            filteredNominees.push({
+              year: year,
+              show: show,
+              count: count,
+            });
+          }
         }
-      }
-    });
+      });
 
-    const nomineesTraces = filteredNominees.map((nominee) => {
-      return {
-        x: [nominee.year],
-        y: [nominee.count],
-        text: nominee.show,
-        textposition: "auto",
-        type: "bar",
-        name: nominee.year,
-        marker: {
-          color: "blue",
+      const nomineesTraces = filteredNominees.map((nominee) => {
+        return {
+          x: [nominee.year],
+          y: [nominee.count],
+          text: nominee.show,
+          textposition: "auto",
+          type: "bar",
+          name: nominee.year,
+          marker: {
+            color: "blue",
+          },
+        };
+      });
+
+      const nomineesLayout = {
+        title: "Show by Year - Nominees",
+        xaxis: {
+          title: "Year",
         },
+        yaxis: {
+          title: "Nominees",
+        },
+        barmode: "group",
       };
-    });
 
-    const nomineesLayout = {
-      title: "Show by Year - Nominees",
-      xaxis: {
-        title: "Year",
-      },
-      yaxis: {
-        title: "Nominees",
-      },
-      barmode: "group",
-    };
+      const nomineesConfig = {
+        responsive: true,
+      };
 
-    const nomineesConfig = {
-      responsive: true,
-    };
+      Plotly.newPlot(
+        divId,
+        nomineesTraces,
+        nomineesLayout,
+        nomineesConfig
+      );
+    } else {
+      console.error(
+        "Error fetching show by year nominees:",
+        nomineesRequest.status
+      );
+    }
+  };
 
-    Plotly.newPlot(
-      "ShowByYearNominees",
-      nomineesTraces,
-      nomineesLayout,
-      nomineesConfig
-    );
-  } else {
-    console.error(
-      "Error fetching show by year nominees:",
-      nomineesRequest.status
-    );
-  }
-};
+  nomineesRequest.send();
+}
 
-nomineesRequest.send();
+displayShowByYearNomineesChart("ShowByYearNominees");
+
 
 //SHOW BY YEAR WINNERS
 
-const showByYearWinnerRequest = new XMLHttpRequest();
-showByYearWinnerRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/showByYearWinners"
-);
-showByYearWinnerRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-showByYearWinnerRequest.onload = function () {
-  if (showByYearWinnerRequest.status === 200) {
-    const winnersData = JSON.parse(showByYearWinnerRequest.responseText);
+function displayShowByYearWinnersChart(divId) {
+  const showByYearWinnerRequest = new XMLHttpRequest();
+  showByYearWinnerRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/showByYearWinners"
+  );
+  showByYearWinnerRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  showByYearWinnerRequest.onload = function () {
+    if (showByYearWinnerRequest.status === 200) {
+      const winnersData = JSON.parse(showByYearWinnerRequest.responseText);
 
-    const filteredWinners = [];
+      const filteredWinners = [];
 
-    winnersData.forEach((winner) => {
-      const { year, show, count } = winner;
+      winnersData.forEach((winner) => {
+        const { year, show, count } = winner;
 
-      if (
-        year !== 1 &&
-        year !== null &&
-        year !== " ESQ" &&
-        show !== "N/A" &&
-        show != "ER"
-      ) {
-        const existingWinner = filteredWinners.find(
-          (item) => item.year === year
-        );
+        if (
+          year !== 1 &&
+          year !== null &&
+          year !== " ESQ" &&
+          show !== "N/A" &&
+          show != "ER"
+        ) {
+          const existingWinner = filteredWinners.find(
+            (item) => item.year === year
+          );
 
-        if (!existingWinner) {
-          filteredWinners.push({
-            year: year,
-            show: show,
-            count: count,
-          });
+          if (!existingWinner) {
+            filteredWinners.push({
+              year: year,
+              show: show,
+              count: count,
+            });
+          }
         }
-      }
-    });
+      });
 
-    const winnersTraces = filteredWinners.map((winner) => {
-      return {
-        x: [winner.year],
-        y: [winner.count],
-        text: winner.show,
-        textposition: "auto",
-        type: "bar",
-        name: winner.year,
-        marker: {
-          color: "blue",
+      const winnersTraces = filteredWinners.map((winner) => {
+        return {
+          x: [winner.year],
+          y: [winner.count],
+          text: winner.show,
+          textposition: "auto",
+          type: "bar",
+          name: winner.year,
+          marker: {
+            color: "blue",
+          },
+        };
+      });
+
+      const winnersLayout = {
+        title: "Show by Year - Winners",
+        xaxis: {
+          title: "Year",
         },
+        yaxis: {
+          title: "Winners",
+        },
+        barmode: "group",
       };
-    });
 
-    const winnersLayout = {
-      title: "Show by Year - Winners",
-      xaxis: {
-        title: "Year",
-      },
-      yaxis: {
-        title: "Winners",
-      },
-      barmode: "group",
-    };
+      const winnersConfig = {
+        responsive: true,
+      };
 
-    const winnersConfig = {
-      responsive: true,
-    };
+      Plotly.newPlot(
+        divId,
+        winnersTraces,
+        winnersLayout,
+        winnersConfig
+      );
+    } else {
+      console.error(
+        "Error fetching show by year winners:",
+        showByYearWinnerRequest.status
+      );
+    }
+  };
 
-    Plotly.newPlot(
-      "ShowByYearWinners",
-      winnersTraces,
-      winnersLayout,
-      winnersConfig
-    );
-  } else {
-    console.error(
-      "Error fetching show by year winners:",
-      showByYearWinnerRequest.status
-    );
-  }
-};
+  showByYearWinnerRequest.send();
+}
 
-showByYearWinnerRequest.send();
+displayShowByYearWinnersChart("ShowByYearWinners");
+
 
 //PEOPLE BY YEAR NOMINNES
 
-const peopleByYearNomineesRequest = new XMLHttpRequest();
-peopleByYearNomineesRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/peopleByYearNominees"
-);
-peopleByYearNomineesRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-peopleByYearNomineesRequest.onload = function () {
-  if (peopleByYearNomineesRequest.status === 200) {
-    const nomineesData = JSON.parse(peopleByYearNomineesRequest.responseText);
+function displayPeopleByYearNomineesChart(divId) {
+  const peopleByYearNomineesRequest = new XMLHttpRequest();
+  peopleByYearNomineesRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/peopleByYearNominees"
+  );
+  peopleByYearNomineesRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  peopleByYearNomineesRequest.onload = function () {
+    if (peopleByYearNomineesRequest.status === 200) {
+      const nomineesData = JSON.parse(peopleByYearNomineesRequest.responseText);
 
-    const filteredNominees = [];
+      const filteredNominees = [];
 
-    nomineesData.forEach((nominee) => {
-      const { year, full_name, count } = nominee;
+      nomineesData.forEach((nominee) => {
+        const { year, full_name, count } = nominee;
 
-      if (
-        year !== 1 &&
-        year !== null &&
-        year !== " ESQ" &&
-        full_name !== null
-      ) {
-        const existingNominee = filteredNominees.find(
-          (item) => item.year === year
-        );
+        if (
+          year !== 1 &&
+          year !== null &&
+          year !== " ESQ" &&
+          full_name !== null
+        ) {
+          const existingNominee = filteredNominees.find(
+            (item) => item.year === year
+          );
 
-        if (!existingNominee) {
-          filteredNominees.push({
-            year: year,
-            full_name: full_name,
-            count: count,
-          });
+          if (!existingNominee) {
+            filteredNominees.push({
+              year: year,
+              full_name: full_name,
+              count: count,
+            });
+          }
         }
-      }
-    });
+      });
 
-    const nomineesTraces = filteredNominees.map((nominee) => {
-      return {
-        x: [nominee.year],
-        y: [nominee.count],
-        text: nominee.full_name,
-        textposition: "auto",
-        type: "bar",
-        name: nominee.year,
-        marker: {
-          color: "blue",
+      const nomineesTraces = filteredNominees.map((nominee) => {
+        return {
+          x: [nominee.year],
+          y: [nominee.count],
+          text: nominee.full_name,
+          textposition: "auto",
+          type: "bar",
+          name: nominee.year,
+          marker: {
+            color: "blue",
+          },
+        };
+      });
+
+      const nomineesLayout = {
+        title: "People by Year - Nominees",
+        xaxis: {
+          title: "Year",
         },
+        yaxis: {
+          title: "Nominees",
+        },
+        barmode: "group",
       };
-    });
 
-    const nomineesLayout = {
-      title: "People by Year - Nominees",
-      xaxis: {
-        title: "Year",
-      },
-      yaxis: {
-        title: "Nominees",
-      },
-      barmode: "group",
-    };
+      const nomineesConfig = {
+        responsive: true,
+      };
 
-    const nomineesConfig = {
-      responsive: true,
-    };
+      Plotly.newPlot(
+        divId,
+        nomineesTraces,
+        nomineesLayout,
+        nomineesConfig
+      );
+    } else {
+      console.error(
+        "Error fetching people by year nominees:",
+        peopleByYearNomineesRequest.status
+      );
+    }
+  };
 
-    Plotly.newPlot(
-      "PeopleByYearNominees",
-      nomineesTraces,
-      nomineesLayout,
-      nomineesConfig
-    );
-  } else {
-    console.error(
-      "Error fetching people by year nominees:",
-      peopleByYearNomineesRequest.status
-    );
-  }
-};
+  peopleByYearNomineesRequest.send();
+}
 
-peopleByYearNomineesRequest.send();
+displayPeopleByYearNomineesChart("PeopleByYearNominees");
+
 
 // PEOPLE BY TEAR WINNERS
 
-const peopleByYearWinnersRequest = new XMLHttpRequest();
-peopleByYearWinnersRequest.open(
-  "GET",
-  "http://localhost:4567/statistics/peopleByYearWinners"
-);
-peopleByYearWinnersRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-peopleByYearWinnersRequest.onload = function () {
-  if (peopleByYearWinnersRequest.status === 200) {
-    const winnersData = JSON.parse(peopleByYearWinnersRequest.responseText);
+function displayPeopleByYearWinnersChart(divId) {
+  const peopleByYearWinnersRequest = new XMLHttpRequest();
+  peopleByYearWinnersRequest.open(
+    "GET",
+    "http://localhost:4567/statistics/peopleByYearWinners"
+  );
+  peopleByYearWinnersRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  peopleByYearWinnersRequest.onload = function () {
+    if (peopleByYearWinnersRequest.status === 200) {
+      const winnersData = JSON.parse(peopleByYearWinnersRequest.responseText);
 
-    const filteredWinners = [];
+      const filteredWinners = [];
 
-    winnersData.forEach((winner) => {
-      const { year, full_name, count } = winner;
+      winnersData.forEach((winner) => {
+        const { year, full_name, count } = winner;
 
-      if (
-        year !== 1 &&
-        year !== null &&
-        year !== " ESQ" &&
-        full_name !== null
-      ) {
-        const existingWinner = filteredWinners.find(
-          (item) => item.year === year
-        );
+        if (
+          year !== 1 &&
+          year !== null &&
+          year !== " ESQ" &&
+          full_name !== null
+        ) {
+          const existingWinner = filteredWinners.find(
+            (item) => item.year === year
+          );
 
-        if (!existingWinner) {
-          filteredWinners.push({
-            year: year,
-            full_name: full_name,
-            count: count,
-          });
+          if (!existingWinner) {
+            filteredWinners.push({
+              year: year,
+              full_name: full_name,
+              count: count,
+            });
+          }
         }
-      }
-    });
+      });
 
-    const winnersTraces = filteredWinners.map((winner) => {
-      return {
-        x: [winner.year],
-        y: [winner.count],
-        text: winner.full_name,
-        textposition: "auto",
-        type: "bar",
-        name: winner.year,
-        marker: {
-          color: "blue",
+      const winnersTraces = filteredWinners.map((winner) => {
+        return {
+          x: [winner.year],
+          y: [winner.count],
+          text: winner.full_name,
+          textposition: "auto",
+          type: "bar",
+          name: winner.year,
+          marker: {
+            color: "blue",
+          },
+        };
+      });
+
+      const winnersLayout = {
+        title: "People by Year - Winners",
+        xaxis: {
+          title: "Year",
         },
+        yaxis: {
+          title: "Winners",
+        },
+        barmode: "group",
       };
-    });
 
-    const winnersLayout = {
-      title: "People by Year - Winners",
-      xaxis: {
-        title: "Year",
-      },
-      yaxis: {
-        title: "Winners",
-      },
-      barmode: "group",
-    };
+      const winnersConfig = {
+        responsive: true,
+      };
 
-    const winnersConfig = {
-      responsive: true,
-    };
+      Plotly.newPlot(
+        divId,
+        winnersTraces,
+        winnersLayout,
+        winnersConfig
+      );
+    } else {
+      console.error(
+        "Error fetching people by year winners:",
+        peopleByYearWinnersRequest.status
+      );
+    }
+  };
 
-    Plotly.newPlot(
-      "PeopleByYearWinners",
-      winnersTraces,
-      winnersLayout,
-      winnersConfig
-    );
-  } else {
-    console.error(
-      "Error fetching people by year winners:",
-      peopleByYearWinnersRequest.status
-    );
-  }
-};
+  peopleByYearWinnersRequest.send();
+}
 
-peopleByYearWinnersRequest.send();
+displayPeopleByYearWinnersChart("PeopleByYearWinners");
+
 
 // WINNING PROPORTION
 
-const winningRequest = new XMLHttpRequest();
-winningRequest.open("GET", "http://localhost:4567/statistics/winning");
-winningRequest.setRequestHeader(
-  "Authorization",
-  `Bearer ${localStorage.getItem("token")}`
-);
-winningRequest.onload = function () {
-  if (winningRequest.status === 200) {
-    const winnersData = JSON.parse(winningRequest.responseText);
-    console.log("Winners Data:", winnersData); // Log the retrieved data
+function displayWinningAndLosingProportionsChart(divId) {
+  const winningRequest = new XMLHttpRequest();
+  winningRequest.open("GET", "http://localhost:4567/statistics/winning");
+  winningRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  winningRequest.onload = function () {
+    if (winningRequest.status === 200) {
+      const winnersData = JSON.parse(winningRequest.responseText);
+      console.log("Winners Data:", winnersData); // Log the retrieved data
 
-    const falseCount = winnersData.falseCount;
-    const trueCount = winnersData.trueCount;
+      const falseCount = winnersData.falseCount;
+      const trueCount = winnersData.trueCount;
 
-    console.log("False Count:", falseCount);
-    console.log("True Count:", trueCount);
+      console.log("False Count:", falseCount);
+      console.log("True Count:", trueCount);
 
-    const data = [
-      {
-        labels: ["False", "True"],
-        values: [falseCount, trueCount],
-        type: "pie",
-        marker: {
-          colors: ["red", "blue"],
+      const data = [
+        {
+          labels: ["False", "True"],
+          values: [falseCount, trueCount],
+          type: "pie",
+          marker: {
+            colors: ["red", "blue"],
+          },
         },
-      },
-    ];
+      ];
 
-    const layout = {
-      title: "Winning and Losing Proportions",
-    };
+      const layout = {
+        title: "Winning and Losing Proportions",
+      };
 
-    Plotly.newPlot("WinningandLosingProportions", data, layout);
-  } else {
-    console.error("Error fetching winners:", winningRequest.status);
-  }
-};
+      Plotly.newPlot(divId, data, layout);
+    } else {
+      console.error("Error fetching winners:", winningRequest.status);
+    }
+  };
 
-winningRequest.send();
+  winningRequest.send();
+}
+
+displayWinningAndLosingProportionsChart("WinningandLosingProportions");
+
 
 // functiile de exportare ale chart-urilor in format csv, webp si svg
 function exportChartBiggestWinners(format) {
@@ -1133,7 +1298,7 @@ function exportChartBiggestWinners(format) {
     winnersRequest.onload = function () {
       if (winnersRequest.status === 200) {
         const winnersData = JSON.parse(winnersRequest.responseText);
-        const processedWinnersData = processWinnersData(winnersData);
+        const processedWinnersData = displayBiggestWinnersChart.processWinnersData(winnersData);
         exportDataToCSV(processedWinnersData, "biggest_winners");
       } else {
         console.error("Error fetching biggest winners:", winnersRequest.status);
@@ -1146,7 +1311,7 @@ function exportChartBiggestWinners(format) {
       filename: "BiggestWinners",
     })
       .then(function () {
-        console.log("s-a descarcat webp-ul");
+        console.log("WebP chart downloaded successfully");
       })
       .catch(function (error) {
         console.error("Error exporting chart as WebP:", error);
@@ -1157,14 +1322,13 @@ function exportChartBiggestWinners(format) {
       filename: "BiggestWinners",
     })
       .then(function () {
-        console.log("s-a descarcat svg-ul");
+        console.log("SVG chart downloaded successfully");
       })
       .catch(function (error) {
         console.error("Error exporting chart as SVG:", error);
       });
   }
 }
-//exportChartBiggestNominees
 function exportChartBiggestNominees(format) {
   if (format === "csv") {
     const nomineesRequest = new XMLHttpRequest();
@@ -1179,7 +1343,7 @@ function exportChartBiggestNominees(format) {
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
         const nomineesData = JSON.parse(nomineesRequest.responseText);
-        const processedNomineesData = processShowsData(nomineesData);
+        const processedNomineesData = displayBiggestNomineesChart.processShowsData(nomineesData);
         exportDataToCSV(processedNomineesData, "biggest_nominees");
       } else {
         console.error(
@@ -1230,7 +1394,7 @@ function exportChartMostNominatedPeople(format) {
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
         const nomineesData = JSON.parse(nomineesRequest.responseText);
-        const processedNomineesData = processPeopleData(nomineesData);
+        const processedNomineesData = displayMostNominatedPeopleChart.processPeopleData(nomineesData);
         exportDataToCSV(processedNomineesData, "most_nominated_people");
       } else {
         console.error(
@@ -1279,7 +1443,7 @@ function exportChartPeopleWithMostStatues(format) {
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
         const peopleData = JSON.parse(peopleRequest.responseText);
-        const processedPeopleData = processPeopleData(peopleData);
+        const processedPeopleData = displayMostNominatedPeopleChart.processPeopleData(peopleData);
         exportDataToCSV(processedPeopleData, "people_with_most_statues");
       } else {
         console.error(
@@ -1329,7 +1493,7 @@ function exportChartMostAppearedShows(format) {
     showsRequest.onload = function () {
       if (showsRequest.status === 200) {
         const showsData = JSON.parse(showsRequest.responseText);
-        const processedShowsData = processMAShowsData(showsData);
+        const processedShowsData = displayMostAppearedShowsChart.processMAShowsData(showsData);
         exportDataToCSV(showsData, "most_appeared_shows");
       } else {
         console.error(
@@ -1379,7 +1543,7 @@ function exportChartMostAppearedPeople(format) {
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
         const peopleData = JSON.parse(peopleRequest.responseText);
-        const processedPeopleData = processPMAShowsData(peopleData);
+        const processedPeopleData = displayMostAppearedShowsChart.processMAShowsData(peopleData);
         exportDataToCSV(peopleData, "most_appeared_people");
       } else {
         console.error(
@@ -1430,7 +1594,7 @@ function exportChartMostAppearedCategories(format) {
       if (categoriesRequest.status === 200) {
         const categoriesData = JSON.parse(categoriesRequest.responseText);
         const processedCategoriesData =
-          processCMACategoriesData(categoriesData);
+        displayMostAppearedCategoriesChart.processCMACategoriesData(categoriesData);
         exportDataToCSV(categoriesData, "most_appeared_categories");
       } else {
         console.error(
@@ -1521,4 +1685,353 @@ function exportChartActorVsActressProportions(format) {
         console.error("Error exporting chart as SVG:", error);
       });
   }
+}
+
+//exportChartShowByYearNominees
+function exportChartShowByYearNominees(format) {
+  if (format === "csv") {
+    const nomineesRequest = new XMLHttpRequest();
+    nomineesRequest.open(
+      "GET",
+      "http://localhost:4567/statistics/showByYearNominees"
+    );
+    nomineesRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
+    nomineesRequest.onload = function () {
+      if (nomineesRequest.status === 200) {
+        const nomineesData = JSON.parse(nomineesRequest.responseText);
+        const filteredNominees = [];
+        nomineesData.forEach((nominee) => {
+          const { year, show, count } = nominee;
+          if (year !== 1 && year !== null && year !== " ESQ") {
+            const existingNominee = filteredNominees.find(
+              (item) => item.year === year
+            );
+            if (!existingNominee) {
+              filteredNominees.push({
+                year: year,
+                show: show,
+                count: count,
+              });
+            }
+          }
+        });
+        exportDataToCSV(filteredNominees, "show_by_year_nominees");
+      } else {
+        console.error(
+          "Error fetching show by year nominees:",
+          nomineesRequest.status
+        );
+      }
+    };
+    nomineesRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("ShowByYearNominees", {
+      format: "webp",
+      filename: "ShowByYearNominees",
+    })
+      .then(function () {
+        console.log("WebP chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("ShowByYearNominees", {
+      format: "svg",
+      filename: "ShowByYearNominees",
+    })
+      .then(function () {
+        console.log("SVG chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartShowByYearWinners
+function exportChartShowByYearWinners(format) {
+  if (format === "csv") {
+    const winnersRequest = new XMLHttpRequest();
+    winnersRequest.open(
+      "GET",
+      "http://localhost:4567/statistics/showByYearWinners"
+    );
+    winnersRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
+    winnersRequest.onload = function () {
+      if (winnersRequest.status === 200) {
+        const winnersData = JSON.parse(winnersRequest.responseText);
+        const filteredWinners = [];
+
+        winnersData.forEach((winner) => {
+          const { year, show, count } = winner;
+
+          if (
+            year !== 1 &&
+            year !== null &&
+            year !== " ESQ" &&
+            show !== "N/A" &&
+            show != "ER"
+          ) {
+            const existingWinner = filteredWinners.find(
+              (item) => item.year === year
+            );
+
+            if (!existingWinner) {
+              filteredWinners.push({
+                year: year,
+                show: show,
+                count: count,
+              });
+            }
+          }
+        });
+
+        exportDataToCSV(filteredWinners, "show_by_year_winners");
+      } else {
+        console.error(
+          "Error fetching show by year winners:",
+          winnersRequest.status
+        );
+      }
+    };
+
+    winnersRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("ShowByYearWinners", {
+      format: "webp",
+      filename: "ShowByYearWinners",
+    })
+      .then(function () {
+        console.log("WebP chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("ShowByYearWinners", {
+      format: "svg",
+      filename: "ShowByYearWinners",
+    })
+      .then(function () {
+        console.log("SVG chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+//exportChartPeopleByYearNominees
+function exportChartPeopleByYearNominees(format) {
+  if (format === "csv") {
+    const nomineesRequest = new XMLHttpRequest();
+    nomineesRequest.open(
+      "GET",
+      "http://localhost:4567/statistics/peopleByYearNominees"
+    );
+    nomineesRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
+    nomineesRequest.onload = function () {
+      if (nomineesRequest.status === 200) {
+        const nomineesData = JSON.parse(nomineesRequest.responseText);
+        const filteredNominees = [];
+
+        nomineesData.forEach((nominee) => {
+          const { year, full_name, count } = nominee;
+
+          if (
+            year !== 1 &&
+            year !== null &&
+            year !== " ESQ" &&
+            full_name !== null
+          ) {
+            const existingNominee = filteredNominees.find(
+              (item) => item.year === year
+            );
+
+            if (!existingNominee) {
+              filteredNominees.push({
+                year: year,
+                full_name: full_name,
+                count: count,
+              });
+            }
+          }
+        });
+
+        exportDataToCSV(filteredNominees, "people_by_year_nominees");
+      } else {
+        console.error(
+          "Error fetching people by year nominees:",
+          nomineesRequest.status
+        );
+      }
+    };
+
+    nomineesRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("PeopleByYearNominees", {
+      format: "webp",
+      filename: "PeopleByYearNominees",
+    })
+      .then(function () {
+        console.log("WebP chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("PeopleByYearNominees", {
+      format: "svg",
+      filename: "PeopleByYearNominees",
+    })
+      .then(function () {
+        console.log("SVG chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartPeopleByYearWinners
+function exportChartPeopleByYearWinners(format) {
+  if (format === "csv") {
+    const winnersRequest = new XMLHttpRequest();
+    winnersRequest.open(
+      "GET",
+      "http://localhost:4567/statistics/peopleByYearWinners"
+    );
+    winnersRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
+    winnersRequest.onload = function () {
+      if (winnersRequest.status === 200) {
+        const winnersData = JSON.parse(winnersRequest.responseText);
+        const filteredWinners = [];
+
+        winnersData.forEach((winner) => {
+          const { year, full_name, count } = winner;
+
+          if (
+            year !== 1 &&
+            year !== null &&
+            year !== " ESQ" &&
+            full_name !== null
+          ) {
+            const existingWinner = filteredWinners.find(
+              (item) => item.year === year
+            );
+
+            if (!existingWinner) {
+              filteredWinners.push({
+                year: year,
+                full_name: full_name,
+                count: count,
+              });
+            }
+          }
+        });
+
+        exportDataToCSV(filteredWinners, "people_by_year_winners");
+      } else {
+        console.error(
+          "Error fetching people by year winners:",
+          winnersRequest.status
+        );
+      }
+    };
+
+    winnersRequest.send();
+  } else if (format === "webp") {
+    Plotly.downloadImage("PeopleByYearWinners", {
+      format: "webp",
+      filename: "PeopleByYearWinners",
+    })
+      .then(function () {
+        console.log("WebP chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as WebP:", error);
+      });
+  } else if (format === "svg") {
+    Plotly.downloadImage("PeopleByYearWinners", {
+      format: "svg",
+      filename: "PeopleByYearWinners",
+    })
+      .then(function () {
+        console.log("SVG chart exported successfully.");
+      })
+      .catch(function (error) {
+        console.error("Error exporting chart as SVG:", error);
+      });
+  }
+}
+
+//exportChartWinningandLosingProportions
+
+function exportChartWinningandLosingProportions(format) {
+  const winningRequest = new XMLHttpRequest();
+  winningRequest.open("GET", "http://localhost:4567/statistics/winning");
+  winningRequest.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
+  winningRequest.onload = function () {
+    if (winningRequest.status === 200) {
+      const winnersData = JSON.parse(winningRequest.responseText);
+      console.log("Winners Data:", winnersData); // Log the retrieved data
+
+      const falseCount = winnersData.falseCount;
+      const trueCount = winnersData.trueCount;
+
+      console.log("False Count:", falseCount);
+      console.log("True Count:", trueCount);
+
+      if (format === "csv") {
+        const data = [
+          {
+            falseCount: falseCount,
+            trueCount: trueCount,
+          },
+        ];
+        exportDataToCSV(data, "winning_and_losing_proportions");
+      } else if (format === "webp") {
+        Plotly.downloadImage("WinningandLosingProportions", {
+          format: "webp",
+          filename: "WinningAndLosingProportions",
+        })
+          .then(function () {
+            console.log("WebP chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as WebP:", error);
+          });
+      } else if (format === "svg") {
+        Plotly.downloadImage("WinningandLosingProportions", {
+          format: "svg",
+          filename: "WinningAndLosingProportions",
+        })
+          .then(function () {
+            console.log("SVG chart exported successfully.");
+          })
+          .catch(function (error) {
+            console.error("Error exporting chart as SVG:", error);
+          });
+      }
+    } else {
+      console.error("Error fetching winners:", winningRequest.status);
+    }
+  };
+
+  winningRequest.send();
 }
