@@ -11,7 +11,7 @@ export function verifyAndRefreshToken(req, res, next) {
     res.end(JSON.stringify({ message: "Token missing" }));
     return;
   }
-
+  console.log("hei, am ajuns aici");
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -21,7 +21,7 @@ export function verifyAndRefreshToken(req, res, next) {
         id: decoded.id,
         username: decoded.username,
       });
-
+      console.log("s-a generat noul token", refreshedToken);
       res.setHeader("Authorization", `Bearer ${refreshedToken}`);
     }
 

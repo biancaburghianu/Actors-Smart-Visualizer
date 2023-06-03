@@ -36,20 +36,23 @@ function searchArticles() {
   console.log(123, searchTerm);
   const url = `http://localhost:3456/articles?search=${searchTerm}`;
 
-  fetch(url)
+  fetch(url, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
       articlesContainer.innerHTML = "";
 
       data.articles.slice(0, 10).forEach((article) => {
-
-
         const articleElement = document.createElement("div");
         articleElement.classList.add("article");
 
         const favoriteButton = document.createElement("button");
         favoriteButton.classList.add("favorite-button");
-        favoriteButton.innerHTML = '<i class="far fa-heart"></i> Mark as favorite';
+        favoriteButton.innerHTML =
+          '<i class="far fa-heart"></i> Mark as favorite';
         articleElement.appendChild(favoriteButton);
 
         const publishedAtElement = document.createElement("em");
@@ -75,17 +78,13 @@ function searchArticles() {
         articleLink.textContent = "Read more about this";
         articleElement.appendChild(articleLink);
 
-      
-
         articlesContainer.appendChild(articleElement);
-
       });
       favoriteButton();
     })
     .catch((error) => {
       console.error(error);
     });
-    
 }
 
 function favoriteButton() {
@@ -104,20 +103,19 @@ function favoriteButton() {
         btn.classList.add("favorite");
         btn.innerHTML = '<i class="fas fa-heart"></i> Favorite';
 
-    
         const articleElement = btn.closest(".article");
         const title = articleElement.querySelector("h2").textContent;
         const description = articleElement.querySelector("p").textContent;
         const publishedAt = articleElement.querySelector("em").textContent;
         const imageUrl = articleElement.querySelector("img").src;
         const articleUrl = articleElement.querySelector("a").href;
-        
+
         const favoriteArticle = {
           title,
           description,
           publishedAt,
           imageUrl,
-          articleUrl
+          articleUrl,
         };
 
         const url = "http://localhost:3456/favorite/article";
@@ -125,9 +123,9 @@ function favoriteButton() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          body: JSON.stringify(favoriteArticle)
+          body: JSON.stringify(favoriteArticle),
         };
 
         fetch(url, options)
@@ -143,20 +141,15 @@ function favoriteButton() {
   });
 }
 
-function checkHeartsFavorites(){
+function checkHeartsFavorites() {
   const hearts = document.querySelectorAll(".fa.fa-heart");
-  if(hearts.length<1){
-  return true;
-  }
-  else{
-  return false;
+  if (hearts.length < 1) {
+    return true;
+  } else {
+    return false;
   }
 }
-
 
 document
   .getElementById("searchButton")
   .addEventListener("click", searchArticles);
-
-
-

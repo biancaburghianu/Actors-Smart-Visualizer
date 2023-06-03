@@ -33,7 +33,7 @@
       <button id="UserBtn"><i class="fa fa-user fa-2xl"></i></button>
       <div class="UserLogin">
         <ul>
-          <li><a href="#">Logout</a></li>
+          <li><a href="#" id="logoutButton">Logout</a></li>
         </ul>
       </div>
     </nav>
@@ -48,7 +48,7 @@
 
       <article class="statistic">
         <h1 class="statistic-title">Actors By Year</h1>
-      
+
         <label class="dropdown">
           <div class="dd-button">Export</div>
           <input type="checkbox" class="dd-input" id="test" />
@@ -58,9 +58,9 @@
             <li onclick="exportChartActorsByYear('svg')">SVG</li>
           </ul>
         </label>
-      
+
         <div id="ActorsByYear" class="center"></div>
-      
+
         <div class="statistic-title" style="margin-bottom: 20px;">
           <label for="year">Year:</label>
           <select id="year">
@@ -85,27 +85,27 @@
             <option value="2002">2002</option>
             <option value="2001">2001</option>
           </select>
-      
+
           <label for="gender">Gender:</label>
           <select id="gender">
             <option value="all">All</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
-      
+
           <label for="wonActors">Won:</label>
           <input type="checkbox" id="wonActors" />
-      
+
           <button onclick="fetchActorsData()">View</button>
         </div>
       </article>
 
 
-      
+
 
       <article class="statistic">
         <h1 class="statistic-title">Winners By Category</h1>
-      
+
         <label class="dropdown">
           <div class="dd-button">Export</div>
           <input type="checkbox" class="dd-input" id="test" />
@@ -115,9 +115,9 @@
             <li onclick="exportWinnersByCategory('svg')">SVG</li>
           </ul>
         </label>
-      
+
         <div id="WinnersByCategory" class="center"></div>
-      
+
         <div class="statistic-title" style="margin-bottom: 20px;">
           <label for="Category">Category:</label>
           <select id="Category">
@@ -131,10 +131,10 @@
             <option value="FEMALE COMEDY"> FEMALE ACTOR IN A COMEDY SERIES</option>
             <option value="MALE COMEDY"> MALE ACTOR IN A COMEDY SERIES</option>
           </select>
-      
+
           <label for="wonCategory">Won:</label>
-          <input type="checkbox" id="wonCategory"  />
-      
+          <input type="checkbox" id="wonCategory" />
+
           <button onclick="fetchCategoryData()">View</button>
         </div>
       </article>
@@ -356,6 +356,14 @@
   </main>
 
   <footer></footer>
+  <script>
+    const logoutButton = document.querySelector("#logoutButton");
+
+    logoutButton.addEventListener("click", () => {
+      window.location.href = "login.html";
+      localStorage.removeItem("token");
+    });
+  </script>
   <script src="../../static/JS/statistics.js"></script>
 </body>
 

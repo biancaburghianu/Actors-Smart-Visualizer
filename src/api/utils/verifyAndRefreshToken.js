@@ -6,6 +6,13 @@ dotenv.config();
 
 export function verifyAndRefreshToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
+  const excludedRoutes = ["/login", "/register", "/changePassword"];
+
+  if (excludedRoutes.includes(req.url)) {
+    next();
+    return;
+  }
+
   if (!token) {
     res.statusCode = 401;
     res.end(JSON.stringify({ message: "Token missing" }));
@@ -21,6 +28,7 @@ export function verifyAndRefreshToken(req, res, next) {
         id: decoded.id,
         username: decoded.username,
       });
+      console.log("s-a generat noul token", refreshedToken);
 
       res.setHeader("Authorization", `Bearer ${refreshedToken}`);
     }

@@ -79,6 +79,10 @@ function fetchActorsData() {
     "GET",
     `http://localhost:4567/statistics/actorsByYear/${year}/${gender}/${won}`
   );
+  xhr.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
+  );
   xhr.onload = function () {
     if (xhr.status === 200) {
       const actorsData = JSON.parse(xhr.responseText);
@@ -131,6 +135,10 @@ function fetchCategoryData() {
     `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(
       category
     )}/${won.checked}`
+  );
+  xhr.setRequestHeader(
+    "Authorization",
+    `Bearer ${localStorage.getItem("token")}`
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -190,6 +198,10 @@ function processWinnersData(data) {
 
 const winnersRequest = new XMLHttpRequest();
 winnersRequest.open("GET", "http://localhost:4567/statistics/biggestWinners");
+winnersRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 winnersRequest.onload = function () {
   if (winnersRequest.status === 200) {
     const winnersData = JSON.parse(winnersRequest.responseText);
@@ -240,6 +252,10 @@ function processShowsData(data) {
 
 const showsRequest = new XMLHttpRequest();
 showsRequest.open("GET", "http://localhost:4567/statistics/biggestNominees");
+showsRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 showsRequest.onload = function () {
   if (showsRequest.status === 200) {
     const showsData = JSON.parse(showsRequest.responseText);
@@ -290,6 +306,10 @@ peopleRequest.open(
   "GET",
   "http://localhost:4567/statistics/mostNominatedPeople"
 );
+peopleRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 peopleRequest.onload = function () {
   if (peopleRequest.status === 200) {
     const peopleData = JSON.parse(peopleRequest.responseText);
@@ -335,6 +355,10 @@ const PeopleWithMostStatuesRequest = new XMLHttpRequest();
 PeopleWithMostStatuesRequest.open(
   "GET",
   "http://localhost:4567/statistics/peopleWithMostStatues"
+);
+PeopleWithMostStatuesRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
 );
 PeopleWithMostStatuesRequest.onload = function () {
   if (PeopleWithMostStatuesRequest.status === 200) {
@@ -398,6 +422,10 @@ const mashowsRequest = new XMLHttpRequest();
 mashowsRequest.open(
   "GET",
   "http://localhost:4567/statistics/mostAppearedShows"
+);
+mashowsRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
 );
 mashowsRequest.onload = function () {
   if (mashowsRequest.status === 200) {
@@ -489,6 +517,10 @@ pmashowsRequest.open(
   "GET",
   "http://localhost:4567/statistics/mostAppearedPeople"
 );
+pmashowsRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 pmashowsRequest.onload = function () {
   if (pmashowsRequest.status === 200) {
     const showsData = JSON.parse(pmashowsRequest.responseText);
@@ -579,6 +611,10 @@ cmaCategoriesRequest.open(
   "GET",
   "http://localhost:4567/statistics/mostAppearedCategories"
 );
+cmaCategoriesRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 cmaCategoriesRequest.onload = function () {
   if (cmaCategoriesRequest.status === 200) {
     const categoriesData = JSON.parse(cmaCategoriesRequest.responseText);
@@ -650,6 +686,10 @@ actorActressProportionsRequest.open(
   "GET",
   "http://localhost:4567/statistics/actorActressProportions"
 );
+actorActressProportionsRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 actorActressProportionsRequest.onload = function () {
   if (actorActressProportionsRequest.status === 200) {
     const actorActressProportionsData = JSON.parse(
@@ -706,6 +746,10 @@ const nomineesRequest = new XMLHttpRequest();
 nomineesRequest.open(
   "GET",
   "http://localhost:4567/statistics/showByYearNominees"
+);
+nomineesRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
 );
 nomineesRequest.onload = function () {
   if (nomineesRequest.status === 200) {
@@ -782,6 +826,10 @@ const showByYearWinnerRequest = new XMLHttpRequest();
 showByYearWinnerRequest.open(
   "GET",
   "http://localhost:4567/statistics/showByYearWinners"
+);
+showByYearWinnerRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
 );
 showByYearWinnerRequest.onload = function () {
   if (showByYearWinnerRequest.status === 200) {
@@ -865,6 +913,10 @@ peopleByYearNomineesRequest.open(
   "GET",
   "http://localhost:4567/statistics/peopleByYearNominees"
 );
+peopleByYearNomineesRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 peopleByYearNomineesRequest.onload = function () {
   if (peopleByYearNomineesRequest.status === 200) {
     const nomineesData = JSON.parse(peopleByYearNomineesRequest.responseText);
@@ -946,6 +998,10 @@ peopleByYearWinnersRequest.open(
   "GET",
   "http://localhost:4567/statistics/peopleByYearWinners"
 );
+peopleByYearWinnersRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 peopleByYearWinnersRequest.onload = function () {
   if (peopleByYearWinnersRequest.status === 200) {
     const winnersData = JSON.parse(peopleByYearWinnersRequest.responseText);
@@ -1024,6 +1080,10 @@ peopleByYearWinnersRequest.send();
 
 const winningRequest = new XMLHttpRequest();
 winningRequest.open("GET", "http://localhost:4567/statistics/winning");
+winningRequest.setRequestHeader(
+  "Authorization",
+  `Bearer ${localStorage.getItem("token")}`
+);
 winningRequest.onload = function () {
   if (winningRequest.status === 200) {
     const winnersData = JSON.parse(winningRequest.responseText);
@@ -1035,7 +1095,6 @@ winningRequest.onload = function () {
     console.log("False Count:", falseCount);
     console.log("True Count:", trueCount);
 
-    // Create data array for the pie chart
     const data = [
       {
         labels: ["False", "True"],
@@ -1047,12 +1106,10 @@ winningRequest.onload = function () {
       },
     ];
 
-    // Set layout options for the pie chart
     const layout = {
       title: "Winning and Losing Proportions",
     };
 
-    // Plot the pie chart
     Plotly.newPlot("WinningandLosingProportions", data, layout);
   } else {
     console.error("Error fetching winners:", winningRequest.status);
@@ -1068,6 +1125,10 @@ function exportChartBiggestWinners(format) {
     winnersRequest.open(
       "GET",
       "http://localhost:4567/statistics/biggestWinners"
+    );
+    winnersRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
     );
     winnersRequest.onload = function () {
       if (winnersRequest.status === 200) {
@@ -1110,6 +1171,10 @@ function exportChartBiggestNominees(format) {
     nomineesRequest.open(
       "GET",
       "http://localhost:4567/statistics/biggestNominees"
+    );
+    nomineesRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
@@ -1158,6 +1223,10 @@ function exportChartMostNominatedPeople(format) {
       "GET",
       "http://localhost:4567/statistics/mostNominatedPeople"
     );
+    nomineesRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
         const nomineesData = JSON.parse(nomineesRequest.responseText);
@@ -1202,6 +1271,10 @@ function exportChartPeopleWithMostStatues(format) {
     peopleRequest.open(
       "GET",
       "http://localhost:4567/statistics/peopleWithMostStatues"
+    );
+    peopleRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
@@ -1249,6 +1322,10 @@ function exportChartMostAppearedShows(format) {
       "GET",
       "http://localhost:4567/statistics/mostAppearedShows"
     );
+    showsRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
     showsRequest.onload = function () {
       if (showsRequest.status === 200) {
         const showsData = JSON.parse(showsRequest.responseText);
@@ -1294,6 +1371,10 @@ function exportChartMostAppearedPeople(format) {
     peopleRequest.open(
       "GET",
       "http://localhost:4567/statistics/mostAppearedPeople"
+    );
+    peopleRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
@@ -1341,6 +1422,10 @@ function exportChartMostAppearedCategories(format) {
       "GET",
       "http://localhost:4567/statistics/mostAppearedCategories"
     );
+    categoriesRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
+    );
     categoriesRequest.onload = function () {
       if (categoriesRequest.status === 200) {
         const categoriesData = JSON.parse(categoriesRequest.responseText);
@@ -1387,6 +1472,10 @@ function exportChartActorVsActressProportions(format) {
     actorActressProportionsRequest.open(
       "GET",
       "http://localhost:4567/statistics/actorActressProportions"
+    );
+    actorActressProportionsRequest.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("token")}`
     );
     actorActressProportionsRequest.onload = function () {
       if (actorActressProportionsRequest.status === 200) {
