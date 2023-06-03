@@ -27,10 +27,6 @@ function favoriteButton() {
         const CardEl = btn.parentElement;
         const title = CardEl.querySelector("h3").textContent;
         const backgroundImageUrl = getComputedStyle(CardEl).backgroundImage;
-        const favoriteCard = {
-          title,
-          backgroundImageUrl,
-        };
         const url = "http://localhost:3456/favorite/nominee";
         const options = {
           method: "POST",
@@ -38,7 +34,7 @@ function favoriteButton() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          body: JSON.stringify(favoriteCard),
+          body: JSON.stringify(title),
         };
         fetch(url,options).then((res)=>res.json()).then((data)=>console.log(data)).catch((err)=>console.log(err));
       }

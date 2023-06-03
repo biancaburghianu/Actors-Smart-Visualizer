@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
-import { FavoriteArticle, User } from "../models/models.js";
+import { FavoriteArticle, User, FavoriteNominee } from "../models/models.js";
 import { generateToken } from "../utils/generateToken.js";
 import dotenv from "dotenv";
 dotenv.config();
+
 
 export async function addFavoriteArticle(req, res) {
   try {
@@ -15,10 +16,35 @@ export async function addFavoriteArticle(req, res) {
       return;
     }
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const userId = parseInt(decodedToken.id);
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        try {
+          const decoded = jwt.decode(token);
+          const refreshedToken = generateToken({
+            id: decoded.id,
+            username: decoded.username,
+          });
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
+          res.setHeader("Authorization", `Bearer ${refreshedToken}`);
+          console.log("Hey, a new token was generated in addFavoriteArticle");
+          decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
+        } catch (error) {
+          console.error("Error generating new token:", error);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: "Internal server error" }));
+          return;
+        }
+      } else {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Invalid token" }));
+        return;
+      }
+    }
 
-    console.log(userId);
+    const userId = parseInt(decodedToken.id);
 
     const user = await User.findByPk(userId);
 
@@ -42,12 +68,13 @@ export async function addFavoriteArticle(req, res) {
             userId: user.id,
           },
         });
+
         if (userFavoriteExists) {
           await userFavoriteExists.update({ details: favoriteArticleData });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.end(
-            JSON.stringify({ message: "Favorite article updated succesfully" })
+            JSON.stringify({ message: "Favorite article updated successfully" })
           );
         } else {
           const favoriteArticle = await FavoriteArticle.create({
@@ -75,6 +102,7 @@ export async function addFavoriteArticle(req, res) {
     res.end(JSON.stringify({ error: "Internal server error" }));
   }
 }
+
 
 export async function getFavoriteArticle(req, res) {
   try {
@@ -149,3 +177,175 @@ export async function getFavoriteArticle(req, res) {
   }
 }
 //de schimbat addFavorite
+export async function addFavoriteNominee(req, res) {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (!token) {
+      res.statusCode = 401;
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        try {
+          const decoded = jwt.decode(token);
+          const refreshedToken = generateToken({
+            id: decoded.id,
+            username: decoded.username,
+          });
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
+          res.setHeader("Authorization", `Bearer ${refreshedToken}`);
+          console.log("Hey, a new token was generated in addFavoriteNominee");
+          decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
+        } catch (error) {
+          console.error("Error generating new token:", error);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: "Internal server error" }));
+          return;
+        }
+      } else {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Invalid token" }));
+        return;
+      }
+    }
+
+    const userId = parseInt(decodedToken.id);
+
+    console.log(userId);
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      res.statusCode = 404;
+      res.end(JSON.stringify({ error: "User not found" }));
+      return;
+    }
+
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
+
+    req.on("end", async () => {
+      try {
+        const favoriteNomineeName = JSON.parse(body);
+        console.log("hei aici e favorite nominee name", favoriteNomineeName)
+
+        const userFavoriteExists = await FavoriteNominee.findOne({
+          where: {
+            userId: user.id,
+          },
+        });
+        
+        if (userFavoriteExists) {
+          await userFavoriteExists.update({ nomineeName: favoriteNomineeName });
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({ message: "Favorite nominee updated successfully" })
+          );
+        } else {
+          const favoriteNominee = await FavoriteNominee.create({
+            userId: user.id,
+            nomineeName: favoriteNomineeName,
+          });
+
+          console.log("Favorite nominee added:", favoriteNominee);
+
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.end(
+            JSON.stringify({ message: "Favorite nominee added successfully" })
+          );
+        }
+      } catch (error) {
+        console.error("Error parsing request body:", error);
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: "Bad request" }));
+      }
+    });
+  } catch (error) {
+    console.error("Error adding favorite nominee:", error);
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: "Internal server error" }));
+  }
+}
+export async function getFavoriteNominee(req, res) {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (!token) {
+      res.statusCode = 401;
+      res.end(JSON.stringify({ error: "Unauthorized" }));
+      return;
+    }
+
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        try {
+          const decoded = jwt.decode(token);
+          const refreshedToken = generateToken({
+            id: decoded.id,
+            username: decoded.username,
+          });
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
+          res.setHeader("Authorization", `Bearer ${refreshedToken}`);
+          console.log("Hey, a new token was generated in favorite controller");
+          decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
+        } catch (error) {
+          console.error("Error generating new token:", error);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: "Internal server error" }));
+          return;
+        }
+      } else {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Invalid token" }));
+        return;
+      }
+    }
+
+    const userId = parseInt(decodedToken.id);
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      res.statusCode = 404;
+      res.end(JSON.stringify({ error: "User not found" }));
+      return;
+    }
+
+    const favoriteNominee = await FavoriteNominee.findOne({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    if (!favoriteNominee) {
+      res.statusCode = 404;
+      res.end(
+        JSON.stringify({ error: "The user doesn't have a favorite nominee" })
+      );
+      return;
+    }
+
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ favoriteNominee }));
+  } catch (error) {
+    console.error("Error getting favorite nominee:", error);
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: "Internal server error" }));
+  }
+}

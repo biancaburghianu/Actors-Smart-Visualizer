@@ -122,4 +122,4 @@ FavoriteNominee.sync();
 
 console.log(User === sequelize.models.User);
 
-export { User, Nominalisation, FavoriteArticle };
+export { User, Nominalisation, FavoriteArticle, FavoriteNominee };
