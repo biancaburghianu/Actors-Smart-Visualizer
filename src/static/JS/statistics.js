@@ -1,6 +1,8 @@
 const menuIcon = document.querySelector(".menu-icon");
 const navLinks = document.querySelector(".nav-links");
 
+
+
 menuIcon.addEventListener("click", () => {
   navLinks.classList.toggle("show-nav");
 });
@@ -2151,3 +2153,41 @@ function exportWinnersByCategory(format) {
   };
   WinnersByCategory.send();
 }
+
+function favoriteButton() {
+  const favoriteBtns = document.querySelectorAll(".favorite-button");
+  favoriteBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isFavorite = btn.classList.contains("favorite");
+
+      favoriteBtns.forEach((btn) => {
+        btn.classList.remove("favorite");
+        btn.innerHTML = '<i class="far fa-heart"></i> Mark as favorite';
+      });
+
+      if (!isFavorite) {
+        btn.classList.add("favorite");
+        btn.innerHTML = '<i class="fas fa-heart"></i> Favorite';
+        
+        // json to send
+        const favoriteStatistic = {
+
+        }
+        //
+
+        const url = "http://localhost:3456/favorite/statistics";
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(favoriteStatistic),
+        };
+        fetch(url,options).then((res)=>res.json()).then((data)=>console.log(data)).catch((err)=>console.log(err));
+      }
+    });
+  });
+}
+
+favoriteButton();
