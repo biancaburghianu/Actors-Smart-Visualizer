@@ -10,7 +10,8 @@ export function verifyAndRefreshToken(req, res, next) {
     "/register",
     "/changePassword",
     "favorite/article",
-    "favorite/nominee"
+    "favorite/nominee",
+    "favorite/statistic"
   ];
   const token = req.headers.authorization?.split(" ")[1];
   const currentRoute = req.url;

@@ -2,7 +2,9 @@ import {
   addFavoriteArticle,
   addFavoriteNominee,
   getFavoriteArticle,
-  getFavoriteNominee
+  getFavoriteNominee,
+  addFavoriteStatistic,
+  getFavoriteStatistic
 } from "../controllers/favoriteController.js";
 
 export function favoritesRoute(req, res) {

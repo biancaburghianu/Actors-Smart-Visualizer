@@ -407,6 +407,7 @@ export async function addFavoriteStatistic(req, res) {
     req.on("end", async () => {
       try {
         const favoriteStatisticData = JSON.parse(body);
+        console.log(body,1234);
 
         const userFavoriteExists = await FavoriteStatistic.findOne({
           where: {
@@ -415,16 +416,16 @@ export async function addFavoriteStatistic(req, res) {
         });
 
         if (userFavoriteExists) {
-          await userFavoriteExists.update({ statisticName: favoriteStatisticData });
+          await userFavoriteExists.update({ statisticName: favoriteStatisticData.title});
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.end(
-            JSON.stringify({ message: "Favorite article updated successfully" })
+            JSON.stringify({ message: "Favorite statistic updated successfully" })
           );
         } else {
-          const favoritestatistic = await FavoriteArticle.create({
+          const favoriteStatistic = await FavoriteStatistic.create({
             userId: user.id,
-            statisticName: favoriteStatisticData,
+            statisticName: favoriteStatisticData.title,
           });
 
           console.log("Favorite statistic added:", favoriteStatistic);

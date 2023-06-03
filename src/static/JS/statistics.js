@@ -2186,9 +2186,15 @@ function favoriteButton() {
         btn.classList.add("favorite");
         btn.innerHTML = '<i class="fas fa-heart"></i> Favorite';
 
+        // Get the title
+        const titleElement = btn.closest(".statistic-title");
+        const title = titleElement.textContent.replace(/(\r\n|\n|\r)/gm, "").trim().replace("Favorite", "");
+
         // json to send
-        const favoriteStatistic = {};
-        //
+        const favoriteStatistic = {
+          title: title
+        };
+        console.log(title);
 
         const url = "http://localhost:3456/favorite/statistics";
         const options = {
@@ -2213,7 +2219,10 @@ function favoriteButton() {
               );
             }
           })
-          .then((data) => console.log(data))
+          .then((data) => {
+            // Handle the response from the server
+            console.log(data);
+          })
           .catch((err) => console.log(err));
       }
     });
@@ -2221,3 +2230,6 @@ function favoriteButton() {
 }
 
 favoriteButton();
+
+
+
