@@ -26,3 +26,18 @@ registerForm.addEventListener("submit", async (event) => {
     console.log(error);
   }
 });
+
+function togglePasswordVisibility() {
+  const passwordInput = document.getElementById("password-input");
+  const passwordToggle = document.getElementById("password-toggle");
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    passwordToggle.style.backgroundImage =
+      "url('../../static/Images/eye-icon-off.png')";
+  } else {
+    passwordInput.type = "password";
+    passwordToggle.style.backgroundImage =
+      "url('../../static/Images/eye-icon.png')";
+  }
+}

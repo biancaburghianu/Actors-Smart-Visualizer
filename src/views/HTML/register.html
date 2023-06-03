@@ -18,7 +18,10 @@
                     </p>
                     <form action="" method="POST" id="form">
                         <input type="username" class="input-box" id="username" placeholder="Username" required />
-                        <input type="password" class="input-box" id="password" placeholder="Password" required />
+                        <input type="password" class="input-box" id="password-input" placeholder="Password" required />
+                        <span id="password-toggle" class="password-toggle" onclick="togglePasswordVisibility()"></span>
+                        <input type="text" class="input-box" id="favorite"
+                            placeholder="Favorite actor/actress/movie/tv series" required />
                         <input type="submit" class="buttons" value="Create account" />
                     </form>
                     <input type="button" class="buttons" value="Login" onClick="window.location.href='login.html'" />
@@ -26,6 +29,19 @@
             </div>
             <script src="../../static/JS/register.js"></script>
             </script>
+            <style>
+                .password-toggle {
+                    position: relative;
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    background-image: url("../../static/PozeDiverse/eye-icon.png");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    cursor: pointer;
+                }
+            </style>
+
 </body>
 
 </html>
