@@ -1,4 +1,4 @@
-import { Nominalisation } from "../models.js";
+import { Nominalisation } from "../models/models.js";
 import sequelize from "sequelize";
 
 export async function getBiggestWinners(req, res) {

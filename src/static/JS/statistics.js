@@ -77,7 +77,7 @@ function fetchActorsData() {
   const xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    `http://localhost:3456/statistics/actorsByYear/${year}/${gender}/${won}`
+    `http://localhost:4567/statistics/actorsByYear/${year}/${gender}/${won}`
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -128,7 +128,7 @@ function fetchCategoryData() {
   const xhr = new XMLHttpRequest();
   xhr.open(
     "GET",
-    `http://localhost:3456/statistics/winnersByCategory/${encodeURIComponent(
+    `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(
       category
     )}/${won.checked}`
   );
@@ -189,7 +189,7 @@ function processWinnersData(data) {
 }
 
 const winnersRequest = new XMLHttpRequest();
-winnersRequest.open("GET", "http://localhost:3456/statistics/biggestWinners");
+winnersRequest.open("GET", "http://localhost:4567/statistics/biggestWinners");
 winnersRequest.onload = function () {
   if (winnersRequest.status === 200) {
     const winnersData = JSON.parse(winnersRequest.responseText);
@@ -239,7 +239,7 @@ function processShowsData(data) {
 }
 
 const showsRequest = new XMLHttpRequest();
-showsRequest.open("GET", "http://localhost:3456/statistics/biggestNominees");
+showsRequest.open("GET", "http://localhost:4567/statistics/biggestNominees");
 showsRequest.onload = function () {
   if (showsRequest.status === 200) {
     const showsData = JSON.parse(showsRequest.responseText);
@@ -288,7 +288,7 @@ function processPeopleData(data) {
 const peopleRequest = new XMLHttpRequest();
 peopleRequest.open(
   "GET",
-  "http://localhost:3456/statistics/mostNominatedPeople"
+  "http://localhost:4567/statistics/mostNominatedPeople"
 );
 peopleRequest.onload = function () {
   if (peopleRequest.status === 200) {
@@ -334,7 +334,7 @@ peopleRequest.send();
 const PeopleWithMostStatuesRequest = new XMLHttpRequest();
 PeopleWithMostStatuesRequest.open(
   "GET",
-  "http://localhost:3456/statistics/peopleWithMostStatues"
+  "http://localhost:4567/statistics/peopleWithMostStatues"
 );
 PeopleWithMostStatuesRequest.onload = function () {
   if (PeopleWithMostStatuesRequest.status === 200) {
@@ -397,7 +397,7 @@ function processMAShowsData(data) {
 const mashowsRequest = new XMLHttpRequest();
 mashowsRequest.open(
   "GET",
-  "http://localhost:3456/statistics/mostAppearedShows"
+  "http://localhost:4567/statistics/mostAppearedShows"
 );
 mashowsRequest.onload = function () {
   if (mashowsRequest.status === 200) {
@@ -487,7 +487,7 @@ function processPMAShowsData(data) {
 const pmashowsRequest = new XMLHttpRequest();
 pmashowsRequest.open(
   "GET",
-  "http://localhost:3456/statistics/mostAppearedPeople"
+  "http://localhost:4567/statistics/mostAppearedPeople"
 );
 pmashowsRequest.onload = function () {
   if (pmashowsRequest.status === 200) {
@@ -577,7 +577,7 @@ function processCMACategoriesData(data) {
 const cmaCategoriesRequest = new XMLHttpRequest();
 cmaCategoriesRequest.open(
   "GET",
-  "http://localhost:3456/statistics/mostAppearedCategories"
+  "http://localhost:4567/statistics/mostAppearedCategories"
 );
 cmaCategoriesRequest.onload = function () {
   if (cmaCategoriesRequest.status === 200) {
@@ -648,7 +648,7 @@ cmaCategoriesRequest.send();
 const actorActressProportionsRequest = new XMLHttpRequest();
 actorActressProportionsRequest.open(
   "GET",
-  "http://localhost:3456/statistics/actorActressProportions"
+  "http://localhost:4567/statistics/actorActressProportions"
 );
 actorActressProportionsRequest.onload = function () {
   if (actorActressProportionsRequest.status === 200) {
@@ -705,7 +705,7 @@ actorActressProportionsRequest.send();
 const nomineesRequest = new XMLHttpRequest();
 nomineesRequest.open(
   "GET",
-  "http://localhost:3456/statistics/showByYearNominees"
+  "http://localhost:4567/statistics/showByYearNominees"
 );
 nomineesRequest.onload = function () {
   if (nomineesRequest.status === 200) {
@@ -781,7 +781,7 @@ nomineesRequest.send();
 const showByYearWinnerRequest = new XMLHttpRequest();
 showByYearWinnerRequest.open(
   "GET",
-  "http://localhost:3456/statistics/showByYearWinners"
+  "http://localhost:4567/statistics/showByYearWinners"
 );
 showByYearWinnerRequest.onload = function () {
   if (showByYearWinnerRequest.status === 200) {
@@ -863,7 +863,7 @@ showByYearWinnerRequest.send();
 const peopleByYearNomineesRequest = new XMLHttpRequest();
 peopleByYearNomineesRequest.open(
   "GET",
-  "http://localhost:3456/statistics/peopleByYearNominees"
+  "http://localhost:4567/statistics/peopleByYearNominees"
 );
 peopleByYearNomineesRequest.onload = function () {
   if (peopleByYearNomineesRequest.status === 200) {
@@ -944,7 +944,7 @@ peopleByYearNomineesRequest.send();
 const peopleByYearWinnersRequest = new XMLHttpRequest();
 peopleByYearWinnersRequest.open(
   "GET",
-  "http://localhost:3456/statistics/peopleByYearWinners"
+  "http://localhost:4567/statistics/peopleByYearWinners"
 );
 peopleByYearWinnersRequest.onload = function () {
   if (peopleByYearWinnersRequest.status === 200) {
@@ -1023,7 +1023,7 @@ peopleByYearWinnersRequest.send();
 // WINNING PROPORTION
 
 const winningRequest = new XMLHttpRequest();
-winningRequest.open("GET", "http://localhost:3456/statistics/winning");
+winningRequest.open("GET", "http://localhost:4567/statistics/winning");
 winningRequest.onload = function () {
   if (winningRequest.status === 200) {
     const winnersData = JSON.parse(winningRequest.responseText);
@@ -1067,7 +1067,7 @@ function exportChartBiggestWinners(format) {
     const winnersRequest = new XMLHttpRequest();
     winnersRequest.open(
       "GET",
-      "http://localhost:3456/statistics/biggestWinners"
+      "http://localhost:4567/statistics/biggestWinners"
     );
     winnersRequest.onload = function () {
       if (winnersRequest.status === 200) {
@@ -1109,7 +1109,7 @@ function exportChartBiggestNominees(format) {
     const nomineesRequest = new XMLHttpRequest();
     nomineesRequest.open(
       "GET",
-      "http://localhost:3456/statistics/biggestNominees"
+      "http://localhost:4567/statistics/biggestNominees"
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
@@ -1156,7 +1156,7 @@ function exportChartMostNominatedPeople(format) {
     const nomineesRequest = new XMLHttpRequest();
     nomineesRequest.open(
       "GET",
-      "http://localhost:3456/statistics/mostNominatedPeople"
+      "http://localhost:4567/statistics/mostNominatedPeople"
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
@@ -1201,7 +1201,7 @@ function exportChartPeopleWithMostStatues(format) {
     const peopleRequest = new XMLHttpRequest();
     peopleRequest.open(
       "GET",
-      "http://localhost:3456/statistics/peopleWithMostStatues"
+      "http://localhost:4567/statistics/peopleWithMostStatues"
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
@@ -1247,7 +1247,7 @@ function exportChartMostAppearedShows(format) {
     const showsRequest = new XMLHttpRequest();
     showsRequest.open(
       "GET",
-      "http://localhost:3456/statistics/mostAppearedShows"
+      "http://localhost:4567/statistics/mostAppearedShows"
     );
     showsRequest.onload = function () {
       if (showsRequest.status === 200) {
@@ -1293,7 +1293,7 @@ function exportChartMostAppearedPeople(format) {
     const peopleRequest = new XMLHttpRequest();
     peopleRequest.open(
       "GET",
-      "http://localhost:3456/statistics/mostAppearedPeople"
+      "http://localhost:4567/statistics/mostAppearedPeople"
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
@@ -1339,7 +1339,7 @@ function exportChartMostAppearedCategories(format) {
     const categoriesRequest = new XMLHttpRequest();
     categoriesRequest.open(
       "GET",
-      "http://localhost:3456/statistics/mostAppearedCategories"
+      "http://localhost:4567/statistics/mostAppearedCategories"
     );
     categoriesRequest.onload = function () {
       if (categoriesRequest.status === 200) {
@@ -1386,7 +1386,7 @@ function exportChartActorVsActressProportions(format) {
     const actorActressProportionsRequest = new XMLHttpRequest();
     actorActressProportionsRequest.open(
       "GET",
-      "http://localhost:3456/statistics/actorActressProportions"
+      "http://localhost:4567/statistics/actorActressProportions"
     );
     actorActressProportionsRequest.onload = function () {
       if (actorActressProportionsRequest.status === 200) {
