@@ -19,14 +19,14 @@ export function favoritesRoute(req, res) {
     console.log("favorite/nominee route");
     addFavoriteNominee(req, res);
   }
-  // } else if (req.url.match(/^\/favorite\/statistics/) && req.method === "GET") {
-  //   console.log("favorite/statistic route");
-  //   getFavoriteNominee(req, res);
-  // } else if (
-  //   req.url.match(/^\/favorite\/statistics/) &&
-  //   req.method === "POST"
-  // ) {
-  //   console.log("favorite/statistic route");
-  //   getFavoriteStatistic(req, res);
-  // }
+  else if (req.url.match(/^\/favorite\/statistics/) && req.method === "GET") {
+    console.log("favorite/statistic route");
+    getFavoriteStatistic(req, res);
+  } else if (
+    req.url.match(/^\/favorite\/statistics/) &&
+    req.method === "POST"
+  ) {
+    console.log("favorite/statistic route");
+    addFavoriteStatistic(req, res);
+  }
 }

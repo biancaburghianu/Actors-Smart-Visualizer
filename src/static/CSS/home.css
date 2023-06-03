@@ -7,6 +7,7 @@
   position: absolute;
   right: 20px;
 }
+
 .UserLogin {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: flex;
@@ -23,15 +24,18 @@
   z-index: 1;
   transition: all 0.5s ease-in;
 }
+
 .UserLogin.active {
   opacity: 1;
 }
+
 .UserLogin ul {
   margin: 0px;
   padding: 0px;
   width: 100%;
   height: 100%;
 }
+
 .UserLogin li {
   padding: 10px;
   display: flex;
@@ -39,6 +43,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .UserLogin a {
   padding: 10px;
   color: #fff;
@@ -47,6 +52,7 @@
   text-decoration: none;
   transition: all 0.3s ease-in;
 }
+
 .UserLogin a:hover {
   color: #a5a5a5;
 }
@@ -181,6 +187,7 @@
 #more {
   display: none;
 }
+
 .card {
   background-color: #ffffff;
   background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 90%);
@@ -259,12 +266,14 @@
   width: 87%;
   margin: auto;
 }
+
 .statistics {
   margin-top: 50px;
   width: 100%;
   text-align: center;
   background-color: #ffffff;
 }
+
 .statistic {
   background-color: #ffffff;
   background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
@@ -275,6 +284,7 @@
   border-radius: 10px;
   text-align: left;
 }
+
 .dropdown {
   display: inline;
   position: relative;
@@ -328,11 +338,11 @@
   z-index: 999;
 }
 
-.dd-input + .dd-menu {
+.dd-input+.dd-menu {
   display: none;
 }
 
-.dd-input:checked + .dd-menu {
+.dd-input:checked+.dd-menu {
   display: block;
 }
 
@@ -345,6 +355,7 @@
 .dd-menu li:hover {
   background-color: #f6f6f6;
 }
+
 .center {
   display: block;
   margin-top: 80px;
@@ -354,30 +365,33 @@
   width: 80%;
   border-radius: 10px;
 }
+
 .statistic-title {
   margin-left: 100px;
   margin-top: 30px;
   font-family: "Lato", sans-serif;
   float: left;
 }
-.CardsContainer {
+
+.Cards.Container {
+  margin-top: 20%;
   display: flex;
-  flex-wrap: wrap;
-  width: 87.5%;
-  height: auto;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 50vh;
 }
+
 .Card {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-repeat: no-repeat;
-  background-size: auto 100%;
+  background-size: auto;
   background-position: center;
-  height: 60vh;
-  min-width: 200px;
+  height: 10vh;
+  width: 30vw;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
-  flex: 1;
   margin: 10px;
   position: relative;
   transition: 0.5s ease-in;
@@ -385,9 +399,11 @@
   flex-direction: column;
   justify-content: flex-end;
 }
+
 .Card:hover {
   opacity: 0.5;
 }
+
 .Card::before {
   content: "";
   position: absolute;
@@ -396,13 +412,12 @@
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.9)
-  );
+  background-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.9));
   z-index: 0;
 }
+
 .Card h3 {
   color: #fff;
   opacity: 1;
@@ -410,7 +425,7 @@
   bottom: 20px;
   left: 20px;
   margin: 1rem;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
   bottom: 20%;
@@ -418,6 +433,7 @@
   border-bottom: 1px solid #fff;
   padding-bottom: 2rem;
 }
+
 .Card h1 {
   font-weight: bolder;
   font-style: oblique;
@@ -431,6 +447,7 @@
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
 }
+
 .Card button {
   padding: 0%;
   font-size: 1.5rem;
@@ -443,18 +460,9 @@
   margin: 1rem;
   font-style: oblique;
   transition: opacity 0.3s ease-in 0.4s;
-  opacity: 0;
-}
-.Card.active {
-  opacity: 1;
-  flex: 2;
-  min-width: 300px;
-}
-.Card.active h1,
-.Card.active h3,
-.Card.active button {
   opacity: 1;
 }
+
 .showMoreBtn {
   background-color: #000067;
   color: #fff;
@@ -533,15 +541,18 @@
     margin: 10px;
     font-size: 16px;
   }
+
   .statistic {
     width: 95%;
     margin-left: 1px;
     margin-right: 1px;
     margin-top: 10px;
   }
+
   .statistic-title {
     margin-left: 30px;
   }
+
   .dropdown {
     margin-right: 30px;
   }
@@ -550,20 +561,25 @@
     width: 96%;
     margin-bottom: 20px;
   }
+
   .actors {
     width: 95%;
     margin: auto;
   }
+
   .CardsContainer {
     width: 101%;
   }
+
   .card {
     margin: auto;
     width: 100%;
     min-width: 350px;
     margin-top: 30px;
   }
-  .UserLogin{
-    width: 100px;;
+
+  .UserLogin {
+    width: 100px;
+    ;
   }
 }
