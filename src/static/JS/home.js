@@ -67,21 +67,33 @@ async function getFavoriteArticle() {
     const data = await response.json();
     const favoriteArticle = data.favoriteArticle;
 
-    const favoriteArticleContainer = document.getElementById(
-      "favorite-article-container"
-    );
+    const favoriteArticleContainer = document.getElementById("favorite-article-container");
     favoriteArticleContainer.innerHTML = "";
 
     const favoriteArticleElement = document.createElement("div");
     favoriteArticleElement.classList.add("favorite-article");
 
-    for (const key in favoriteArticle) {
-      if (favoriteArticle.hasOwnProperty(key)) {
-        const propertyElement = document.createElement("p");
-        propertyElement.textContent = `${key}: ${favoriteArticle[key]}`;
-        favoriteArticleElement.appendChild(propertyElement);
-      }
-    }
+    
+    const titleElement = document.createElement("h2");
+    titleElement.textContent = favoriteArticle.details.title || "No title available";
+    favoriteArticleElement.appendChild(titleElement);
+
+    const descriptionElement = document.createElement("p");
+    descriptionElement.textContent = favoriteArticle.details.description || "No description available";
+    favoriteArticleElement.appendChild(descriptionElement);
+
+    const imageElement = document.createElement("img");
+    imageElement.src = favoriteArticle.details.imageUrl || "";
+    favoriteArticleElement.appendChild(imageElement);
+
+    const publishedAtElement = document.createElement("p");
+    publishedAtElement.textContent = favoriteArticle.details.publishedAt || "No publication date available";
+    favoriteArticleElement.appendChild(publishedAtElement);
+
+    const articleUrlElement = document.createElement("a");
+    articleUrlElement.href = favoriteArticle.details.articleUrl || "#";
+    articleUrlElement.textContent = "Read more";
+    favoriteArticleElement.appendChild(articleUrlElement);
 
     favoriteArticleContainer.appendChild(favoriteArticleElement);
   } catch (error) {

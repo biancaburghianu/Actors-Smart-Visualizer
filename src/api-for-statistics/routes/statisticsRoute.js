@@ -1,6 +1,7 @@
 import { getBiggestWinners , getBiggestNominees,getShowByYearNominees,getMostNominatedPeople ,
   getPeopleWithMostStatues,getMostAppearedShows,getMostAppearedPeople,getMostAppearedCategories,
-  getActorActressProportions,getShowByYearWinners,getPeopleByYearNominees,getPeopleByYearWinners,getWinning} from "../controllers/statisticsController.js";
+  getActorActressProportions,getShowByYearWinners,getPeopleByYearNominees,getPeopleByYearWinners,getWinning,getActorsByYear,getWinnerByCategory
+} from "../controllers/statisticsController.js";
 
 export function statisticsRoute(req, res) {
   if (req.url === "/statistics/biggestWinners" && req.method === "GET") {
@@ -37,6 +38,17 @@ export function statisticsRoute(req, res) {
     getPeopleByYearWinners(req, res);
   }else if (req.url === "/statistics/winning" && req.method === "GET") {
     getWinning(req, res);
+  }else if (req.url.startsWith("/statistics/actorsByYear/") && req.method === "GET") {
+    const urlParts = req.url.split("/");
+    const year = urlParts[3];
+    const gender = urlParts[4];
+    const won = urlParts[5];
+    getActorsByYear(year, gender, won, req, res);
+  }else if (req.url.startsWith("/statistics/winnersByCategory/") && req.method === "GET") {
+    const urlParts = req.url.split("/");
+    const category = urlParts[3];
+    const won = urlParts[4];
+    getWinnerByCategory(category,won, req, res);
   }
 
 }
