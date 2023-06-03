@@ -59,6 +59,11 @@ async function getFavoriteArticle() {
     if (!response.ok) {
       throw new Error("Request failed");
     }
+    const newToken = response.headers.get("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
+
     const data = await response.json();
     const favoriteArticle = data.favoriteArticle;
 
@@ -85,4 +90,3 @@ async function getFavoriteArticle() {
 }
 
 getFavoriteArticle();
-    

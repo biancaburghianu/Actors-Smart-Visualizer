@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { FavoriteArticle, User } from "../models/models.js";
+import { generateToken } from "../utils/generateToken.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -86,7 +87,34 @@ export async function getFavoriteArticle(req, res) {
       return;
     }
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    let decodedToken;
+    try {
+      decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        try {
+          const decoded = jwt.decode(token);
+          const refreshedToken = generateToken({
+            id: decoded.id,
+            username: decoded.username,
+          });
+          res.setHeader("Access-Control-Expose-Headers", "Authorization");
+          res.setHeader("Authorization", `Bearer ${refreshedToken}`);
+          console.log("Hey, a new token was generated in favorite controller");
+          decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
+        } catch (error) {
+          console.error("Error generating new token:", error);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: "Internal server error" }));
+          return;
+        }
+      } else {
+        res.statusCode = 401;
+        res.end(JSON.stringify({ error: "Invalid token" }));
+        return;
+      }
+    }
+
     const userId = parseInt(decodedToken.id);
 
     const user = await User.findByPk(userId);
@@ -120,3 +148,4 @@ export async function getFavoriteArticle(req, res) {
     res.end(JSON.stringify({ error: "Internal server error" }));
   }
 }
+//de schimbat addFavorite

@@ -5,29 +5,45 @@ import { generateToken } from "./generateToken.js";
 dotenv.config();
 
 export function verifyAndRefreshToken(req, res, next) {
+  const excludedRoutes = ["/login", "/register", "/changePassword"];
   const token = req.headers.authorization?.split(" ")[1];
+  const currentRoute = req.url;
+
+  if (excludedRoutes.includes(currentRoute)) {
+    next();
+    return;
+  }
+
   if (!token) {
     res.statusCode = 401;
     res.end(JSON.stringify({ message: "Token missing" }));
     return;
   }
-  console.log("hei, am ajuns aici");
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    if (decoded.exp <= currentTimestamp) {
-      const refreshedToken = generateToken({
-        id: decoded.id,
-        username: decoded.username,
-      });
-      console.log("s-a generat noul token", refreshedToken);
-      res.setHeader("Authorization", `Bearer ${refreshedToken}`);
-    }
-
+    console.log("Hey, the token is valid");
     next();
   } catch (error) {
-    res.statusCode = 401;
-    res.end(JSON.stringify({ message: "Invalid token" }));
+    if (error.name === "TokenExpiredError") {
+      try {
+        const decoded = jwt.decode(token);
+        const refreshedToken = generateToken({
+          id: decoded.id,
+          username: decoded.username,
+        });
+        res.setHeader("Access-Control-Expose-Headers", "Authorization");
+        res.setHeader("Authorization", `Bearer ${refreshedToken}`);
+        console.log("Hey, a new token was generated");
+        next();
+      } catch (error) {
+        console.error("Error generating new token:", error);
+        res.statusCode = 500;
+        res.end(JSON.stringify({ message: "Internal server error" }));
+      }
+    } else {
+      res.statusCode = 401;
+      res.end(JSON.stringify({ message: "Invalid token" }));
+    }
   }
 }

@@ -19,7 +19,6 @@ export function getArticles(req, res) {
         sortBy: "relevancy",
       })
       .then((response) => {
-        console.log(response);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(response));
       })

@@ -85,6 +85,10 @@ function fetchActorsData() {
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
+      const newToken = xhr.getResponseHeader("Authorization");
+      if (newToken) {
+        localStorage.setItem("token", newToken.split(" ")[1]);
+      }
       const actorsData = JSON.parse(xhr.responseText);
       console.log("Received data:", actorsData);
       createChart(actorsData, "chart");
@@ -142,6 +146,10 @@ function fetchCategoryData() {
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
+      const newToken = xhr.getResponseHeader("Authorization");
+      if (newToken) {
+        localStorage.setItem("token", newToken.split(" ")[1]);
+      }
       const categoryData = JSON.parse(xhr.responseText);
       console.log("Received data:", categoryData);
       createChartWinnersByCategory(categoryData, "WinnersByCategory");
@@ -204,6 +212,10 @@ winnersRequest.setRequestHeader(
 );
 winnersRequest.onload = function () {
   if (winnersRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const winnersData = JSON.parse(winnersRequest.responseText);
     const processedWinnersData = processWinnersData(winnersData);
 
@@ -258,6 +270,10 @@ showsRequest.setRequestHeader(
 );
 showsRequest.onload = function () {
   if (showsRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const showsData = JSON.parse(showsRequest.responseText);
     const processedShowsData = processShowsData(showsData);
 
@@ -312,6 +328,10 @@ peopleRequest.setRequestHeader(
 );
 peopleRequest.onload = function () {
   if (peopleRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const peopleData = JSON.parse(peopleRequest.responseText);
     const processedPeopleData = processPeopleData(peopleData);
 
@@ -362,6 +382,10 @@ PeopleWithMostStatuesRequest.setRequestHeader(
 );
 PeopleWithMostStatuesRequest.onload = function () {
   if (PeopleWithMostStatuesRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const peopleData = JSON.parse(PeopleWithMostStatuesRequest.responseText);
     const processedPeopleData = processPeopleData(peopleData);
 
@@ -429,6 +453,10 @@ mashowsRequest.setRequestHeader(
 );
 mashowsRequest.onload = function () {
   if (mashowsRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const showsData = JSON.parse(mashowsRequest.responseText);
     const processedShowsData = processMAShowsData(showsData);
 
@@ -523,6 +551,10 @@ pmashowsRequest.setRequestHeader(
 );
 pmashowsRequest.onload = function () {
   if (pmashowsRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const showsData = JSON.parse(pmashowsRequest.responseText);
     const processedShowsData = processPMAShowsData(showsData);
 
@@ -617,6 +649,10 @@ cmaCategoriesRequest.setRequestHeader(
 );
 cmaCategoriesRequest.onload = function () {
   if (cmaCategoriesRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const categoriesData = JSON.parse(cmaCategoriesRequest.responseText);
     const processedCategoriesData = processCMACategoriesData(categoriesData);
 
@@ -692,6 +728,10 @@ actorActressProportionsRequest.setRequestHeader(
 );
 actorActressProportionsRequest.onload = function () {
   if (actorActressProportionsRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const actorActressProportionsData = JSON.parse(
       actorActressProportionsRequest.responseText
     );
@@ -753,6 +793,10 @@ nomineesRequest.setRequestHeader(
 );
 nomineesRequest.onload = function () {
   if (nomineesRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const nomineesData = JSON.parse(nomineesRequest.responseText);
 
     const filteredNominees = [];
@@ -833,6 +877,10 @@ showByYearWinnerRequest.setRequestHeader(
 );
 showByYearWinnerRequest.onload = function () {
   if (showByYearWinnerRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const winnersData = JSON.parse(showByYearWinnerRequest.responseText);
 
     const filteredWinners = [];
@@ -919,6 +967,10 @@ peopleByYearNomineesRequest.setRequestHeader(
 );
 peopleByYearNomineesRequest.onload = function () {
   if (peopleByYearNomineesRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const nomineesData = JSON.parse(peopleByYearNomineesRequest.responseText);
 
     const filteredNominees = [];
@@ -1004,6 +1056,10 @@ peopleByYearWinnersRequest.setRequestHeader(
 );
 peopleByYearWinnersRequest.onload = function () {
   if (peopleByYearWinnersRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const winnersData = JSON.parse(peopleByYearWinnersRequest.responseText);
 
     const filteredWinners = [];
@@ -1086,6 +1142,10 @@ winningRequest.setRequestHeader(
 );
 winningRequest.onload = function () {
   if (winningRequest.status === 200) {
+    const newToken = xhr.getResponseHeader("Authorization");
+    if (newToken) {
+      localStorage.setItem("token", newToken.split(" ")[1]);
+    }
     const winnersData = JSON.parse(winningRequest.responseText);
     console.log("Winners Data:", winnersData); // Log the retrieved data
 
@@ -1132,6 +1192,10 @@ function exportChartBiggestWinners(format) {
     );
     winnersRequest.onload = function () {
       if (winnersRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const winnersData = JSON.parse(winnersRequest.responseText);
         const processedWinnersData = processWinnersData(winnersData);
         exportDataToCSV(processedWinnersData, "biggest_winners");
@@ -1178,6 +1242,10 @@ function exportChartBiggestNominees(format) {
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const nomineesData = JSON.parse(nomineesRequest.responseText);
         const processedNomineesData = processShowsData(nomineesData);
         exportDataToCSV(processedNomineesData, "biggest_nominees");
@@ -1229,6 +1297,10 @@ function exportChartMostNominatedPeople(format) {
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const nomineesData = JSON.parse(nomineesRequest.responseText);
         const processedNomineesData = processPeopleData(nomineesData);
         exportDataToCSV(processedNomineesData, "most_nominated_people");
@@ -1278,6 +1350,10 @@ function exportChartPeopleWithMostStatues(format) {
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const peopleData = JSON.parse(peopleRequest.responseText);
         const processedPeopleData = processPeopleData(peopleData);
         exportDataToCSV(processedPeopleData, "people_with_most_statues");
@@ -1328,6 +1404,10 @@ function exportChartMostAppearedShows(format) {
     );
     showsRequest.onload = function () {
       if (showsRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const showsData = JSON.parse(showsRequest.responseText);
         const processedShowsData = processMAShowsData(showsData);
         exportDataToCSV(showsData, "most_appeared_shows");
@@ -1378,6 +1458,10 @@ function exportChartMostAppearedPeople(format) {
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const peopleData = JSON.parse(peopleRequest.responseText);
         const processedPeopleData = processPMAShowsData(peopleData);
         exportDataToCSV(peopleData, "most_appeared_people");
@@ -1428,6 +1512,10 @@ function exportChartMostAppearedCategories(format) {
     );
     categoriesRequest.onload = function () {
       if (categoriesRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const categoriesData = JSON.parse(categoriesRequest.responseText);
         const processedCategoriesData =
           processCMACategoriesData(categoriesData);
@@ -1479,6 +1567,10 @@ function exportChartActorVsActressProportions(format) {
     );
     actorActressProportionsRequest.onload = function () {
       if (actorActressProportionsRequest.status === 200) {
+        const newToken = xhr.getResponseHeader("Authorization");
+        if (newToken) {
+          localStorage.setItem("token", newToken.split(" ")[1]);
+        }
         const actorActressProportionsData = JSON.parse(
           actorActressProportionsRequest.responseText
         );

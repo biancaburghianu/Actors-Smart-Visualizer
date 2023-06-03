@@ -18,10 +18,9 @@ loginForm.addEventListener("submit", async (event) => {
 
     if (response.ok) {
       const authHeader = response.headers.get("Authorization");
-      console.log(authHeader);
+
       if (authHeader) {
         const token = authHeader.split(" ")[1];
-        console.log(token);
         localStorage.setItem("token", token);
         window.location.href = "home.html";
       }

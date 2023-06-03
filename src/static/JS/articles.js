@@ -41,7 +41,13 @@ function searchArticles() {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      const newToken = response.headers.get("Authorization");
+      if (newToken) {
+        localStorage.setItem("token", newToken.split(" ")[1]);
+      }
+      return response.json();
+    })
     .then((data) => {
       articlesContainer.innerHTML = "";
 
@@ -129,7 +135,13 @@ function favoriteButton() {
         };
 
         fetch(url, options)
-          .then((response) => response.json())
+          .then((response) => {
+            const newToken = response.headers.get("Authorization");
+            if (newToken) {
+              localStorage.setItem("token", newToken.split(" ")[1]);
+            }
+            return response.json();
+          })
           .then((data) => {
             console.log(data);
           })
