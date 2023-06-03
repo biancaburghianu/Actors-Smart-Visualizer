@@ -1,22 +1,21 @@
-const registerForm = document.getElementById("form");
+const changePasswordForm = document.getElementById("form");
 
-registerForm.addEventListener("submit", async (event) => {
+changePasswordForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const username = document.getElementById("username").value;
-  const password = document.getElementById("password-input").value;
   const favorite = document.getElementById("favorite").value;
-  console.log(username, password, favorite);
+  const newPassword = document.getElementById("new-password").value;
 
   try {
-    const response = await fetch("http://localhost:3456/register", {
-      method: "POST",
+    const response = await fetch("http://localhost:3456/changePassword", {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password, favorite }),
+      body: JSON.stringify({ username, favorite, newPassword }),
     });
-    console.log(favorite);
+
     if (response.ok) {
       const data = await response.json();
       alert(data.message);

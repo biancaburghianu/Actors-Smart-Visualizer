@@ -3,6 +3,7 @@ import { registerRoute } from "./registerRoute.js";
 import { nomineesRoute } from "./nomineesRoute.js";
 import { articlesRoute } from "./articlesRoute.js";
 import { favoritesRoute } from "./favoritesRoute.js";
+import { changePasswordRoute } from "./changePasswordRoute.js";
 
 export async function router(req, res) {
   if (req.url.match(/^\/login/)) {
@@ -20,5 +21,8 @@ export async function router(req, res) {
   } else if (req.url.match(/^\/favorite\//)) {
     console.log("favorite route");
     favoritesRoute(req, res);
+  } else if (req.url.match(/^\/changePassword/)) {
+    console.log("changePassword route");
+    changePasswordRoute(req, res);
   }
 }

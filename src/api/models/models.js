@@ -13,13 +13,17 @@ User.init(
       allowNull: false,
       primaryKey: true,
       type: DataTypes.INTEGER,
-      autoIncrement:true
+      autoIncrement: true,
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    favorite: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -57,7 +61,6 @@ Nominalisation.init(
 
 FavoriteArticle.init(
   {
-  
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,

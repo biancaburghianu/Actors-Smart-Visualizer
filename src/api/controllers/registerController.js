@@ -8,8 +8,9 @@ export async function registerUser(req, res) {
   });
   req.on("end", async () => {
     try {
-      const { username, password } = JSON.parse(body);
-
+      const { username, password, favorite } = JSON.parse(body);
+      console.log(body);
+      console.log(username, password, favorite);
 
       const userExists = await User.findOne({
         where: {
@@ -26,10 +27,12 @@ export async function registerUser(req, res) {
         return;
       }
       const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedFavorite = await bcrypt.hash(favorite, 10);
 
       const user = await User.create({
         username: username,
         password: hashedPassword,
+        favorite: hashedFavorite,
       });
       console.log(username);
       if (user) {
