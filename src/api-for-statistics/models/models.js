@@ -23,6 +23,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    favorite: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -75,6 +79,25 @@ FavoriteArticle.init(
     timestamps: false,
   }
 );
+FavoriteNominee.init({
+  userId: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
+      key: "id",
+    },
+  },
+  nomineeName:{
+    allowNull:false,
+    type:DataTypes.STRING
+  }
+},
+{
+  sequelize,
+  modelName: "FavoriteNominee",
+  timestamps: false,
+})
 
 User.hasOne(FavoriteArticle, {
   foreignKey: "userId",
@@ -83,10 +106,19 @@ User.hasOne(FavoriteArticle, {
 FavoriteArticle.belongsTo(User, {
   foreignKey: "userId",
 });
+User.hasOne(FavoriteNominee, {
+  foreignKey: "userId",
+});
+
+FavoriteNominee.belongsTo(User, {
+  foreignKey: "userId",
+});
+
 
 User.sync(); //creeaza tabelul daca nu exista
 Nominalisation.sync();
 FavoriteArticle.sync();
+FavoriteNominee.sync();
 
 console.log(User === sequelize.models.User);
 
