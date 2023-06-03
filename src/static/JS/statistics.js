@@ -83,13 +83,13 @@ function fetchActorsData() {
     "Authorization",
     `Bearer ${localStorage.getItem("token")}`
   );
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const newToken = xhr.getResponseHeader("Authorization");
+  ActorsByYear.onload = function () {
+    if (ActorsByYear.status === 200) {
+      const newToken = ActorsByYear.getResponseHeader("Authorization");
       if (newToken) {
         localStorage.setItem("token", newToken.split(" ")[1]);
       }
-      const actorsData = JSON.parse(xhr.responseText);
+      const actorsData = JSON.parse(ActorsByYear.responseText);
       console.log("Received data:", actorsData);
       createChart(actorsData, "chart");
     } else {
@@ -144,13 +144,13 @@ function fetchCategoryData() {
     "Authorization",
     `Bearer ${localStorage.getItem("token")}`
   );
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const newToken = xhr.getResponseHeader("Authorization");
+  WinnersByCategory.onload = function () {
+    if (WinnersByCategory.status === 200) {
+      const newToken = WinnersByCategory.getResponseHeader("Authorization");
       if (newToken) {
         localStorage.setItem("token", newToken.split(" ")[1]);
       }
-      const categoryData = JSON.parse(xhr.responseText);
+      const categoryData = JSON.parse(WinnersByCategory.responseText);
       console.log("Received data:", categoryData);
       createChartWinnersByCategory(categoryData, "WinnersByCategory");
     } else {
@@ -263,7 +263,7 @@ winnersRequest.setRequestHeader(
 );
 winnersRequest.onload = function () {
   if (winnersRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = winnersRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -376,7 +376,7 @@ showsRequest.setRequestHeader(
 );
 showsRequest.onload = function () {
   if (showsRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = showsRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -489,7 +489,7 @@ peopleRequest.setRequestHeader(
 );
 peopleRequest.onload = function () {
   if (peopleRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = peopleRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -544,7 +544,8 @@ PeopleWithMostStatuesRequest.setRequestHeader(
 );
 PeopleWithMostStatuesRequest.onload = function () {
   if (PeopleWithMostStatuesRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken =
+      PeopleWithMostStatuesRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -756,7 +757,7 @@ mashowsRequest.setRequestHeader(
 );
 mashowsRequest.onload = function () {
   if (mashowsRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = mashowsRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -947,7 +948,7 @@ pmashowsRequest.setRequestHeader(
 );
 pmashowsRequest.onload = function () {
   if (pmashowsRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = pmashowsRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1141,7 +1142,7 @@ cmaCategoriesRequest.setRequestHeader(
 );
 cmaCategoriesRequest.onload = function () {
   if (cmaCategoriesRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = cmaCategoriesRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1161,7 +1162,8 @@ cmaCategoriesRequest.onload = function () {
     );
     actorActressProportionsRequest.onload = function () {
       if (actorActressProportionsRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken =
+          actorActressProportionsRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1234,7 +1236,7 @@ cmaCategoriesRequest.onload = function () {
   );
   nomineesRequest.onload = function () {
     if (nomineesRequest.status === 200) {
-      const newToken = xhr.getResponseHeader("Authorization");
+      const newToken = nomineesRequest.getResponseHeader("Authorization");
       if (newToken) {
         localStorage.setItem("token", newToken.split(" ")[1]);
       }
@@ -1316,7 +1318,7 @@ showByYearWinnerRequest.setRequestHeader(
 );
 showByYearWinnerRequest.onload = function () {
   if (showByYearWinnerRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = showByYearWinnerRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1403,7 +1405,8 @@ peopleByYearNomineesRequest.setRequestHeader(
 );
 peopleByYearNomineesRequest.onload = function () {
   if (peopleByYearNomineesRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken =
+      peopleByYearNomineesRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1489,7 +1492,8 @@ peopleByYearWinnersRequest.setRequestHeader(
 );
 peopleByYearWinnersRequest.onload = function () {
   if (peopleByYearWinnersRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken =
+      peopleByYearWinnersRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1572,7 +1576,7 @@ winningRequest.setRequestHeader(
 );
 winningRequest.onload = function () {
   if (winningRequest.status === 200) {
-    const newToken = xhr.getResponseHeader("Authorization");
+    const newToken = winningRequest.getResponseHeader("Authorization");
     if (newToken) {
       localStorage.setItem("token", newToken.split(" ")[1]);
     }
@@ -1624,7 +1628,7 @@ function exportChartBiggestWinners(format) {
     );
     winnersRequest.onload = function () {
       if (winnersRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = winnersRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1674,7 +1678,7 @@ function exportChartBiggestNominees(format) {
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = nomineesRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1730,7 +1734,7 @@ function exportChartMostNominatedPeople(format) {
     );
     nomineesRequest.onload = function () {
       if (nomineesRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = nomineesRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1784,7 +1788,7 @@ function exportChartPeopleWithMostStatues(format) {
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = peopleRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1839,7 +1843,7 @@ function exportChartMostAppearedShows(format) {
     );
     showsRequest.onload = function () {
       if (showsRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = showsRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1894,7 +1898,7 @@ function exportChartMostAppearedPeople(format) {
     );
     peopleRequest.onload = function () {
       if (peopleRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = peopleRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -1949,7 +1953,7 @@ function exportChartMostAppearedCategories(format) {
     );
     categoriesRequest.onload = function () {
       if (categoriesRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken = categoriesRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
@@ -2006,7 +2010,8 @@ function exportChartActorVsActressProportions(format) {
     );
     actorActressProportionsRequest.onload = function () {
       if (actorActressProportionsRequest.status === 200) {
-        const newToken = xhr.getResponseHeader("Authorization");
+        const newToken =
+          actorActressProportionsRequest.getResponseHeader("Authorization");
         if (newToken) {
           localStorage.setItem("token", newToken.split(" ")[1]);
         }
