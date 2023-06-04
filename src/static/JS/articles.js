@@ -14,21 +14,7 @@ function toggleNavLinks() {
     link.style.display = link.style.display === 'block' ? 'none' : 'block';
   });
 }
-function myFunction(articleNum) {
-  var dots = document.getElementById("dots" + articleNum);
-  var moreText = document.getElementById("more" + articleNum);
-  var btnText = document.getElementById("readMore");
 
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    moreText.style.display = "none";
-    btnText.innerHTML = "Read more";
-  } else {
-    dots.style.display = "none";
-    moreText.style.display = "inline";
-    btnText.innerHTML = "Read less";
-  }
-}
 
 const LoginBtn = document.getElementById("UserBtn");
 const LoginPannel = document.querySelector(".UserLogin");

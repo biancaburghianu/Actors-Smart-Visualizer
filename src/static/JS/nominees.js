@@ -183,6 +183,14 @@ async function CreateELEMENTS(year) {
       LoginPannel.classList.remove("active");
     else LoginPannel.classList.add("active");
   });
+//Log out script
+  const logoutButton = document.querySelector("#logoutButton");
+
+    logoutButton.addEventListener("click", () => {
+      window.location.href = "login.html";
+      localStorage.removeItem("token");
+    });
+
 
   //  End
 
@@ -313,6 +321,8 @@ async function CreateELEMENTS(year) {
       Cards.classList.remove("hidden");
     });
   }
+
+
 }
 //End of creating cards
 
@@ -334,4 +344,5 @@ function myFunction(articleNum) {
     moreText.style.display = "inline";
     btnText.innerHTML = "Read less";
   }
+
 }
