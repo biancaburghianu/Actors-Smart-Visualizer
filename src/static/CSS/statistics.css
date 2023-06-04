@@ -50,9 +50,7 @@
 .UserLogin a:hover {
   color: #a5a5a5;
 }
-.nav-links li a {
-  display: none;
-}
+
 
 /* End Navbar Login Button */
 
@@ -359,5 +357,8 @@ input:focus {
   }
   .UserLogin{
     width: 100px;;
+  }
+  .nav-links li a {
+    display: none;
   }
 }

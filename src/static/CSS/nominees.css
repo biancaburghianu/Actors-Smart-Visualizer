@@ -586,9 +586,7 @@ width: 90%;
     justify-content: center;
     margin: 10px 0 10px;
   }
-  .nav-links li a {
-    display: none;
-  }
+  
 }
 @media all and (max-width: 375px) {
   .Card.active {
@@ -662,5 +660,8 @@ width: 90%;
   }
   .overlayCard{
     overflow: scroll;
+  }
+  .nav-links li a {
+    display: none;
   }
 }
