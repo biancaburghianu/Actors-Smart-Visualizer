@@ -3,6 +3,9 @@
 
 <head>
   <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="../../static/CSS/login.css" />
 </head>
 
@@ -18,7 +21,10 @@
           </p> -->
           <form id="loginForm">
             <input type="text" class="input-box" id="username" placeholder="Your username" required />
-            <input type="password" class="input-box" id="password" placeholder="Your password" required />
+            <div class="input-container">
+              <input type="password" class="input-box" id="password" placeholder="Your password" required />
+              <i id="eye" class="fa fa-eye" onclick="togglePasswordVisibility()"></i>
+            </div>
             <button type="submit" class="buttons">Login</button>
           </form>
           <input type="button" class="buttons" value="Create an account"
