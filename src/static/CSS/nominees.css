@@ -71,6 +71,7 @@
   height: 40px;
   position: absolute;
   right: 20px;
+  cursor: pointer;
 }
 .UserLogin {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

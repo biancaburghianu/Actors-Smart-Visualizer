@@ -1,11 +1,27 @@
 const BigContainerEl = document.querySelector(".CardsClass");
 const API_KEY = "23fe5450a05a0810ba1587ec23e9b849";
 
+//Log out script
+const logoutButton = document.querySelector("#logoutButton");
+logoutButton.addEventListener("click", () => {
+  window.location.href = "login.html";
+  localStorage.removeItem("token");
+});
+//  End
+//  Login Script
+const LoginPannel = document.querySelector(".UserLogin");
+const LoginBtn = document.getElementById("UserBtn");
+LoginBtn.addEventListener("click", () => {
+  if (LoginPannel.classList.contains("active"))
+    LoginPannel.classList.remove("active");
+  else LoginPannel.classList.add("active");
+});
+//
+
 // dropdown script
 const dropdown = document.querySelector(".select-box");
 dropdown.addEventListener("change", () => {
   const selectedValue = dropdown.value;
-  console.log(selectedValue);
   CreateELEMENTS(selectedValue);
 });
 
@@ -45,6 +61,9 @@ function favoriteButton() {
     });
   });
 }
+
+
+
 
 // request for database data and tmdb api
 const overviewData = new Map();
@@ -170,31 +189,13 @@ async function CreateELEMENTS(year) {
   const closebtn = document.querySelectorAll(".overlaybtn");
   const ActorsCardBtn = document.querySelectorAll(".ActorsCardBtn");
   // const Actorsoverlaybtn = document.querySelectorAll(".ActorsCardBtn");
-  const LoginBtn = document.getElementById("UserBtn");
-  const LoginPannel = document.querySelector(".UserLogin");
+  
+  
   const overlayBtnMovies = document.querySelectorAll(".CardBtn.Movies");
   const overlayBtnActors = document.querySelectorAll(".CardBtn.Actors");
   const favoriteBtn = document.querySelectorAll(".favorite-button");
 
-  //  Login Script
-
-  LoginBtn.addEventListener("click", () => {
-    if (LoginPannel.classList.contains("active"))
-      LoginPannel.classList.remove("active");
-    else LoginPannel.classList.add("active");
-  });
-//Log out script
-  const logoutButton = document.querySelector("#logoutButton");
-
-    logoutButton.addEventListener("click", () => {
-      window.location.href = "login.html";
-      localStorage.removeItem("token");
-    });
-
-
-  //  End
-
-  //
+  
   const menuIcon = document.querySelector(".menu-icon");
   const navLinks = document.querySelector(".nav-links");
 
