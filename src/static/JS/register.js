@@ -36,7 +36,7 @@ registerForm.addEventListener("submit", async (event) => {
 });
 
 function togglePasswordVisibility() {
-  const passwordInput = document.getElementById('password');
+  const passwordInput = document.getElementById('password-input');
   const eyeIcon = document.getElementById('eye');
 
   if (passwordInput.type === 'password') {
