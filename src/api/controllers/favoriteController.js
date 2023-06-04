@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken";
-import { FavoriteArticle, User, FavoriteNominee, FavoriteStatistic } from "../models/models.js";
+import {
+  FavoriteArticle,
+  User,
+  FavoriteNominee,
+  FavoriteStatistic,
+} from "../models/models.js";
 import { generateToken } from "../utils/generateToken.js";
 import dotenv from "dotenv";
 dotenv.config();
-
 
 export async function addFavoriteArticle(req, res) {
   try {
@@ -103,7 +107,6 @@ export async function addFavoriteArticle(req, res) {
   }
 }
 
-
 export async function getFavoriteArticle(req, res) {
   try {
     const authHeader = req.headers.authorization;
@@ -128,7 +131,7 @@ export async function getFavoriteArticle(req, res) {
           });
           res.setHeader("Access-Control-Expose-Headers", "Authorization");
           res.setHeader("Authorization", `Bearer ${refreshedToken}`);
-          console.log("Hey, a new token was generated in favorite controller");
+          console.log("Hey, a new token was generated in  getFavoriteArticle");
           decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
         } catch (error) {
           console.error("Error generating new token:", error);
@@ -176,7 +179,6 @@ export async function getFavoriteArticle(req, res) {
     res.end(JSON.stringify({ error: "Internal server error" }));
   }
 }
-//de schimbat addFavorite
 export async function addFavoriteNominee(req, res) {
   try {
     const authHeader = req.headers.authorization;
@@ -236,14 +238,13 @@ export async function addFavoriteNominee(req, res) {
     req.on("end", async () => {
       try {
         const favoriteNomineeName = JSON.parse(body);
-        console.log("hei aici e favorite nominee name", favoriteNomineeName)
 
         const userFavoriteExists = await FavoriteNominee.findOne({
           where: {
             userId: user.id,
           },
         });
-        
+
         if (userFavoriteExists) {
           await userFavoriteExists.update({ nomineeName: favoriteNomineeName });
           res.statusCode = 200;
@@ -277,6 +278,7 @@ export async function addFavoriteNominee(req, res) {
     res.end(JSON.stringify({ error: "Internal server error" }));
   }
 }
+
 export async function getFavoriteNominee(req, res) {
   try {
     const authHeader = req.headers.authorization;
@@ -301,7 +303,7 @@ export async function getFavoriteNominee(req, res) {
           });
           res.setHeader("Access-Control-Expose-Headers", "Authorization");
           res.setHeader("Authorization", `Bearer ${refreshedToken}`);
-          console.log("Hey, a new token was generated in favorite controller");
+          console.log("Hey, a new token was generated in getFavoriteNominee");
           decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
         } catch (error) {
           console.error("Error generating new token:", error);
@@ -374,7 +376,7 @@ export async function addFavoriteStatistic(req, res) {
           });
           res.setHeader("Access-Control-Expose-Headers", "Authorization");
           res.setHeader("Authorization", `Bearer ${refreshedToken}`);
-          console.log("Hey, a new token was generated in addFavoriteArticle");
+          console.log("Hey, a new token was generated in addFavoriteStatistic");
           decodedToken = jwt.verify(refreshedToken, process.env.JWT_SECRET);
         } catch (error) {
           console.error("Error generating new token:", error);
@@ -407,7 +409,7 @@ export async function addFavoriteStatistic(req, res) {
     req.on("end", async () => {
       try {
         const favoriteStatisticData = JSON.parse(body);
-        console.log(body,1234);
+        console.log(body, 1234);
 
         const userFavoriteExists = await FavoriteStatistic.findOne({
           where: {
@@ -416,11 +418,15 @@ export async function addFavoriteStatistic(req, res) {
         });
 
         if (userFavoriteExists) {
-          await userFavoriteExists.update({ statisticName: favoriteStatisticData.title});
+          await userFavoriteExists.update({
+            statisticName: favoriteStatisticData.title,
+          });
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.end(
-            JSON.stringify({ message: "Favorite statistic updated successfully" })
+            JSON.stringify({
+              message: "Favorite statistic updated successfully",
+            })
           );
         } else {
           const favoriteStatistic = await FavoriteStatistic.create({

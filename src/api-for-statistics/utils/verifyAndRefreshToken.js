@@ -5,14 +5,7 @@ import { generateToken } from "./generateToken.js";
 dotenv.config();
 
 export function verifyAndRefreshToken(req, res, next) {
-  const excludedRoutes = ["/login", "/register", "/changePassword"];
   const token = req.headers.authorization?.split(" ")[1];
-  const currentRoute = req.url;
-
-  if (excludedRoutes.includes(currentRoute)) {
-    next();
-    return;
-  }
 
   if (!token) {
     res.statusCode = 401;
