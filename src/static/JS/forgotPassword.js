@@ -8,7 +8,7 @@ changePasswordForm.addEventListener("submit", async (event) => {
   const newPassword = document.getElementById("new-password").value;
   if (newPassword.length < 10) {
     alert("Parola trebuie sa aiba minim 10 caractere!");
-  } else createAccount();
+  } else changePassword();
 
   async function changePassword() {
     try {
