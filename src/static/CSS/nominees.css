@@ -193,6 +193,7 @@ body {
   background-position: center;
   height: 60vh;
   min-width: 200px;
+  max-width: 800px;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
@@ -332,7 +333,7 @@ body {
   max-height: 100%;
 }
 .overlayCard.Actors ul{
-width: 90%;
+width: 70%;
 }
 .overlayCard.Movies h2 {
   width: 70%;
@@ -597,6 +598,9 @@ width: 90%;
   }
 }
 @media all and (max-width: 1024px) {
+  .overlayCard.Actors ul{
+    width: 90%;
+  }
   .NavTitle h1 {
     font-size: 3rem;
   }
