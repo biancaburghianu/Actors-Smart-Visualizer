@@ -32,3 +32,4 @@ export function favoritesRoute(req, res) {
     addFavoriteStatistic(req, res);
   }
 }
+

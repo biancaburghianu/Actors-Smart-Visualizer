@@ -10,6 +10,7 @@
     crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="../../static/CSS/home.css">
+  <script src="https://cdn.plot.ly/plotly-2.20.0.min.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -52,19 +53,7 @@
 
     <section class="statistics">
       <article class="statistic">
-        <h1 class="statistic-title">Actor vs Actress</h1>
-        <label class="dropdown">
-          <div class="dd-button">Export</div>
-
-          <input type="checkbox" class="dd-input" id="test" />
-
-          <ul class="dd-menu">
-            <li>CSV</li>
-            <li>WebP</li>
-            <li>SVG</li>
-          </ul>
-        </label>
-        <img src="../../static/Poze Statistici/ActorvsActress.png" class="center" />
+        <div id="favoriteChart" class="center"></div>
       </article>
     </section>
 

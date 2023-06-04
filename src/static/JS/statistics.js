@@ -2171,6 +2171,8 @@ function exportWinnersByCategory(format) {
     });
 }
 
+//favorite button 
+
 function favoriteButton() {
   const favoriteBtns = document.querySelectorAll(".favorite-button");
   favoriteBtns.forEach((btn) => {
