@@ -283,7 +283,9 @@ body {
   opacity: 0;
 }
 .Card.active {
-  flex: 2;
+  transition: .5s ease-in;
+  background-size: 100% 100%;
+  flex: 1.5;
   min-width: 300px;
 }
 .Card.active h1,
@@ -302,9 +304,8 @@ body {
 .overlayCard {
   font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
     Arial, sans-serif;
-  width: 100vw;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 100%;
+  max-width: 100%;
   background-color: black;
   opacity: 0.9;
   position: fixed;
@@ -314,22 +315,42 @@ body {
   justify-content: center;
   overflow: auto;
   z-index: 2;
-  padding: 70px 0px 100px 0px;
+}
+.overlayCard.Actors{
+  overflow: auto;
+  justify-content: center;
+  max-height: 100%;
+  max-width: 100%;
+  margin:auto;
 }
 .overlayCard.active {
   display: flex;
 }
 .overlayCard.Actors.active {
   justify-content: flex-start;
+  max-width: 100%;
+  max-height: 100%;
 }
-.overlayCard.Actors h2 {
+.overlayCard.Actors ul{
+width: 90%;
+}
+.overlayCard.Movies h2 {
+  width: 70%;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  margin-top: 50px;
+  z-index: 3;
+  text-align: center;
+  padding: 0px 20px 0px 20px;
 }
 .overlayCard.Actors p {
   color: #fff;
-  padding: 20px 10vw 20px 10vw;
+  margin: 50px;
   font-size: 1.25rem;
+}
+.overlayCard.Actors li{
+  color:#fff;
+  margin: 0;
 }
 
 .overlayCard button {
@@ -338,11 +359,13 @@ body {
   border: none;
   color: #fff;
   font-size: 3rem;
-  position: absolute;
-  right: 10%;
-  top: 2%;
-  padding: 15px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  
 }
+
 .overlayCard h1 {
   text-align: center;
   width: 80%;
@@ -354,7 +377,7 @@ body {
 }
 .overlayCard ul {
   padding: 0px;
-  width: auto;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -521,10 +544,13 @@ body {
   font-weight: 600;
 }
 
+.favorite-button{
+  border-top:none !important;
+}
+
+
 @media all and (max-width: 600px) {
-  .overlayCard {
-    padding: 20px;
-  }
+  
   .overlayCard h1 {
     font-size: 2rem;
   }
@@ -534,7 +560,7 @@ body {
   .CategoryNominalization h1 {
     font-size: 1.5rem;
   }
-  .CategoryNominalization p1 {
+  .CategoryNominalization p {
     font-size: 1rem;
   }
   .LineText {
@@ -560,6 +586,7 @@ body {
     justify-content: center;
     margin: 10px 0 10px;
   }
+  
 }
 @media all and (max-width: 375px) {
   .Card.active {
@@ -576,13 +603,19 @@ body {
   .Card h1 {
     font-size: 2rem;
   }
-  .Card h3,
-  .Card button {
-    font-size: 1.25rem;
+  .Card h3 {
+  font-size: 1.25rem;
   }
 }
 
 @media screen and (max-width: 700px) {
+  
+  .overlayCard h1{
+    font-size: 2rem;
+  }
+  .overlayCard h2{
+    font-size: 1.25rem !important;
+  }
   .menu-icon {
     display: block;
     position: absolute;
@@ -624,5 +657,11 @@ body {
   }
   .UserLogin{
     width: 100px;;
+  }
+  .overlayCard{
+    overflow: scroll;
+  }
+  .nav-links li a {
+    display: none;
   }
 }

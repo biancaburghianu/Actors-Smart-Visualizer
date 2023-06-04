@@ -51,6 +51,7 @@
   color: #a5a5a5;
 }
 
+
 /* End Navbar Login Button */
 
 .body {
@@ -356,5 +357,8 @@ input:focus {
   }
   .UserLogin{
     width: 100px;;
+  }
+  .nav-links li a {
+    display: none;
   }
 }

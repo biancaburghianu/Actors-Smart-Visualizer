@@ -3,7 +3,16 @@ const navLinks = document.querySelector(".nav-links");
 
 menuIcon.addEventListener("click", () => {
   navLinks.classList.toggle("show-nav");
+  toggleNavLinks();
 });
+
+function toggleNavLinks() {
+  const navLinks = document.querySelectorAll('.nav-links li a');
+  
+  navLinks.forEach(link => {
+    link.style.display = link.style.display === 'block' ? 'none' : 'block';
+  });
+}
 
 const searchInput = document.querySelector('input[type="text"]');
 searchInput.addEventListener("input", handleSearch);
