@@ -1,5 +1,6 @@
 const BigContainerEl = document.querySelector(".CardsClass");
 const API_KEY = "23fe5450a05a0810ba1587ec23e9b849";
+
 // dropdown script
 const dropdown = document.querySelector(".select-box");
 dropdown.addEventListener("change", () => {
@@ -191,7 +192,16 @@ async function CreateELEMENTS(year) {
 
   menuIcon.addEventListener("click", () => {
     navLinks.classList.toggle("show-nav");
+    toggleNavLinks();
   });
+  
+  function toggleNavLinks() {
+    const navLinks = document.querySelectorAll('.nav-links li a');
+    
+    navLinks.forEach(link => {
+      link.style.display = link.style.display === 'block' ? 'none' : 'block';
+    });
+  }
 
   //
 

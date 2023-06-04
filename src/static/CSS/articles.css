@@ -206,6 +206,9 @@ p {
 .favorite-button .far {
   font-size: inherit;
 }
+.nav-links li a {
+  display: none;
+}
 
 
 

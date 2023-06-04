@@ -56,8 +56,9 @@
 .UserLogin a:hover {
   color: #a5a5a5;
 }
-
-/* End Navbar Login Button */
+.nav-links li a {
+  display: none;
+}
 
 .body {
   background-color: #f8f8ff;

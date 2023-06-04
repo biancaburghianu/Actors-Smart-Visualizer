@@ -50,6 +50,9 @@
 .UserLogin a:hover {
   color: #a5a5a5;
 }
+.nav-links li a {
+  display: none;
+}
 
 /* End Navbar Login Button */
 
