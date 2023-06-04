@@ -374,65 +374,72 @@
 }
 
 .Cards.Container {
-  margin-top: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 50vh;
+  /* width: auto;
+  height: auto; */
 }
 
 .Card {
+  z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 100% 100%;
   background-position: center;
-  height: 10vh;
-  width: 30vw;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  margin: 10px;
-  position: relative;
-  transition: 0.5s ease-in;
   display: flex;
+  justify-content: end;
   flex-direction: column;
-  justify-content: flex-end;
+  min-width: 350px;
+  width: 25vw;
+  height: 60vh;
+  align-items: center;
+  border-radius: 10px;
+  transition: 0.5s ease-in;
 }
-
-.Card:hover {
-  opacity: 0.5;
-}
-
-.Card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 5px;
+.Card p {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transition: .5s ease-in;
+  margin: 0px;
   width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.9));
-  z-index: 0;
+  text-align: center;
+  padding: 30px;
+  font-size: 1.25rem;
 }
-
 .Card h3 {
-  color: #fff;
-  opacity: 1;
+  transition: .5s ease-in;
+  text-align: center;
+  margin: 0px;
+  width: 100%;
+  opacity: 0;
   font-size: 3rem;
-  bottom: 20px;
   left: 20px;
-  margin: 1rem;
-  opacity: 1;
-  transition: opacity 0.3s ease-in 0.4s;
-  z-index: 1;
   bottom: 20%;
   font-size: 1.5rem;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 2rem;
+  padding: 1rem 0rem 1rem 0rem;
 }
+.Card:hover {
+  background-image: none;
+  opacity: 0.8;
+}
+.Card:hover > p{
+  background-color: #fff;
+  opacity: 1 ;
+  color:black;
+}
+.Card:hover h3{
+  background-color: #fff;
+  color: black;
+  opacity: 1;
+  border-bottom: 1px solid black;
+}
+
+
+
+
+
 
 .Card h1 {
   font-weight: bolder;
@@ -446,21 +453,6 @@
   opacity: 0;
   transition: opacity 0.3s ease-in 0.4s;
   z-index: 1;
-}
-
-.Card button {
-  padding: 0%;
-  font-size: 1.5rem;
-  color: #fff;
-  background-color: transparent;
-  z-index: 1;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  margin: 1rem;
-  font-style: oblique;
-  transition: opacity 0.3s ease-in 0.4s;
-  opacity: 1;
 }
 
 .showMoreBtn {

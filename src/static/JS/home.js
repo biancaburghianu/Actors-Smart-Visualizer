@@ -137,8 +137,8 @@ async function getFavoriteNominee() {
 }
 
 async function generateFavoriteNomineeCard() {
-  // const nomineeName = await getFavoriteNominee();
-  const nomineeName = "Al Pac";
+  const nomineeName = await getFavoriteNominee();
+  // const nomineeName = "The dark knight";
 
   if (nomineeName) {
     const urlMovie = "https://api.themoviedb.org/3/search/multi";
@@ -152,6 +152,7 @@ async function generateFavoriteNomineeCard() {
     };
 
     try {
+      
       const responseMovie = await fetch(
         `${urlMovie}?api_key=${API_KEY}&query=${encodeURIComponent(
           nomineeName
@@ -162,24 +163,9 @@ async function generateFavoriteNomineeCard() {
       console.log(dataMovie.results[0]);
       if (dataMovie.results && dataMovie.results.length > 0) {
         const movie = dataMovie.results[0];
-        await generateCard(movie, "movie");
+        await generateCard(movie, movie.media_type);
         return;
       }
-
-      const responsePerson = await fetch(
-        `${urlPerson}?api_key=${API_KEY}&query=${encodeURIComponent(
-          nomineeName
-        )}`,
-        options
-      );
-      const dataPerson = await responsePerson.json();
-
-      if (dataPerson.results && dataPerson.results.length > 0) {
-        const person = dataPerson.results[0];
-        await generateCard(person, "person");
-        return;
-      }
-
       console.log("No results found");
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -198,11 +184,11 @@ async function generateCard(result, searchType) {
   try {
     let title, overview, imagePath;
 
-    if (searchType === "movie") {
-      title = result.title;
+    if (searchType === "movie" || searchType === "tv" ) {
+      title = result.title || result.name;
       overview = result.overview;
       imagePath = result.poster_path;
-    } else if (searchType === "person") {
+    } else if (result.media_type === "person") {
       title = result.name;
       overview = `Known for: ${result.known_for_department}`;
       imagePath = result.profile_path;
@@ -214,9 +200,9 @@ async function generateCard(result, searchType) {
 
     card.innerHTML = `
       <h3>${title}</h3>
-      <p>${overview}</p>
-      <img src="${imageUrl}" alt="${title}">
-    `;
+      <p>${overview}</p>`;
+
+    card.style.backgroundImage = `url(${imageUrl})`
   } catch (error) {
     console.error("Error building card:", error);
     card.textContent = "Error building card";

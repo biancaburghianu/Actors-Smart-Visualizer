@@ -1,5 +1,5 @@
 const BigContainerEl = document.querySelector(".CardsClass");
-
+const API_KEY = "23fe5450a05a0810ba1587ec23e9b849";
 // dropdown script
 const dropdown = document.querySelector(".select-box");
 dropdown.addEventListener("change", () => {
@@ -102,8 +102,12 @@ async function getDataFromDb(year) {
         <i class="far fa-heart"></i>
         Mark as favorite
         </button>
+          <h1></h1>
           <h3>${data.results[0].title || data.results[0].name}</h3>
           <button class="CardBtn Movies">More info</button>`;
+        const winner = cardEl.querySelector("h1");
+        if(cardEl.className==="Card active")
+        winner.innerText="Winner";
         cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${data.results[0].poster_path})`;
         overviewData.set(
           data.results[0].title || data.results[0].name,
@@ -123,9 +127,13 @@ async function getDataFromDb(year) {
       <i class="far fa-heart"></i>
       Mark as favorite
       </button>
+      <h1></h1>
     <h3 id="ActorName">${data.results[0].name || "Cant find"}</h3>
     <h2 id="ActorShow">${nominee.show || "Cant find"}</h2>
     <button class="CardBtn Actors">More Info</button>`;
+        const winner = cardEl.querySelector("h1");
+        if(cardEl.className==="Card active")
+        winner.innerText="Winner";
         cardEl.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500/${data.results[0].profile_path})`;
         actorsOverlayData.set(data.results[0].name, data.results[0].known_for);
       } else {
