@@ -8,7 +8,7 @@ registerForm.addEventListener("submit", async (event) => {
   const favorite = document.getElementById("favorite").value;
   if (password.length < 10 || favorite.length < 3) {
     alert(
-      "Parola trebuie sa aiba minim 10 caractere, iar numele actrictei/actorului/serialului/filmului trebuie sa aiba minim 3 caractere!"
+      "Parola trebuie sa aiba minim 10 caractere, iar numele actritei/actorului/serialului/filmului trebuie sa aiba minim 3 caractere!"
     );
   } else createAccount();
 
@@ -36,16 +36,16 @@ registerForm.addEventListener("submit", async (event) => {
 });
 
 function togglePasswordVisibility() {
-  const passwordInput = document.getElementById('password-input');
-  const eyeIcon = document.getElementById('eye');
+  const passwordInput = document.getElementById("password-input");
+  const eyeIcon = document.getElementById("eye");
 
-  if (passwordInput.type === 'password') {
-    passwordInput.type = 'text';
-    eyeIcon.classList.remove('fa-eye');
-    eyeIcon.classList.add('fa-eye-slash');
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    eyeIcon.classList.remove("fa-eye");
+    eyeIcon.classList.add("fa-eye-slash");
   } else {
-    passwordInput.type = 'password';
-    eyeIcon.classList.remove('fa-eye-slash');
-    eyeIcon.classList.add('fa-eye');
+    passwordInput.type = "password";
+    eyeIcon.classList.remove("fa-eye-slash");
+    eyeIcon.classList.add("fa-eye");
   }
 }

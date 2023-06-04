@@ -25,10 +25,14 @@ export function getArticles(req, res) {
       .catch((error) => {
         console.error(error);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "A apărut o problemă la căutare." }));
+        res.end(JSON.stringify({ error: "Internal server error." }));
       });
   } else {
     res.writeHead(400, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ error: "Cuvântul cheie lipsește din cerere." }));
+    res.end(
+      JSON.stringify({
+        error: "Trebuie sa introduci numele unui actor/actrite/film/serial.",
+      })
+    );
   }
 }

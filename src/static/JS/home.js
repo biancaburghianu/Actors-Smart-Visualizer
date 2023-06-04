@@ -7,14 +7,12 @@ menuIcon.addEventListener("click", () => {
 });
 
 function toggleNavLinks() {
-  const navLinks = document.querySelectorAll('.nav-links li a');
-  
-  navLinks.forEach(link => {
-    link.style.display = link.style.display === 'block' ? 'none' : 'block';
+  const navLinks = document.querySelectorAll(".nav-links li a");
+
+  navLinks.forEach((link) => {
+    link.style.display = link.style.display === "block" ? "none" : "block";
   });
 }
-
-
 
 function myFunction(articleNum) {
   var dots = document.getElementById("dots" + articleNum);
@@ -148,7 +146,6 @@ async function generateFavoriteNomineeCard() {
     };
 
     try {
-      
       const responseMovie = await fetch(
         `${urlMovie}?api_key=${API_KEY}&query=${encodeURIComponent(
           nomineeName
@@ -180,7 +177,7 @@ async function generateCard(result, searchType) {
   try {
     let title, overview, imagePath;
 
-    if (searchType === "movie" || searchType === "tv" ) {
+    if (searchType === "movie" || searchType === "tv") {
       title = result.title || result.name;
       overview = result.overview;
       imagePath = result.poster_path;
@@ -198,7 +195,7 @@ async function generateCard(result, searchType) {
       <h3>${title}</h3>
       <p>${overview}</p>`;
 
-    card.style.backgroundImage = `url(${imageUrl})`
+    card.style.backgroundImage = `url(${imageUrl})`;
   } catch (error) {
     console.error("Error building card:", error);
     card.textContent = "Error building card";
@@ -1154,18 +1151,13 @@ function displayWinningAndLosingProportionsChart(divId) {
       console.error(error);
     });
 }
-//actor by year 
+//actor by year
 function fetchActorsData() {
-  
-
-  fetch(
-    `http://localhost:4567/statistics/actorsByYear/2020/MALE/True`,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  )
+  fetch(`http://localhost:4567/statistics/actorsByYear/2020/MALE/True`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
     .then((response) => {
       if (response.ok) {
         const newToken = response.headers.get("Authorization");
@@ -1205,26 +1197,24 @@ function createChart(actorsData, divName) {
     title: "Actors' By Year",
     xaxis: { title: "Actor" },
     yaxis: { title: "Won Count" },
-    responsive: true, // Make the chart responsive
+    responsive: true,
   };
 
   Plotly.newPlot("favoriteChart", data, layout);
 }
 //winners by category
 function fetchCategoryData() {
-  
   const category = "CAST IN A MOTION PICTURE";
   const won = true;
 
-  const url = `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(category)}/${won}`;
-  fetch(
-    url,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  )
+  const url = `http://localhost:4567/statistics/winnersByCategory/${encodeURIComponent(
+    category
+  )}/${won}`;
+  fetch(url, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  })
     .then((response) => {
       if (response.ok) {
         const newToken = response.headers.get("Authorization");
@@ -1266,14 +1256,14 @@ function createChartWinnersByCategory(categoryData, divName) {
     title: "Winners by Category",
     xaxis: { title: "Year" },
     yaxis: { title: "Count" },
-    responsive: true, // Make the chart responsive
+    responsive: true,
   };
 
   Plotly.newPlot(divName, data, layout);
 }
 // favorite statistics
 async function fetchFavoriteStatistic() {
-  const url = "http://localhost:3456/favorite/statistics"; // Update the URL accordingly
+  const url = "http://localhost:3456/favorite/statistics";
   const options = {
     method: "GET",
     headers: {
@@ -1294,35 +1284,35 @@ async function fetchFavoriteStatistic() {
     if (statisticName.includes("Biggest Winners")) {
       console.log("The statistic name contains 'Biggest Winners'");
       displayBiggestWinnersChart("favoriteChart");
-    } else if(statisticName.includes("Biggest Nominees")){
+    } else if (statisticName.includes("Biggest Nominees")) {
       displayBiggestNomineesChart("favoriteChart");
-    }else if(statisticName.includes("Most Nominated People")){
+    } else if (statisticName.includes("Most Nominated People")) {
       displayMostNominatedPeopleChart("favoriteChart");
-    }else if(statisticName.includes("People With Most Statues")){
+    } else if (statisticName.includes("People With Most Statues")) {
       displayPeopleWithMostStatuesChart("favoriteChart");
-    }else if(statisticName.includes("Most Appeared Shows")){
+    } else if (statisticName.includes("Most Appeared Shows")) {
       displayMostAppearedShowsChart("favoriteChart");
-    }else if(statisticName.includes("Most Appeared People")){
+    } else if (statisticName.includes("Most Appeared People")) {
       displayMostAppearedPeopleChart("favoriteChart");
-    }else if(statisticName.includes("Most Appeared Category")){
+    } else if (statisticName.includes("Most Appeared Category")) {
       displayMostAppearedCategoriesChart("favoriteChart");
-    }else if(statisticName.includes("Actor vs Actress")){
+    } else if (statisticName.includes("Actor vs Actress")) {
       displayActorActressProportionsChart("favoriteChart");
-    }else if(statisticName.includes("Show By Year - Nominees")){
+    } else if (statisticName.includes("Show By Year - Nominees")) {
       displayShowByYearNomineesChart("favoriteChart");
-    }else if(statisticName.includes("Show By Year - Winners")){
+    } else if (statisticName.includes("Show By Year - Winners")) {
       displayShowByYearWinnersChart("favoriteChart");
-    }else if(statisticName.includes("People by Year - Nominees")){
+    } else if (statisticName.includes("People by Year - Nominees")) {
       displayPeopleByYearNomineesChart("favoriteChart");
-    }else if(statisticName.includes("People by Year - Winners")){
+    } else if (statisticName.includes("People by Year - Winners")) {
       displayPeopleByYearWinnersChart("favoriteChart");
-    }else if(statisticName.includes("Winning and Losing")){
-      displayWinningAndLosingProportionsChart("favoriteChart")
-    }else if(statisticName.includes("Actors By Year")){
+    } else if (statisticName.includes("Winning and Losing")) {
+      displayWinningAndLosingProportionsChart("favoriteChart");
+    } else if (statisticName.includes("Actors By Year")) {
       fetchActorsData("favoriteChart");
-     }else if(statisticName.includes("Winners By Category")){
-       fetchCategoryData("favoriteChart");
-     }
+    } else if (statisticName.includes("Winners By Category")) {
+      fetchCategoryData("favoriteChart");
+    }
 
     return statisticName;
   } catch (error) {
@@ -1332,5 +1322,3 @@ async function fetchFavoriteStatistic() {
 }
 
 fetchFavoriteStatistic();
-
-
