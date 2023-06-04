@@ -34,16 +34,16 @@ changePasswordForm.addEventListener("submit", async (event) => {
 });
 
 function togglePasswordVisibility() {
-  const passwordInput = document.getElementById("password-input");
-  const passwordToggle = document.getElementById("password-toggle");
+  const passwordInput = document.getElementById('new-password');
+  const eyeIcon = document.getElementById('eye');
 
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-    passwordToggle.style.backgroundImage =
-      "url('../../static/PozeDiverse/8466805.png')";
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeIcon.classList.remove('fa-eye');
+    eyeIcon.classList.add('fa-eye-slash');
   } else {
-    passwordInput.type = "password";
-    passwordToggle.style.backgroundImage =
-      "url('../../static/PozeDiverse/8466805.png')";
+    passwordInput.type = 'password';
+    eyeIcon.classList.remove('fa-eye-slash');
+    eyeIcon.classList.add('fa-eye');
   }
 }
