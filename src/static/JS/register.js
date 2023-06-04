@@ -6,26 +6,32 @@ registerForm.addEventListener("submit", async (event) => {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password-input").value;
   const favorite = document.getElementById("favorite").value;
-  console.log(username, password, favorite);
+  if (password.length < 10 || favorite.length < 3) {
+    alert(
+      "Parola trebuie sa aiba minim 10 caractere, iar numele actrictei/actorului/serialului/filmului trebuie sa aiba minim 3 caractere!"
+    );
+  } else createAccount();
 
-  try {
-    const response = await fetch("http://localhost:3456/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password, favorite }),
-    });
-    console.log(favorite);
-    if (response.ok) {
-      const data = await response.json();
-      alert(data.message);
-    } else {
-      const data = await response.json();
-      alert(data.message);
+  async function createAccount() {
+    try {
+      const response = await fetch("http://localhost:3456/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, favorite }),
+      });
+      console.log(favorite);
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
   }
 });
 
